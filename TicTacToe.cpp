@@ -1,32 +1,24 @@
-#include "header.hpp"
+#include "TicTacToe.hpp"
+using namespace std;
 
-TicTacToe::TicTacToe () {
-	finished = false;
-	MAXROW = 3;
-	MAXCOL = 3;
-	board = new char*[MAXROW];
-	for (int i = 0; i < MAXROW; ++i) {
-		board[i] = new char[MAXCOL];
-		for (int j = 0; j < MAXCOL; ++j) {
-			board[i][j] = '#';
-		}
-	}
-}
+string game_type;
 
-void TicTacToe::printBoard () {
-	cout << endl;
-	for (int i = 0; i < MAXROW; ++i) {
-		for (int j = 0; j < MAXCOL; ++j) {
-			cout << board[i][j] << " ";
-		}
-		cout << endl;
-	}
-}
 
-void TicTacToe::playerOneMove (int x, int y) {
+void TicTacToe :: startGame(){
+	
+	Human player("User");
+    Computer comp("Computer");
+    Engine control(player,comp);
+    while (control.get_state() != control.QUIT) {
+        while(control.get_state() == control.PLAYING) {
+            control.make_move();
+            control.update();
+        }
+        if (control.get_state()  == control.XWIN || control.get_state()  == control.OWIN || control.get_state()  == control.DRAW) {
+            control.find_winner();
+            control.display_result();
+        }
+    }
 
-}
-
-void TicTacToe::playerTwoMove (int x, int y) {
 
 }

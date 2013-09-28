@@ -5,7 +5,7 @@ int main (int argc, char **argv) {
 
 	TicTacToe game;
 
-	game.printBoard();
+	game.startGame();
 	
 	return EXIT_SUCCESS;
 }

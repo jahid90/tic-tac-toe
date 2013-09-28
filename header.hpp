@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cstdlib>
-
-#include "TicTacToe.hpp"
+#include "Player.h"
+#include "Engine.h"
 
 using namespace std;
+
+#include "TicTacToe.hpp"
