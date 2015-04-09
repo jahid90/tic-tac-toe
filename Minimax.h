@@ -1,14 +1,17 @@
-#include "header.h"
+#ifndef __MINIMAX_H__
+#define __MINIMAX_H__
+
+//class Engine;
 
 class Minimax {
 
 private:
     static const int INFINITY = 10000;
-	Engine control;
+	//Engine *control;
 
 public:
     
-    Minimax(){}
+    Minimax();
     list<int> generate_moves(char _board[]);
 
     int evaluate_board(char _board[]);
@@ -17,3 +20,5 @@ public:
     int MaxMove(char _board[]);
 
 };
+
+#endif  // __MINIMAX_H__

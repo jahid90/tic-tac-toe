@@ -1,9 +1,11 @@
-#include "header.h"
+#ifndef __PLAYER_H__
+#define __PLAYER_H__
+
+// TODO move code to a cpp file
 
 class Player {
 
 private:
-
 	string playerName;
 	char playerSymbol;
 	int move;
@@ -13,67 +15,32 @@ private:
 
 public:
 
-    Player() {}
-    Player(string name, char symbol) : playerName(name), playerSymbol(symbol),win(false) {}
+    Player();
+    Player(string name, char symbol);
 
-    char getPlayerSymbol() {
-        return playerSymbol;
-    }
-
-    string getPlayerName() {
-        return playerName;
-    };
-
-    bool is_win() {
-        return win;
-    }
-
-    void setWin(bool sWin) {
-        win = sWin;
-    }
-
-    bool is_turn() {
-        return isTurn;
-    }
-
-    void setTurn(bool sTurn) {
-        isTurn = sTurn;
-    }
-
-    void set_move(int pos ) {
-
-        move = pos;
-    }
-
-    int get_move() { 
-	
-		return move;
-	}
-
+    char getPlayerSymbol();
+    string getPlayerName();
+    bool is_win();
+    void setWin(bool sWin);
+    bool is_turn() ;
+    void setTurn(bool sTurn) ;
+    void set_move(int pos );
+    int get_move();
 };
 
 class Computer : public Player {
 public:
-    Computer(){}
-
-    Computer(std::string name, char symbol = 'O') : Player(name, symbol)
-	{
-
-    }
+    Computer();
+    Computer(string name, char symbol = 'O');
 };
 
 class Human : public Player {
 
 public:
-    Human(){}
-    Human(string name, char symbol = 'X') : Player(name, symbol) {}
+    Human();
+    Human(string name, char symbol = 'X');
 
-    int ask_move(){
-		
-		int pos = -1;
-		cin >> pos;
-		pos--;
-		return pos;	
-	};
-
+    int ask_move();
 };
+
+#endif  // __PLAYER_H__

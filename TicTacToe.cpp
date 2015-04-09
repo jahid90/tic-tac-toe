@@ -1,9 +1,11 @@
+#include "includes.h"
 #include "header.h"
+#include "TicTacToe.h"
 
 //string game_type;
 
 TicTacToe::TicTacToe() {
-    
+
 }
 
 void TicTacToe :: startGame(){

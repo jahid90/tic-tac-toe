@@ -1,4 +1,6 @@
+#include "includes.h"
 #include "header.h"
+#include "TicTacToe.h"
 
 int main (int argc, char **argv) {
 	cout << "*******TIC-TAC-TOE*******" << endl;

@@ -1,19 +1,24 @@
-#include "header.h"
+#include "includes.h"
+
+#include "Minimax.h"
+
+//#include "Engine.h"
+
+Minimax::Minimax() {
+    //control = new Engine();
+}
 
 list<int> Minimax::generate_moves(char _board[]) {
     list<int> list;
-   
-	for (int i = 0; i < 9; ++i) {
-   
-		if (_board[i] == 0) {
-        
-			list.push_back(i);
-       
-		}
-   
-	}
-	return list;
 
+	for (int i = 0; i < 9; ++i) {
+
+		if (_board[i] == 0) {
+			list.push_back(i);
+		}
+	}
+
+	return list;
 }
 
 int Minimax::evaluate_board(char _board[]) {
