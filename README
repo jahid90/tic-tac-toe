@@ -1,3 +1,9 @@
 TicTacToe
 
 The game of TicTacToe
+
+States followed by the game:
+START   ->    PLAYING   ->  XWIN | OWIN | DRAW  ->  QUIT
+
+bug: doesn't handle bad inputs well
+position expected is linear; should be pair 

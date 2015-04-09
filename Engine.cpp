@@ -10,11 +10,11 @@ Engine::Engine() {
 }
 
 Engine::Engine(Human _player,Computer _comp) {
-    player  = &_player;
-    comp    = &_comp;
-    gameboard = new Board();
+    player      =   &_player;
+    comp        =   &_comp;
+    gameboard   =   new Board();
 
-    state   = PLAYING;
+    state       =   PLAYING;
 
     gameboard->display_board();
 }
@@ -54,7 +54,7 @@ void Engine::make_move()
 
 bool Engine::verify_move(int pos)
 {
-    if (gameboard->board[pos] != '\0' || (pos < 0) || (pos > 9)) {
+    if (gameboard->board[pos] != ' ' || (pos < 0) || (pos > 9)) {
         cout << "Invalid move" << endl;
 
         return false;
@@ -85,7 +85,7 @@ void Engine::check_game_state(char _board[]) {
 	    state = DRAW;
 
 		for(int i = 0; i < 9; ++i) {
-			if(_board[i] == 0) {
+			if(_board[i] == ' ') {
 				state = PLAYING;
 				break;
 			}
@@ -95,9 +95,9 @@ void Engine::check_game_state(char _board[]) {
 
 void Engine::find_winner(){
     if (state == XWIN) {
-        player->setWin(true);
+        player->set_win(true);
     } else if (state == OWIN) {
-        comp->setWin(true);
+        comp->set_win(true);
     }
 }
 
@@ -117,6 +117,4 @@ void Engine::update() {
     check_game_state(gameboard->board);
 }
   
-int Engine::get_state() { 
-    return state;
-}
+int Engine::get_state() { return state; }

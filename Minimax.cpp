@@ -13,7 +13,7 @@ list<int> Minimax::generate_moves(char _board[]) {
 
 	for (int i = 0; i < 9; ++i) {
 
-		if (_board[i] == 0) {
+		if (_board[i] == ' ') {
 			list.push_back(i);
 		}
 	}
@@ -23,22 +23,22 @@ list<int> Minimax::generate_moves(char _board[]) {
 
 int Minimax::evaluate_board(char _board[]) {
     char symbol ='*';
-    if ((_board[0] == _board[1] || _board[1] == _board[2]) && (_board[1] != '\0')) {
+    if ((_board[0] == _board[1] || _board[1] == _board[2]) && (_board[1] != ' ')) {
         symbol = _board[1];
     }
-    if (((_board[3] == _board[4] || _board[4] == _board[5]) && (_board[4] != '\0')) ||
-    ((_board[1] == _board[4] || _board[4] == _board[7]) && (_board[4] != '\0')) ||
-    ((_board[0] == _board[4] || _board[4] == _board[8]) && (_board[4] != '\0')) ||
-    ((_board[2] == _board[4] || _board[4] == _board[6]) && (_board[4] != '\0'))) {
+    if (((_board[3] == _board[4] || _board[4] == _board[5]) && (_board[4] != ' ')) ||
+    ((_board[1] == _board[4] || _board[4] == _board[7]) && (_board[4] != ' ')) ||
+    ((_board[0] == _board[4] || _board[4] == _board[8]) && (_board[4] != ' ')) ||
+    ((_board[2] == _board[4] || _board[4] == _board[6]) && (_board[4] != ' '))) {
         symbol = _board[4];
     }
-    if ((_board[6] == _board[7] || _board[7] == _board[8]) && (_board[7] != '\0')) {
+    if ((_board[6] == _board[7] || _board[7] == _board[8]) && (_board[7] != ' ')) {
         symbol = _board[7];
     }
-    if ((_board[0] == _board[3] || _board[3] == _board[6]) && (_board[3] != '\0')) {
+    if ((_board[0] == _board[3] || _board[3] == _board[6]) && (_board[3] != ' ')) {
         symbol = _board[3];
     }
-    if ((_board[2] == _board[5] || _board[5] == _board[8]) && (_board[5] != '\0')) {
+    if ((_board[2] == _board[5] || _board[5] == _board[8]) && (_board[5] != ' ')) {
         symbol = _board[5];
     }
     if (symbol == 'X')
@@ -80,7 +80,7 @@ int Minimax::MiniMax(char _board[])
 		{
 			nBestMoves.push_back(nValidMoves.front());  
 		}
-		_board[nValidMoves.front()] = 0; 
+		_board[nValidMoves.front()] = ' '; 
 		nValidMoves.pop_front();  
 	}
 
@@ -111,7 +111,7 @@ int Minimax::MinMove(char _board[])
 		{
 			nBestScore = nScore;
 		}
-		_board[nValidMoves.front()] = 0; 
+		_board[nValidMoves.front()] = ' '; 
 		nValidMoves.pop_front();
 	}
 
@@ -136,7 +136,7 @@ int Minimax::MaxMove(char _board[])
 		{
 			nBestScore = nScore;
 		}
-		_board[nValidMoves.front()] = 0; 
+		_board[nValidMoves.front()] = ' '; 
 		nValidMoves.pop_front();
 	}
 

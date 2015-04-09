@@ -1,18 +1,19 @@
 #include "includes.h"
-#include "header.h"
+
 #include "TicTacToe.h"
 
-//string game_type;
+#include "Player.h"
+#include "Engine.h"
 
 TicTacToe::TicTacToe() {
-
 }
 
-void TicTacToe :: startGame(){
-	
-	/*Human player("User");
+void TicTacToe::startGame() {
+    
+	Human player("User");
     Computer comp("Computer");
-    Engine control(player,comp);
+    Engine control(player, comp);
+
     while (control.get_state() != control.QUIT) {
         while(control.get_state() == control.PLAYING) {
             control.make_move();
@@ -22,5 +23,5 @@ void TicTacToe :: startGame(){
             control.find_winner();
             control.display_result();
         }
-    }*/
+    }
 }
