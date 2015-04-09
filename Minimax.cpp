@@ -1,9 +1,4 @@
-#include "Minimax.h"
-#include "Engine.h"
-#include <vector>
-#include <list>
-
-using namespace std;
+#include "header.h"
 
 list<int> Minimax::generate_moves(char _board[]) {
     list<int> list;

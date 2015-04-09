@@ -1,8 +1,4 @@
-#include "Board.h"
-#include <iostream>
-#include "Engine.h"
-using namespace std;
-
+#include "header.h"
 
 Board::Board() {
 

@@ -1,7 +1,4 @@
-#include <iostream>
-#include "Engine.h"
-#include "Minimax.h"
-using namespace std;
+#include "header.h"
 
 void Engine::make_move()
 {

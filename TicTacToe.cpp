@@ -1,12 +1,14 @@
-#include "TicTacToe.hpp"
-using namespace std;
+#include "header.h"
 
-string game_type;
+//string game_type;
 
+TicTacToe::TicTacToe() {
+    
+}
 
 void TicTacToe :: startGame(){
 	
-	Human player("User");
+	/*Human player("User");
     Computer comp("Computer");
     Engine control(player,comp);
     while (control.get_state() != control.QUIT) {
@@ -18,7 +20,5 @@ void TicTacToe :: startGame(){
             control.find_winner();
             control.display_result();
         }
-    }
-
-
+    }*/
 }

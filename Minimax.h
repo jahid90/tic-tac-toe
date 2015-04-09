@@ -1,8 +1,4 @@
-#include <list>
-#include <stdlib.h>
-#include "Engine.h"
-
-using namespace std;
+#include "header.h"
 
 class Minimax {
 
