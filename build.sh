@@ -1,5 +1,6 @@
 #!/usr/bin/sh
 
+make clean
 qmake-qt5 TicTacToe.pro
 make
-./tictactoe
+./gen/out/tictactoe

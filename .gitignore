@@ -1,4 +1,5 @@
 .git/*
-tictactoe
 Makefile
+tictactoe
 *.o
+gen/*
