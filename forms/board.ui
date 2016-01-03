@@ -74,7 +74,7 @@
         <enum>QLayout::SetMinimumSize</enum>
        </property>
        <item>
-        <widget class="QLabel" name="cell_11">
+        <widget class="QtLabelClickable" name="cell_11">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -123,7 +123,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="cell_12">
+        <widget class="QtLabelClickable" name="cell_12">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -160,7 +160,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="cell_13">
+        <widget class="QtLabelClickable" name="cell_13">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -210,7 +210,7 @@
         <enum>QLayout::SetMinimumSize</enum>
        </property>
        <item>
-        <widget class="QLabel" name="cell_21">
+        <widget class="QtLabelClickable" name="cell_21">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -250,7 +250,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="cell_22">
+        <widget class="QtLabelClickable" name="cell_22">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -287,7 +287,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="cell_23">
+        <widget class="QtLabelClickable" name="cell_23">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -334,7 +334,7 @@
         <enum>QLayout::SetMinimumSize</enum>
        </property>
        <item>
-        <widget class="QLabel" name="cell_31">
+        <widget class="QtLabelClickable" name="cell_31">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -371,7 +371,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="cell_32">
+        <widget class="QtLabelClickable" name="cell_32">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -408,7 +408,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="cell_33">
+        <widget class="QtLabelClickable" name="cell_33">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -464,6 +464,13 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QtLabelClickable</class>
+   <extends>QLabel</extends>
+   <header location="global">QtLabelClickable.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

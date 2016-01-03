@@ -2,22 +2,20 @@
 #define __QT_BOARD_VIEW_H__
 
 #include <QMainWindow>
-
-namespace Ui 
-{
-  class Board;
-}
+#include "ui_board.h"
 
 class QtBoardView : public QMainWindow
 {
   public:
     QtBoardView(QMainWindow *parent = 0);
-    virtual ~QtBoardView();
-    Ui::Board * board();
+    static Ui::Board * board() 
+    {
+      static Ui::Board board;
+
+      return &board;
+    }
 
   private:
-    Ui::Board * _board;
-
     void initSignalsAndSlots();
 };
 
