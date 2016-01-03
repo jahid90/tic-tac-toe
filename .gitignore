@@ -1,0 +1,4 @@
+.git/*
+tictactoe
+Makefile
+*.o
