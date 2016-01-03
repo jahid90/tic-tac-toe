@@ -1,23 +1,37 @@
 #include "CommonIncludes.h"
 
-#include "QtBoardView.h"
 #include "ui_board.h"
+#include "BoardActionsHelper.h"
+
+#include "QtBoardView.h"
 
 QtBoardView::QtBoardView(QMainWindow *parent)
-    : QMainWindow(parent), board(new Ui::Board)
+    : QMainWindow(parent)
 {
-  board->setupUi(this);
+  if (_board == NULL) 
+    _board = new Ui::Board;
+
+  _board->setupUi(this);
 
   initSignalsAndSlots();
 }
 
 QtBoardView::~QtBoardView()
 {
-  delete board;
+  delete _board;
 }
 
-void QtBoardView::initSignalsAndSlots()
+Ui::Board * QtBoardView::board()
 {
-  connect( board->btnQuit, SIGNAL (clicked()), 
+  return _board;
+}
+
+void 
+QtBoardView::initSignalsAndSlots()
+{
+  connect( _board->btnQuit, SIGNAL (clicked()), 
       QApplication::instance(), SLOT (quit()) );
+
+  connect( _board->btnClear, SIGNAL (clicked()), 
+      BoardActionsHelper::instance(), SLOT (clearBoard()) );
 }

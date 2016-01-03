@@ -1,14 +1,22 @@
 #ifndef __BOARD_ACTIONS_HELPER_H__
 #define __BOARD_ACTIONS_HELPER_H__
 
-class BoardActionsHelper
+#include <QObject>
+
+class BoardActionsHelper : public QObject
 {
+  Q_OBJECT
   public:
-    BoardActionsHelper * instance();
+    static BoardActionsHelper * instance() { 
+      static BoardActionsHelper instance;
+
+      return &instance; 
+    }
 
   private:
-    BoardActionsHelper();
-    BoardActionsHelper * _instance;
+
+  public slots:
+    void clearBoard();
 };
 
 #endif // __BOARD_ACTIONS_HELPER_H__

@@ -16,6 +16,7 @@ SOURCES += \
     main.cpp \
     src/views/QtBoardView.cpp \
     src/helpers/BoardActionsHelper.cpp \
+    $$files(gen/src/*.cpp) \
 
 HEADERS += \
     include/QtBoardView.h \
@@ -24,3 +25,4 @@ HEADERS += \
 DESTDIR = gen/out
 OBJECTS_DIR = obj
 UI_DIR = gen/include
+MOC_DIR = gen/src

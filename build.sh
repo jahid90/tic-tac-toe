@@ -2,5 +2,4 @@
 
 make clean
 qmake-qt5 TicTacToe.pro
-make
-./gen/out/tictactoe
+make && ./gen/out/tictactoe

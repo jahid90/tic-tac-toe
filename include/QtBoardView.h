@@ -13,9 +13,11 @@ class QtBoardView : public QMainWindow
   public:
     QtBoardView(QMainWindow *parent = 0);
     virtual ~QtBoardView();
+    Ui::Board * board();
 
   private:
-    Ui::Board *board;
+    Ui::Board * _board;
+
     void initSignalsAndSlots();
 };
 

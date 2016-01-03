@@ -2,14 +2,8 @@
 
 #include "BoardActionsHelper.h"
 
-BoardActionsHelper::BoardActionsHelper()
+void
+BoardActionsHelper::clearBoard()
 {
-}
-
-BoardActionsHelper * BoardActionsHelper::instance()
-{
-  if (NULL == _instance)
-    _instance = new BoardActionsHelper();
-
-  return _instance;
+  std::cout << "clearBoard() called" << std::endl;
 }
