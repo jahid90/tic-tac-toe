@@ -1,6 +1,4 @@
-#include <iostream>
-#include <cstdlib>
-#include <errno.h>
+#include "CommonIncludes.h"
 
 #include <QApplication>
 
@@ -18,7 +16,7 @@ int main(int argc, char **argv)
   if (0 != rc)
   {
     std::cerr << "Some error occured!" << std::endl;
-    std::cerr << errno << std::endl;
+    perror("error app.exec(): ");
   }
 
   return EXIT_SUCCESS;

@@ -15,9 +15,11 @@ FORMS += \
 SOURCES += \
     main.cpp \
     src/views/QtBoardView.cpp \
+    src/helpers/BoardActionsHelper.cpp \
 
 HEADERS += \
     include/QtBoardView.h \
+    include/BoardActionsHelper.h \
 
 DESTDIR = gen/out
 OBJECTS_DIR = obj

@@ -1,3 +1,5 @@
+#include "CommonIncludes.h"
+
 #include "QtBoardView.h"
 #include "ui_board.h"
 
@@ -6,10 +8,16 @@ QtBoardView::QtBoardView(QMainWindow *parent)
 {
   board->setupUi(this);
 
-  connect( board->btnQuit, SIGNAL (clicked()), QApplication::instance(), SLOT (quit()) );
+  initSignalsAndSlots();
 }
 
 QtBoardView::~QtBoardView()
 {
   delete board;
+}
+
+void QtBoardView::initSignalsAndSlots()
+{
+  connect( board->btnQuit, SIGNAL (clicked()), 
+      QApplication::instance(), SLOT (quit()) );
 }

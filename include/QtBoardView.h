@@ -16,6 +16,7 @@ class QtBoardView : public QMainWindow
 
   private:
     Ui::Board *board;
+    void initSignalsAndSlots();
 };
 
 #endif // __QT_BOARD_VIEW_H__
