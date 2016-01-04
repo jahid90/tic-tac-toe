@@ -20,6 +20,7 @@ class QtBoardView : public QMainWindow
     void initSignalsAndSlots();
     void connectMessageDispatchWithCell();
     void connectCellClickWithHelper();
+    void connectCellClickWithCellComponents();
     void setupCellsToUseScaledContents();
 };
 

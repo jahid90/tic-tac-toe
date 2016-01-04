@@ -12,7 +12,7 @@ class BoardActionsHelper : public QObject
 {
   Q_OBJECT
   public:
-    BoardActionsHelper(QObject *parent = 0);
+    BoardActionsHelper(QObject *parent = NULL);
     static BoardActionsHelper * instance() { 
       static BoardActionsHelper instance;
 
