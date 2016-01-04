@@ -1,12 +1,16 @@
 #include "CommonIncludes.h"
 
 #include <QApplication>
+#include <QIcon>
 
 #include "QtBoardView.h"
 
 int main(int argc, char **argv)
 {
   QApplication app(argc, argv);
+
+  QIcon appIcon(":/images/icon");
+  app.setWindowIcon(appIcon);
 
   QtBoardView *board = new QtBoardView(NULL);
   board->show();

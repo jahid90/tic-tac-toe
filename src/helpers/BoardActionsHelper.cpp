@@ -41,7 +41,10 @@ BoardActionsHelper::markCell()
   QString senderName = sender()->objectName();
 
   // to set an image on a label
-  QPixmap img(":/images/x_n_o");
+  QPixmap x(":/images/x");
+  QPixmap o(":/images/o");
+
+  QPixmap img = rand() % 2 ? x : o;
 
   int r = cellMap[senderName].first;
   int c = cellMap[senderName].second;

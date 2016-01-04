@@ -1,6 +1,9 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
   <qresource prefix="/images">
+    <file alias="icon">tictactoe.ico</file>
+    <file alias="x">x.png</file>
+    <file alias="o">o.png</file>
     <file alias="x_n_o">x_n_o.png</file>
     <file alias="blank">blank.png</file>
   </qresource>

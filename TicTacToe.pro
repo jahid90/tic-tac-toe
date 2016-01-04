@@ -34,3 +34,5 @@ OBJECTS_DIR = obj
 UI_DIR = gen/include
 MOC_DIR = gen/src
 RCC_DIR = gen/rcc
+
+ICON = resources/tictactoe.ico
