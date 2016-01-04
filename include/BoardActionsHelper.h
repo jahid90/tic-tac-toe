@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QMap>
 #include <QPair>
+#include <QPixmap>
 
 class BoardActionsHelper : public QObject
 {
@@ -18,19 +19,18 @@ class BoardActionsHelper : public QObject
 
   private:
     QMap<QString, QPair<int, int> > cellMap;
-    void markCell(int r, int c, QString text);
+    void markCell(int, int, QPixmap);
 
   signals:
-    void setText(QString text);
-    void setText11(QString);
-    void setText12(QString);
-    void setText13(QString);
-    void setText21(QString);
-    void setText22(QString);
-    void setText23(QString);
-    void setText31(QString);
-    void setText32(QString);
-    void setText33(QString);
+    void setContent11(QPixmap);
+    void setContent12(QPixmap);
+    void setContent13(QPixmap);
+    void setContent21(QPixmap);
+    void setContent22(QPixmap);
+    void setContent23(QPixmap);
+    void setContent31(QPixmap);
+    void setContent32(QPixmap);
+    void setContent33(QPixmap);
 
   public slots:
     void clearBoard();

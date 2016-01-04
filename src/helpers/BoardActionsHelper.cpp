@@ -24,17 +24,17 @@ BoardActionsHelper::BoardActionsHelper(QObject *parent)
 void
 BoardActionsHelper::clearBoard()
 {
-  QString emptyString("");
+  QPixmap blankImg(":/images/blank");
 
-  emit setText11(emptyString);
-  emit setText12(emptyString);
-  emit setText13(emptyString);
-  emit setText21(emptyString);
-  emit setText22(emptyString);
-  emit setText23(emptyString);
-  emit setText31(emptyString);
-  emit setText32(emptyString);
-  emit setText33(emptyString);
+  emit setContent11(blankImg);
+  emit setContent12(blankImg);
+  emit setContent13(blankImg);
+  emit setContent21(blankImg);
+  emit setContent22(blankImg);
+  emit setContent23(blankImg);
+  emit setContent31(blankImg);
+  emit setContent32(blankImg);
+  emit setContent33(blankImg);
 }
 
 void
@@ -42,67 +42,44 @@ BoardActionsHelper::markCell()
 {
   QString senderName = sender()->objectName();
 
-  QString crossString("X");
+  // to set an image on a label
+  QPixmap img(":/images/x_n_o");
 
   int r = cellMap[senderName].first;
   int c = cellMap[senderName].second;
 
-  markCell(r, c, crossString);
+  markCell(r, c, img);
 }
 
 void
-BoardActionsHelper::markCell(int r, int c, QString text)
+BoardActionsHelper::markCell(int r, int c, QPixmap img)
 {
   switch(r)
   {
     case 1:
       switch(c)
       {
-        case 1:
-          emit setText11(text);
-          break;
-
-        case 2:
-          emit setText12(text);
-          break;
-
-        case 3:
-          emit setText13(text);
-          break;
+        case 1: emit setContent11(img); break;
+        case 2: emit setContent12(img); break;
+        case 3: emit setContent13(img); break;
       }
       break;
 
     case 2:
       switch(c)
       {
-        case 1:
-          emit setText21(text);
-          break;
-
-        case 2:
-          emit setText22(text);
-          break;
-
-        case 3:
-          emit setText23(text);
-          break;
+        case 1: emit setContent21(img); break;
+        case 2: emit setContent22(img); break;
+        case 3: emit setContent23(img); break;
       }
       break;
 
     case 3:
       switch(c)
       {
-        case 1:
-          emit setText31(text);
-          break;
-
-        case 2:
-          emit setText32(text);
-          break;
-
-        case 3:
-          emit setText33(text);
-          break;
+        case 1: emit setContent31(img); break;
+        case 2: emit setContent32(img); break;
+        case 3: emit setContent33(img); break;
       }
       break;
   }

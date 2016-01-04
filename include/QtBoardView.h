@@ -17,6 +17,9 @@ class QtBoardView : public QMainWindow
 
   private:
     void initSignalsAndSlots();
+    void connectMessageDispatchWithCell();
+    void connectCellClickWithHelper();
+    void setupCellsToUseScaledContents();
 };
 
 #endif // __QT_BOARD_VIEW_H__

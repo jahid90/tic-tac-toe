@@ -26,7 +26,11 @@ HEADERS += \
     include/QtLabelClickable.h \
     include/Utils.h \
 
+RESOURCES = \
+    resources/images/images.qrc \
+
 DESTDIR = gen/out
 OBJECTS_DIR = obj
 UI_DIR = gen/include
 MOC_DIR = gen/src
+RCC_DIR = gen/rcc
