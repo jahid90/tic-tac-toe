@@ -2,6 +2,7 @@
 #define __QT_BOARD_VIEW_H__
 
 #include <QMainWindow>
+
 #include "ui_board.h"
 
 class QtBoardView : public QMainWindow

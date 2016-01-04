@@ -3,6 +3,10 @@
 
 #include <QLabel>
 
+class QString;
+class QWidget;
+class QMouseEvent;
+
 class QtLabelClickable : public QLabel
 {
   Q_OBJECT

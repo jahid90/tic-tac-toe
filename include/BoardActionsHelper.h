@@ -6,6 +6,8 @@
 #include <QPair>
 #include <QPixmap>
 
+class QString;
+
 class BoardActionsHelper : public QObject
 {
   Q_OBJECT

@@ -1,3 +1,9 @@
+#include "CommonIncludes.h"
+
+#include <QString>
+#include <QWidget>
+#include <QMouseEvent>
+
 #include "QtLabelClickable.h"
 
 QtLabelClickable::QtLabelClickable( const QString& text, QWidget* parent )
@@ -18,5 +24,7 @@ QtLabelClickable::~QtLabelClickable()
 void
 QtLabelClickable::mousePressEvent( QMouseEvent* event )
 {
+  std::cout << "received mousePressEvent: " << event->type() << std::endl;
+
   emit clicked();
 }

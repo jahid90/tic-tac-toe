@@ -1,7 +1,5 @@
 #include "CommonIncludes.h"
 
-#include <QObject>
-
 #include "Utils.h"
 #include "QtBoardView.h"
 
