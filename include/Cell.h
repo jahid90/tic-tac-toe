@@ -11,7 +11,7 @@ class Cell : public QObject
 {
   Q_OBJECT
   public:
-    Cell(Board*, int, int);
+    Cell(Board *, int, int);
     int x();
     int y();
     Piece piece();

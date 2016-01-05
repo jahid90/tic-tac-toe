@@ -11,7 +11,7 @@
 
 #include "QtBoardView.h"
 
-QtBoardView::QtBoardView(QMainWindow *parent)
+QtBoardView::QtBoardView(QMainWindow * parent)
     : QMainWindow(parent)
 {
   board()->setupUi(this);

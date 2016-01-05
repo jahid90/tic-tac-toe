@@ -17,11 +17,14 @@ class Game
     Board * board();
     Player * firstPlayer();
     Player * secondPlayer();
+    Player * currentPlayer();
+    void setCurrentPlayer(Player *);
 
   private:
     Board * _board;
     Player * _firstPlayer;
     Player * _secondPlayer;
+    Player * _currentPlayer;
 };
 
 #endif // __GAME_H__

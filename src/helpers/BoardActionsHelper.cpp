@@ -2,10 +2,12 @@
 
 #include "Utils.h"
 #include "QtBoardView.h"
+#include "Game.h"
+#include "Player.h"
 
 #include "BoardActionsHelper.h"
 
-BoardActionsHelper::BoardActionsHelper(QObject *parent)
+BoardActionsHelper::BoardActionsHelper(QObject * parent)
     : QObject(parent)
 {
   cellMap.insert("cell_11", qMakePair(1, 1));
@@ -19,7 +21,7 @@ BoardActionsHelper::BoardActionsHelper(QObject *parent)
   cellMap.insert("cell_33", qMakePair(3, 3));
 }
 
-void
+/* slot */ void
 BoardActionsHelper::clearBoard()
 {
   QPixmap blankImg(":/images/blank");
@@ -33,23 +35,22 @@ BoardActionsHelper::clearBoard()
   emit setContent31(blankImg);
   emit setContent32(blankImg);
   emit setContent33(blankImg);
+
+  clearAllCells();
+  setAllCellsEnabled( true, QtBoardView::board() );
 }
 
-void
+/* slot */ void
 BoardActionsHelper::markCell()
 {
   QString senderName = sender()->objectName();
 
-  // to set an image on a label
-  QPixmap x(":/images/x");
-  QPixmap o(":/images/o");
-
-  QPixmap img = rand() % 2 ? x : o;
+  QPixmap icon = getIcon( Game::instance()->currentPlayer()->piece() );
 
   int r = cellMap[senderName].first;
   int c = cellMap[senderName].second;
 
-  markCell(r, c, img);
+  markCell(r, c, icon);
 }
 
 void

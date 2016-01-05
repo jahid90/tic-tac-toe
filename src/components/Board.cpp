@@ -2,6 +2,8 @@
 #include "Player.h"
 #include "Game.h"
 #include "Piece.h"
+#include "QtBoardView.h"
+#include "Utils.h"
 
 #include "Board.h"
 
@@ -9,14 +11,20 @@ Board::Board()
     : _ROW(3), _COL(3),
     _winner(NULL)
 {
-  _cells = new Cell**[_ROW];
+  _cells = new Cell ** [_ROW];
   for (int i = 0; i < _ROW; ++i)
-    _cells[i] = new Cell*[_COL];
+    _cells[i] = new Cell * [_COL];
 
   for (int r = 0; r < _ROW; ++r)
     for (int c = 0; c < _COL; ++c)
       _cells[r][c] = new Cell(this, r, c);
 
+  populateWinningPatterns();
+}
+
+void
+Board::populateWinningPatterns()
+{
   // 0-based indexing! - 1-based everywhere else, careful!!
   winningPatterns.insert( make_pair( 1, std::make_tuple( std::make_pair(0, 0)
       , std::make_pair(0, 1), std::make_pair(0, 2) ) ) );
@@ -45,7 +53,7 @@ Board::cell(int r, int c)
 }
 
 void
-Board::setCell(Cell *cell, int r, int c)
+Board::setCell(Cell * cell, int r, int c)
 {
   --r; --c;
 
@@ -66,7 +74,7 @@ Board::hasWinner()
 }
 
 bool
-Board::isWinner(Player *player)
+Board::isWinner(Player * player)
 {
   std::cerr << "checking winner for: ";
   debugPrintPiece(player->piece());
@@ -121,7 +129,7 @@ Board::onStateChanged(int r, int c)
     debugPrintPiece(winner()->piece());
     std::cerr << "is the winner!!" << std::endl;
 
-    exit(0);
+    setAllCellsEnabled( false, QtBoardView::board() );
   }
   else
   {

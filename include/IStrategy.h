@@ -1,5 +1,5 @@
-#ifndef __ISTARATEGY_H__
-#define __ISTARATEGY_H__
+#ifndef __ISTRATEGY_H__
+#define __ISTRATEGY_H__
 
 class Board;
 class Player;
@@ -7,7 +7,7 @@ class Player;
 /* abstract */ class IStrategy
 {
   public:
-    Board * getNextBestMove(Player *forPlayer, Board *currentState);
+    Board * getNextBestMoveFor(Player *, Board *);
 };
 
-#endif // __ISTARATEGY_H__
+#endif // __ISTRATEGY_H__

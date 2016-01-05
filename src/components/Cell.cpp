@@ -7,7 +7,7 @@
 
 #include "Cell.h"
 
-Cell::Cell(Board *parent, int x, int y)
+Cell::Cell(Board * parent, int x, int y)
     : QObject(NULL), 
     _parent(parent), _x(x), _y(y)
 {
@@ -43,9 +43,5 @@ Cell::setPiece(Piece piece)
 void
 Cell::onCellSelected()
 {
-  Player *p = rand() % 2 
-      ? Game::instance()->firstPlayer()
-      : Game::instance()->secondPlayer();
-
-  setPiece(p->piece());
+  setPiece( Game::instance()->currentPlayer()->piece() );
 }

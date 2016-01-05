@@ -10,10 +10,11 @@ class Board
 {
   public:
     Board();
+    void populateWinningPatterns();
     Cell * cell(int, int);
-    void setCell(Cell*, int, int);
+    void setCell(Cell *, int, int);
     bool hasWinner();
-    bool isWinner(Player*);
+    bool isWinner(Player *);
     void onStateChanged(int, int);
     Player * winner();
 
@@ -23,7 +24,7 @@ class Board
     Cell *** _cells;
     std::map< int, std::tuple< std::pair<int, int>, 
         std::pair<int, int>, std::pair<int, int> > > winningPatterns;
-    Player *_winner;
+    Player * _winner;
 
     void debugPrintPiece(Piece);
 };

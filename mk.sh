@@ -1,3 +1,3 @@
 #!/usr/bin/sh
 
-make && ./run.sh
+make > /dev/null && ./run.sh

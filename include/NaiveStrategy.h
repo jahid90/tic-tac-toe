@@ -5,7 +5,9 @@
 
 class NaiveStrategy : public IStrategy
 {
+  public:
 
+  private:
 };
 
 #endif // __NAIVE_STRATEGY_H__

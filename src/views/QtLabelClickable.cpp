@@ -6,13 +6,13 @@
 
 #include "QtLabelClickable.h"
 
-QtLabelClickable::QtLabelClickable( const QString& text, QWidget* parent )
+QtLabelClickable::QtLabelClickable( const QString & text, QWidget * parent )
     : QLabel(parent)
 {
   setText(text);
 }
 
-QtLabelClickable::QtLabelClickable( QWidget* parent )
+QtLabelClickable::QtLabelClickable( QWidget * parent )
     : QLabel(parent)
 {
 }
@@ -22,7 +22,7 @@ QtLabelClickable::~QtLabelClickable()
 }
  
 void
-QtLabelClickable::mousePressEvent( QMouseEvent* event )
+QtLabelClickable::mousePressEvent( QMouseEvent * event )
 {
   std::cout << "received mousePressEvent: " << event->type() << std::endl;
 
