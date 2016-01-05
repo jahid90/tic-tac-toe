@@ -15,7 +15,10 @@ FORMS += \
 SOURCES += \
     main.cpp \
     src/components/Board.cpp \
+    src/components/BoardRowIterator.cpp \
+    src/components/BoardColumnIterator.cpp \
     src/components/Cell.cpp \
+    src/components/IBoardIterator.cpp \
     src/components/Player.cpp \
     src/helpers/BoardActionsHelper.cpp \
     src/helpers/Utils.cpp \
@@ -28,9 +31,12 @@ SOURCES += \
 HEADERS += \
     include/Board.h \
     include/BoardActionsHelper.h \
+    include/BoardRowIterator.h \
+    include/BoardColumnIterator.h \
     include/Cell.h \
     include/CommonIncludes.h \
     include/Game.h \
+    include/IBoardIterator.h \
     include/IStrategy.h \
     include/NaiveStrategy.h \
     include/Piece.h \

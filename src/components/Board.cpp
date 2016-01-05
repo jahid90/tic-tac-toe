@@ -137,6 +137,30 @@ Board::onStateChanged(int r, int c)
   }
 }
 
+IBoardIterator *
+Board::begin(IBoardIterator::Type type)
+{
+  if (IBoardIterator::Type::ROW == type)
+    return IBoardIterator::rowMajorBegin(this);
+
+  if (IBoardIterator::Type::COL == type)
+    return IBoardIterator::columnMajorBegin(this);
+
+  return NULL;
+}
+
+IBoardIterator *
+Board::end(IBoardIterator::Type type)
+{
+  if (IBoardIterator::Type::ROW == type)
+    return IBoardIterator::rowMajorEnd(this);
+
+  if (IBoardIterator::Type::COL == type)
+    return IBoardIterator::columnMajorEnd(this);
+
+  return NULL;
+}
+
 void
 Board::debugPrintPiece(Piece p)
 {

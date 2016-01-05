@@ -3,8 +3,11 @@
 
 #include "CommonIncludes.h"
 
+#include "IBoardIterator.h"
+
 class Cell;
 enum class Piece;
+class Player;
 
 class Board
 {
@@ -17,6 +20,9 @@ class Board
     bool isWinner(Player *);
     void onStateChanged(int, int);
     Player * winner();
+
+    IBoardIterator * begin(IBoardIterator::Type);
+    IBoardIterator * end(IBoardIterator::Type);
 
   private:
     int _ROW;

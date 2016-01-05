@@ -36,7 +36,7 @@ BoardActionsHelper::clearBoard()
   emit setContent32(blankImg);
   emit setContent33(blankImg);
 
-  clearAllCells();
+  clearAllCells( Game::instance()->board() );
   setAllCellsEnabled( true, QtBoardView::board() );
 }
 

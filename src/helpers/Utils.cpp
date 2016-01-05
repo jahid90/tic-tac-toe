@@ -24,17 +24,17 @@ setAllCellsEnabled(bool enabled, Ui::Board * board)
 }
 
 void
-clearAllCells()
+clearAllCells(Board * board)
 {
-  Game::instance()->board()->cell(1, 1)->setPiece(Piece::BLANK);
-  Game::instance()->board()->cell(1, 2)->setPiece(Piece::BLANK);
-  Game::instance()->board()->cell(1, 3)->setPiece(Piece::BLANK);
-  Game::instance()->board()->cell(2, 1)->setPiece(Piece::BLANK);
-  Game::instance()->board()->cell(2, 2)->setPiece(Piece::BLANK);
-  Game::instance()->board()->cell(2, 3)->setPiece(Piece::BLANK);
-  Game::instance()->board()->cell(3, 1)->setPiece(Piece::BLANK);
-  Game::instance()->board()->cell(3, 2)->setPiece(Piece::BLANK);
-  Game::instance()->board()->cell(3, 3)->setPiece(Piece::BLANK);
+  board->cell(1, 1)->setPiece(Piece::BLANK);
+  board->cell(1, 2)->setPiece(Piece::BLANK);
+  board->cell(1, 3)->setPiece(Piece::BLANK);
+  board->cell(2, 1)->setPiece(Piece::BLANK);
+  board->cell(2, 2)->setPiece(Piece::BLANK);
+  board->cell(2, 3)->setPiece(Piece::BLANK);
+  board->cell(3, 1)->setPiece(Piece::BLANK);
+  board->cell(3, 2)->setPiece(Piece::BLANK);
+  board->cell(3, 3)->setPiece(Piece::BLANK);
 }
 
 QPixmap
@@ -47,4 +47,12 @@ getIcon(Piece p)
     return QPixmap(":/images/o");
 
   return QPixmap(":/images/blank");
+}
+
+Cell *
+nextEmptyCell(Board * board)
+{
+  Board * copy = board;
+  
+  return NULL;
 }

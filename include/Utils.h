@@ -4,6 +4,8 @@
 #include "Piece.h"
 
 class QPixmap;
+class Board;
+class Cell;
 
 namespace Ui
 {
@@ -12,6 +14,7 @@ namespace Ui
 
 QPixmap getIcon(Piece);
 void setAllCellsEnabled(bool enabled, Ui::Board * board);
-void clearAllCells();
+void clearAllCells(Board *);
+Cell * nextEmptyCell(Board *);
 
 #endif // __UTILS_H__
