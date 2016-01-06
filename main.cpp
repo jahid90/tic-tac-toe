@@ -4,12 +4,6 @@
 #include <QIcon>
 
 #include "QtBoardView.h"
-#include "Utils.h"
-#include "Cell.h"
-#include "Piece.h"
-#include "Board.h"
-#include "IBoardIterator.h"
-#include "Game.h"
 
 int main(int argc, char **argv)
 {

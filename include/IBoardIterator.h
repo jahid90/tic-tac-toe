@@ -3,8 +3,10 @@
 
 #include "CommonIncludes.h"
 
-class Board;
 class Cell;
+class Board;
+class BoardRowIterator;
+class BoardColumnIterator;
 
 class IBoardIterator
 {
@@ -18,15 +20,13 @@ class IBoardIterator
     Board & board();
 
     Cell & operator*();
-    virtual IBoardIterator & operator++() {};
-    virtual IBoardIterator operator++(int) {};
+    virtual IBoardIterator & operator++() = 0;
+    virtual IBoardIterator & operator++(int) = 0;
 
-#ifdef O
-    static IBoardIterator rowMajorBegin(Board &);
-    static IBoardIterator columnMajorBegin(Board &);
-    static IBoardIterator rowMajorEnd(Board &);
-    static IBoardIterator columnMajorEnd(Board &);
-#endif
+    static BoardRowIterator & rowMajorBegin(Board &);
+    static BoardColumnIterator & columnMajorBegin(Board &);
+    static BoardRowIterator & rowMajorEnd(Board &);
+    static BoardColumnIterator & columnMajorEnd(Board &);
 
     enum class Type { ROW, COL };
 
@@ -36,7 +36,7 @@ class IBoardIterator
     int _c;
 };
 
-bool operator==(const IBoardIterator & lhs, const IBoardIterator & rhs);
-bool operator!=(const IBoardIterator & lhs, const IBoardIterator & rhs);
+bool operator==(IBoardIterator & lhs, IBoardIterator & rhs);
+bool operator!=(IBoardIterator & lhs, IBoardIterator & rhs);
 
 #endif // __BOARD_ITERATOR_H__

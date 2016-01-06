@@ -58,17 +58,3 @@ getIcon(Piece p)
 
   return QPixmap(":/images/blank");
 }
-
-Cell *
-nextEmptyCell(Board * board)
-{
-  //int i = 0;
-  //for ( IBoardIterator &itr = board->begin( IBoardIterator::Type::ROW )
-  //    ; itr != board->end( IBoardIterator::Type::ROW ) && i < 10
-  //    ; itr++, ++i )
-  {
-    std::cout << "elem" << std::endl;
-  }
-  
-  return NULL;
-}

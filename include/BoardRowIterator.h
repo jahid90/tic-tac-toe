@@ -1,4 +1,3 @@
-#ifdef O
 #ifndef __BOARD_ROW_ITERATOR_H__
 #define __BOARD_ROW_ITERATOR_H__
 
@@ -7,7 +6,8 @@
 class BoardRowIterator : public IBoardIterator
 {
   public:
-    BoardRowIterator(Board *, int, int);
+    BoardRowIterator(Board &, int, int);
+
     IBoardIterator & operator++();
     IBoardIterator & operator++(int);
 
@@ -16,4 +16,3 @@ class BoardRowIterator : public IBoardIterator
 };
 
 #endif // __BOARD_ROW_ITERATOR_H__
-#endif

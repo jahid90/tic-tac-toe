@@ -9,11 +9,13 @@ class Cell
 {
   public:
     Cell(Board *, int, int);
+    std::string toString();
+
     int x();
     int y();
     Piece piece();
     void setPiece(Piece);
-    std::string toString();
+    bool isBlank();
 
   private:
     Board * _parent;

@@ -17,6 +17,17 @@ Cell::Cell(Board * parent, int x, int y)
   std::cerr << "New Cell created: " << toString() << std::endl;
 }
 
+std::string
+Cell::toString()
+{
+  std::stringstream ss;
+  ss << "[" << this << "] (" 
+      << x() << ", " << y()
+      << ") -> " << pieceToString(piece());
+
+  return ss.str();
+}
+
 int
 Cell::x()
 {
@@ -35,20 +46,15 @@ Cell::piece()
   return *_piece;
 }
 
-std::string
-Cell::toString()
-{
-  std::stringstream ss;
-  ss << "[" << this << "] (" 
-      << x() << ", " << y()
-      << ") -> " << pieceToString(piece());
-
-  return ss.str();
-}
-
 void
 Cell::setPiece(Piece piece)
 {
   *_piece = piece;
   _parent->onStateChanged(this->x(), this->y());
+}
+
+bool
+Cell::isBlank()
+{
+  return Piece::BLANK == piece();
 }

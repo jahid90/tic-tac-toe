@@ -38,58 +38,40 @@ IBoardIterator::board()
   return _board;
 }
 
-#ifdef O
-IBoardIterator
+BoardRowIterator &
 IBoardIterator::rowMajorBegin(Board & board)
 {
-  BoardRowIterator itr(board, 1, 1);
-  return (IBoardIterator) itr;
+  BoardRowIterator * clone = new BoardRowIterator(board, 1, 1);
+  return *clone;
 }
 
-IBoardIterator &
+BoardColumnIterator &
 IBoardIterator::columnMajorBegin(Board & board)
 {
-  BoardColumnIterator itr(board, 1, 1);
-  return (IBoardIterator) itr;
+  BoardColumnIterator * clone = new BoardColumnIterator(board, 1, 1);
+  return *clone;
 }
 
-IBoardIterator &
+BoardRowIterator &
 IBoardIterator::rowMajorEnd(Board & board)
 {
-  BoardRowIterator itr(board, 4, 0);
-  return (IBoardIterator) itr;
+  BoardRowIterator * clone = new BoardRowIterator(board, 4, 1);
+  return *clone;
 }
 
-IBoardIterator &
+BoardColumnIterator &
 IBoardIterator::columnMajorEnd(Board & board)
 {
-  BoardColumnIterator itr(board, 0, 4);
-  return (IBoardIterator) itr;
+  BoardColumnIterator * clone = new BoardColumnIterator(board, 1, 4);
+  return *clone;
 }
-
-bool
-IBoardIterator::operator==(IBoardIterator * other)
-{
-  std::cerr << "equality check on itr" << std::endl;
-
-  return this->board() == &other->board()
-      && this->r() == other->r()
-      && this->c() == other->c();
-}
-
-bool
-IBoardIterator::operator!=(IBoardIterator * other)
-{
-  return !( this == other);
-}
-#endif
 
 Cell &
 IBoardIterator::operator*()
 {
-  std::cerr << "dereferencing iterator: " << toString() << std::endl;
-  std::cerr << "board: " << board().toString() << std::endl;
-  std::cerr << "cell: " << board().cell(r(), c()).toString() << std::endl;
+  //std::cerr << "dereferencing iterator: " << toString() << std::endl;
+  //std::cerr << "board: " << board().toString() << std::endl;
+  //std::cerr << "cell: " << board().cell(r(), c()).toString() << std::endl;
   return board().cell(r(), c());
 }
 

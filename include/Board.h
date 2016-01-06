@@ -22,6 +22,8 @@ class Board
     bool isWinner(Player *);
     void onStateChanged(int, int);
     Player * winner();
+    bool hasBlankCell();
+    Cell * nextBlankCell();
 
     IBoardIterator & begin(IBoardIterator::Type);
     IBoardIterator & end(IBoardIterator::Type);

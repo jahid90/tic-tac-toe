@@ -2,11 +2,13 @@
 
 #include "CommonIncludes.h"
 
+#include "QtBoardView.h"
 #include "Player.h"
 #include "Game.h"
 #include "Piece.h"
-#include "QtBoardView.h"
 #include "Utils.h"
+#include "BoardRowIterator.h"
+#include "BoardColumnIterator.h"
 
 Board::Board()
     : _winner(NULL)
@@ -150,12 +152,11 @@ Board::onStateChanged(int r, int c)
   }
 }
 
-#ifdef O
-IBoardIterator
+IBoardIterator &
 Board::begin(IBoardIterator::Type type)
 {
-  static IBoardIterator rItr = IBoardIterator::rowMajorBegin( *this );
-  static IBoardIterator cItr = IBoardIterator::columnMajorBegin( *this );
+  static BoardRowIterator &rItr = IBoardIterator::rowMajorBegin( *this );
+  static BoardColumnIterator &cItr = IBoardIterator::columnMajorBegin( *this );
   
   if (IBoardIterator::Type::ROW == type)
     return rItr;
@@ -166,11 +167,11 @@ Board::begin(IBoardIterator::Type type)
   return rItr;  // row iter by default, todo throw exception
 }
 
-IBoardIterator
+IBoardIterator &
 Board::end(IBoardIterator::Type type)
 {
-  static IBoardIterator rItr = IBoardIterator::rowMajorEnd( *this );
-  static IBoardIterator cItr = IBoardIterator::columnMajorEnd( *this );
+  static BoardRowIterator &rItr = IBoardIterator::rowMajorEnd( *this );
+  static BoardColumnIterator &cItr = IBoardIterator::columnMajorEnd( *this );
   
   if (IBoardIterator::Type::ROW == type)
     return rItr;
@@ -180,9 +181,39 @@ Board::end(IBoardIterator::Type type)
 
   return rItr;  // row iter by default, todo throw exception
 }
-#endif
 
 bool operator==(Board lhs, Board rhs)
 {
   return &lhs == &rhs;
+}
+
+bool
+Board::hasBlankCell()
+{
+    for ( IBoardIterator &itr = begin( IBoardIterator::Type::ROW )
+      ; itr != end( IBoardIterator::Type::ROW )
+      ; ++itr )
+  {
+    if ( (*itr).isBlank() ) return true;
+  }
+
+  return false;
+}
+
+/* call hasBlankCell() first */
+Cell *
+Board::nextBlankCell()
+{
+  for ( IBoardIterator &itr = begin( IBoardIterator::Type::COL )
+      ; itr != end( IBoardIterator::Type::COL )
+      ; ++itr )
+  {
+    if ( (*itr).isBlank() )
+    {
+      std::cerr << "found blank cell: " << (*itr).toString() << std::endl;
+      return &(*itr);
+    }
+  }
+  
+  return NULL; // todo throw exception
 }
