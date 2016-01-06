@@ -1,18 +1,24 @@
+#ifdef O
+#include "CommonIncludes.h"
+
 #include "BoardRowIterator.h"
 
 BoardRowIterator::BoardRowIterator(Board * board, int r, int c)
     : IBoardIterator(board, r, c)
 {
+  std::cerr << "row iter created at: " << r << ", " << c << std::endl;
 }
 
-BoardRowIterator::BoardRowIterator(BoardRowIterator * other)
-    : IBoardIterator(other->board(), other->r(), other->c())
+BoardRowIterator::BoardRowIterator(BoardRowIterator & other)
+    : IBoardIterator(other.board(), other.r(), other.c())
 {
 }
 
-IBoardIterator *
+IBoardIterator &
 BoardRowIterator::operator++()
 {
+  std::cerr << "r: " << this->r() << ", c: " << this->c() << std::endl;
+
   this->_c = 1 + this->c();
 
   if (this->c() > 2)
@@ -21,13 +27,15 @@ BoardRowIterator::operator++()
     this->_r = 1 + this->r();
   }
 
-  return this;
+  std::cerr << "new r: " << this->r() << ", new c: " << this->c() << std::endl;
+
+  return *this;
 }
 
-IBoardIterator *
+IBoardIterator &
 BoardRowIterator::operator++(int)
 {
-  IBoardIterator * clone = new BoardRowIterator(this);
+  BoardRowIterator * clone = new BoardRowIterator(*this);
 
   this->_c = 1 + this->c();
 
@@ -37,5 +45,6 @@ BoardRowIterator::operator++(int)
     this->_r = 1 + this->r();
   }
 
-  return clone;
+  return *clone;
 }
+#endif

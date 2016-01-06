@@ -4,6 +4,11 @@
 #include <QIcon>
 
 #include "QtBoardView.h"
+#include "Utils.h"
+#include "Cell.h"
+#include "Board.h"
+#include "IBoardIterator.h"
+#include "Game.h"
 
 int main(int argc, char **argv)
 {
@@ -22,6 +27,11 @@ int main(int argc, char **argv)
     std::cerr << "Some error occured!" << std::endl;
     perror("error app.exec(): ");
   }
+
+  nextEmptyCell( Game::instance()->board() );
+
+  Board b;
+  std::cerr << "returned cell: " << &(*IBoardIterator(b, 0, 2)) << std::endl;
 
   return EXIT_SUCCESS;
 }

@@ -1,3 +1,4 @@
+#ifdef O
 #include "BoardColumnIterator.h"
 
 BoardColumnIterator::BoardColumnIterator(Board * board, int r, int c)
@@ -5,12 +6,12 @@ BoardColumnIterator::BoardColumnIterator(Board * board, int r, int c)
 {
 }
 
-BoardColumnIterator::BoardColumnIterator(BoardColumnIterator * other)
-    : IBoardIterator(other->board(), other->r(), other->c())
+BoardColumnIterator::BoardColumnIterator(BoardColumnIterator & other)
+    : IBoardIterator(other.board(), other.r(), other.c())
 {
 }
 
-IBoardIterator *
+IBoardIterator &
 BoardColumnIterator::operator++()
 {
   this->_r = 1 + this->r();
@@ -21,13 +22,13 @@ BoardColumnIterator::operator++()
     this->_c = 1 + this->c();
   }
 
-  return this;
+  return *this;
 }
 
-IBoardIterator *
+IBoardIterator &
 BoardColumnIterator::operator++(int)
 {
-  IBoardIterator * clone = new BoardColumnIterator(this);
+  BoardColumnIterator * clone = new BoardColumnIterator(*this);
 
   this->_r = 1 + this->r();
 
@@ -37,5 +38,6 @@ BoardColumnIterator::operator++(int)
     this->_c = 1 + this->c();
   }
 
-  return clone;
+  return *clone;
 }
+#endif

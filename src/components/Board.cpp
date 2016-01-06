@@ -1,25 +1,27 @@
-#include "Cell.h"
+#include "Board.h"
+
 #include "Player.h"
 #include "Game.h"
 #include "Piece.h"
 #include "QtBoardView.h"
 #include "Utils.h"
 
-#include "Board.h"
-
 Board::Board()
-    : _ROW(3), _COL(3),
-    _winner(NULL)
+    : _winner(NULL)
 {
-  _cells = new Cell ** [_ROW];
-  for (int i = 0; i < _ROW; ++i)
-    _cells[i] = new Cell * [_COL];
-
-  for (int r = 0; r < _ROW; ++r)
-    for (int c = 0; c < _COL; ++c)
-      _cells[r][c] = new Cell(this, r, c);
+  for (int i = 0; i < 3; ++i)
+  {
+    std::vector<Cell> c;
+    for (int j = 0; j < 3; ++j)
+    {
+      c.push_back( Cell(this, i, j) );
+    }
+    _cells.push_back(c);
+  }
 
   populateWinningPatterns();
+
+  std::cerr << "New Board created: " << this << std::endl;
 }
 
 void
@@ -44,7 +46,7 @@ Board::populateWinningPatterns()
       , std::make_pair(1, 1), std::make_pair(2, 0) ) ) );
 }
 
-Cell *
+Cell &
 Board::cell(int r, int c)
 {
   --r; --c;
@@ -53,11 +55,11 @@ Board::cell(int r, int c)
 }
 
 void
-Board::setCell(Cell * cell, int r, int c)
+Board::setCell(Cell cell, int r, int c)
 {
   --r; --c;
 
-  _cells[r][c] = cell;
+  _cells[r][c].setPiece( cell.piece() );
 }
 
 Player *
@@ -87,15 +89,15 @@ Board::isWinner(Player * player)
 
     r = 1 + std::get<0>(itr->second).first;
     c = 1 + std::get<0>(itr->second).second;
-    winner &= (player->piece() == cell(r, c)->piece());
+    winner &= (player->piece() == cell(r, c).piece());
 
     r = 1 + std::get<1>(itr->second).first;
     c = 1 + std::get<1>(itr->second).second;
-    winner &= (player->piece() == cell(r, c)->piece());
+    winner &= (player->piece() == cell(r, c).piece());
 
     r = 1 + std::get<2>(itr->second).first;
     c = 1 + std::get<2>(itr->second).second;
-    winner &= (player->piece() == cell(r, c)->piece());
+    winner &= (player->piece() == cell(r, c).piece());
 
     if (winner)
     {
@@ -112,11 +114,11 @@ void
 Board::onStateChanged(int r, int c)
 {
   std::cerr << std::endl;
-  for (int r = 0; r < _ROW; ++r)
+  for (int r = 0; r < 3; ++r)
   {
-    for (int c = 0; c < _COL; c++)
+    for (int c = 0; c < 3; c++)
     {
-      debugPrintPiece( cell(1 + r, 1 + c)->piece() );
+      debugPrintPiece( cell(1 + r, 1 + c).piece() );
     }
     std::cerr << std::endl;
   }
@@ -137,28 +139,41 @@ Board::onStateChanged(int r, int c)
   }
 }
 
-IBoardIterator *
+#ifdef O
+IBoardIterator
 Board::begin(IBoardIterator::Type type)
 {
+  static IBoardIterator rItr = IBoardIterator::rowMajorBegin( *this );
+  static IBoardIterator cItr = IBoardIterator::columnMajorBegin( *this );
+  
   if (IBoardIterator::Type::ROW == type)
-    return IBoardIterator::rowMajorBegin(this);
+    return rItr;
 
   if (IBoardIterator::Type::COL == type)
-    return IBoardIterator::columnMajorBegin(this);
+    return cItr;
 
-  return NULL;
+  return rItr;  // row iter by default, todo throw exception
 }
 
-IBoardIterator *
+IBoardIterator
 Board::end(IBoardIterator::Type type)
 {
+  static IBoardIterator rItr = IBoardIterator::rowMajorEnd( *this );
+  static IBoardIterator cItr = IBoardIterator::columnMajorEnd( *this );
+  
   if (IBoardIterator::Type::ROW == type)
-    return IBoardIterator::rowMajorEnd(this);
+    return rItr;
 
   if (IBoardIterator::Type::COL == type)
-    return IBoardIterator::columnMajorEnd(this);
+    return cItr;
 
-  return NULL;
+  return rItr;  // row iter by default, todo throw exception
+}
+#endif
+
+bool operator==(Board lhs, Board rhs)
+{
+  return &lhs == &rhs;
 }
 
 void

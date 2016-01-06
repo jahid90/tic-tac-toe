@@ -35,8 +35,6 @@ QtBoardView::initSignalsAndSlots()
   connectMessageDispatchWithCell();
 
   connectCellClickWithHelper();
-
-  connectCellClickWithCellComponents();
 }
 
 void
@@ -83,29 +81,6 @@ QtBoardView::connectCellClickWithHelper()
       BoardActionsHelper::instance(), SLOT (markCell()) );
   connect( board()->cell_33, SIGNAL (clicked()),
       BoardActionsHelper::instance(), SLOT (markCell()) );
-}
-
-void
-QtBoardView::connectCellClickWithCellComponents()
-{
-  connect( board()->cell_11, SIGNAL (clicked()),
-      Game::instance()->board()->cell(1, 1), SLOT (onCellSelected()) );
-  connect( board()->cell_12, SIGNAL (clicked()),
-      Game::instance()->board()->cell(1, 2), SLOT (onCellSelected()) );
-  connect( board()->cell_13, SIGNAL (clicked()),
-      Game::instance()->board()->cell(1, 3), SLOT (onCellSelected()) );
-  connect( board()->cell_21, SIGNAL (clicked()),
-      Game::instance()->board()->cell(2, 1), SLOT (onCellSelected()) );
-  connect( board()->cell_22, SIGNAL (clicked()),
-      Game::instance()->board()->cell(2, 2), SLOT (onCellSelected()) );
-  connect( board()->cell_23, SIGNAL (clicked()),
-      Game::instance()->board()->cell(2, 3), SLOT (onCellSelected()) );
-  connect( board()->cell_31, SIGNAL (clicked()),
-      Game::instance()->board()->cell(3, 1), SLOT (onCellSelected()) );
-  connect( board()->cell_32, SIGNAL (clicked()),
-      Game::instance()->board()->cell(3, 2), SLOT (onCellSelected()) );
-  connect( board()->cell_33, SIGNAL (clicked()),
-      Game::instance()->board()->cell(3, 3), SLOT (onCellSelected()) );
 }
 
 void

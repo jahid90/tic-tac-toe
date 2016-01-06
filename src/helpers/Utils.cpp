@@ -4,6 +4,7 @@
 
 #include "Game.h"
 #include "Board.h"
+#include "IBoardIterator.h"
 #include "Cell.h"
 #include "ui_board.h"
 
@@ -26,15 +27,15 @@ setAllCellsEnabled(bool enabled, Ui::Board * board)
 void
 clearAllCells(Board * board)
 {
-  board->cell(1, 1)->setPiece(Piece::BLANK);
-  board->cell(1, 2)->setPiece(Piece::BLANK);
-  board->cell(1, 3)->setPiece(Piece::BLANK);
-  board->cell(2, 1)->setPiece(Piece::BLANK);
-  board->cell(2, 2)->setPiece(Piece::BLANK);
-  board->cell(2, 3)->setPiece(Piece::BLANK);
-  board->cell(3, 1)->setPiece(Piece::BLANK);
-  board->cell(3, 2)->setPiece(Piece::BLANK);
-  board->cell(3, 3)->setPiece(Piece::BLANK);
+  board->cell(1, 1).setPiece(Piece::BLANK);
+  board->cell(1, 2).setPiece(Piece::BLANK);
+  board->cell(1, 3).setPiece(Piece::BLANK);
+  board->cell(2, 1).setPiece(Piece::BLANK);
+  board->cell(2, 2).setPiece(Piece::BLANK);
+  board->cell(2, 3).setPiece(Piece::BLANK);
+  board->cell(3, 1).setPiece(Piece::BLANK);
+  board->cell(3, 2).setPiece(Piece::BLANK);
+  board->cell(3, 3).setPiece(Piece::BLANK);
 }
 
 QPixmap
@@ -52,7 +53,13 @@ getIcon(Piece p)
 Cell *
 nextEmptyCell(Board * board)
 {
-  Board * copy = board;
+  //int i = 0;
+  //for ( IBoardIterator &itr = board->begin( IBoardIterator::Type::ROW )
+  //    ; itr != board->end( IBoardIterator::Type::ROW ) && i < 10
+  //    ; itr++, ++i )
+  {
+    std::cout << "elem" << std::endl;
+  }
   
   return NULL;
 }

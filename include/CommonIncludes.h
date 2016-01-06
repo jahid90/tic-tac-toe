@@ -8,6 +8,7 @@
 #include <cstdio>
 #include <cstdlib>
 
+#include <vector>
 #include <map>
 #include <utility>
 #include <tuple>

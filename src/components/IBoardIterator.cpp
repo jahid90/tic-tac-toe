@@ -1,18 +1,18 @@
 #include "IBoardIterator.h"
 
+#include "CommonIncludes.h"
+
 #include "Board.h"
 #include "Cell.h"
 #include "BoardRowIterator.h"
 #include "BoardColumnIterator.h"
 
-IBoardIterator::IBoardIterator(Board * board, int r, int c)
+IBoardIterator::IBoardIterator(Board & board, int r, int c)
     : _board(board), _r(r), _c(c)
 {
-}
-
-IBoardIterator::~IBoardIterator()
-{
-  delete _board;
+  std::cerr << "New Iterrator created [" << this
+    << "] for: " << &_board 
+    << " at pos: (" << _r << ", " << _c << ")" << std::endl;
 }
 
 int
@@ -27,39 +27,46 @@ IBoardIterator::c()
   return _c;
 }
 
-Board *
+Board &
 IBoardIterator::board()
 {
   return _board;
 }
 
-IBoardIterator *
-IBoardIterator::rowMajorBegin(Board * board)
+#ifdef O
+IBoardIterator
+IBoardIterator::rowMajorBegin(Board & board)
 {
-  return new BoardRowIterator(board, 0, 0);
+  BoardRowIterator itr(board, 0, 0);
+  return (IBoardIterator) itr;
 }
 
-IBoardIterator *
+IBoardIterator &
 IBoardIterator::columnMajorBegin(Board * board)
 {
-  return new BoardColumnIterator(board, 0, 0);
+  BoardColumnIterator itr(board, 0, 0);
+  return (IBoardIterator) itr;
 }
 
-IBoardIterator *
+IBoardIterator &
 IBoardIterator::rowMajorEnd(Board * board)
 {
-  return new BoardRowIterator(board, 3, 0);
+  BoardRowIterator itr(board, 3, 0);
+  return (IBoardIterator) itr;
 }
 
-IBoardIterator *
+IBoardIterator &
 IBoardIterator::columnMajorEnd(Board * board)
 {
-  return new BoardColumnIterator(board, 0, 3);
+  BoardColumnIterator itr(board, 0, 3);
+  return (IBoardIterator) itr;
 }
 
 bool
 IBoardIterator::operator==(IBoardIterator * other)
 {
+  std::cerr << "equality check on itr" << std::endl;
+
   return this->board() == other->board()
       && this->r() == other->r()
       && this->c() == other->c();
@@ -70,9 +77,22 @@ IBoardIterator::operator!=(IBoardIterator * other)
 {
   return !( this == other);
 }
+#endif
 
-Cell *
+Cell &
 IBoardIterator::operator*()
 {
-  return this->board()->cell(this->r(), this->c());
+  return this->board().cell(this->r(), this->c());
+}
+
+bool operator==(IBoardIterator & lhs, IBoardIterator & rhs)
+{
+  return &lhs.board() == &rhs.board()
+      && lhs.r() == rhs.r()
+      && lhs.c() == rhs.c();
+}
+
+bool operator!=(IBoardIterator & lhs, IBoardIterator & rhs)
+{
+  return !( lhs == rhs );
 }

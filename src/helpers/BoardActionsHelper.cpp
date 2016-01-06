@@ -4,6 +4,8 @@
 #include "QtBoardView.h"
 #include "Game.h"
 #include "Player.h"
+#include "Board.h"
+#include "Cell.h"
 
 #include "BoardActionsHelper.h"
 
@@ -61,27 +63,63 @@ BoardActionsHelper::markCell(int r, int c, QPixmap img)
     case 1:
       switch(c)
       {
-        case 1: emit setContent11(img); break;
-        case 2: emit setContent12(img); break;
-        case 3: emit setContent13(img); break;
+        case 1: 
+          emit setContent11(img);
+          Game::instance()->board()->cell(1, 1)
+              .setPiece(Game::instance()->currentPlayer()->piece());
+          break;
+        case 2: 
+          emit setContent12(img);
+          Game::instance()->board()->cell(1, 2)
+              .setPiece(Game::instance()->currentPlayer()->piece());
+          break;
+        case 3: 
+          emit setContent13(img);
+          Game::instance()->board()->cell(1, 3)
+              .setPiece(Game::instance()->currentPlayer()->piece());
+          break;
       }
       break;
 
     case 2:
       switch(c)
       {
-        case 1: emit setContent21(img); break;
-        case 2: emit setContent22(img); break;
-        case 3: emit setContent23(img); break;
+        case 1: 
+          emit setContent21(img);
+          Game::instance()->board()->cell(2, 1)
+              .setPiece(Game::instance()->currentPlayer()->piece());
+          break;
+        case 2:
+          emit setContent22(img);
+          Game::instance()->board()->cell(2, 2)
+              .setPiece(Game::instance()->currentPlayer()->piece());
+          break;
+        case 3:
+          emit setContent23(img);
+          Game::instance()->board()->cell(2, 3)
+              .setPiece(Game::instance()->currentPlayer()->piece());
+          break;
       }
       break;
 
     case 3:
       switch(c)
       {
-        case 1: emit setContent31(img); break;
-        case 2: emit setContent32(img); break;
-        case 3: emit setContent33(img); break;
+        case 1:
+          emit setContent31(img);
+          Game::instance()->board()->cell(3, 1)
+              .setPiece(Game::instance()->currentPlayer()->piece());
+          break;
+        case 2:
+          emit setContent32(img);
+          Game::instance()->board()->cell(3, 2)
+              .setPiece(Game::instance()->currentPlayer()->piece());
+          break;
+        case 3:
+          emit setContent33(img);
+          Game::instance()->board()->cell(3, 3)
+              .setPiece(Game::instance()->currentPlayer()->piece());
+          break;
       }
       break;
   }
