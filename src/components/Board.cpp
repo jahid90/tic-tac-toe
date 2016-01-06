@@ -1,5 +1,7 @@
 #include "Board.h"
 
+#include "CommonIncludes.h"
+
 #include "Player.h"
 #include "Game.h"
 #include "Piece.h"
@@ -21,7 +23,15 @@ Board::Board()
 
   populateWinningPatterns();
 
-  std::cerr << "New Board created: " << this << std::endl;
+  std::cerr << "New Board created: " << toString() << std::endl;
+}
+
+std::string
+Board::toString()
+{
+  std::stringstream ss;
+  ss << "[" << this << "]";
+  return ss.str();
 }
 
 void
@@ -78,8 +88,8 @@ Board::hasWinner()
 bool
 Board::isWinner(Player * player)
 {
-  std::cerr << "checking winner for: ";
-  debugPrintPiece(player->piece());
+  std::cerr << "checking winner for: "
+      << pieceToString(player->piece());
   std::cerr << std::endl;
 
   for (auto itr = winningPatterns.begin(); itr != winningPatterns.end(); ++itr)
@@ -118,18 +128,19 @@ Board::onStateChanged(int r, int c)
   {
     for (int c = 0; c < 3; c++)
     {
-      debugPrintPiece( cell(1 + r, 1 + c).piece() );
+      std::cerr << pieceToString( cell(1 + r, 1 + c).piece() ) << " ";
     }
     std::cerr << std::endl;
   }
 
-  std::cerr << "content of [" << r << ", " << c << "] changed" << std::endl;
+  std::cerr << "content of cell " << cell(1 + r, 1 + c).toString()
+      << " changed" << std::endl;
 
   if (hasWinner())
   {
     std::cout << "We have a winner!" << std::endl;
-    debugPrintPiece(winner()->piece());
-    std::cerr << "is the winner!!" << std::endl;
+    std::cerr << pieceToString(winner()->piece())
+        << " is the winner!!" << std::endl;
 
     setAllCellsEnabled( false, QtBoardView::board() );
   }
@@ -174,11 +185,4 @@ Board::end(IBoardIterator::Type type)
 bool operator==(Board lhs, Board rhs)
 {
   return &lhs == &rhs;
-}
-
-void
-Board::debugPrintPiece(Piece p)
-{
-  const std::string sym[] {"X", "O", "-"};
-  std::cerr << sym[(int) p] << " ";
 }

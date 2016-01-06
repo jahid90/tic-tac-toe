@@ -1,6 +1,8 @@
 #ifndef __BOARD_ITERATOR_H__
 #define __BOARD_ITERATOR_H__
 
+#include "CommonIncludes.h"
+
 class Board;
 class Cell;
 
@@ -9,6 +11,8 @@ class IBoardIterator
   public:
     IBoardIterator(Board &, int, int);
     virtual ~IBoardIterator() {};
+    std::string toString();
+
     int r();
     int c();
     Board & board();

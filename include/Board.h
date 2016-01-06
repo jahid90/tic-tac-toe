@@ -13,6 +13,8 @@ class Board
 {
   public:
     Board();
+    std::string toString();
+
     void populateWinningPatterns();
     Cell & cell(int, int);
     void setCell(Cell, int, int);
@@ -29,8 +31,6 @@ class Board
     std::map< int, std::tuple< std::pair<int, int>, 
         std::pair<int, int>, std::pair<int, int> > > winningPatterns;
     Player * _winner;
-
-    void debugPrintPiece(Piece);
 };
 
 bool operator==(Board lhs, Board rhs);

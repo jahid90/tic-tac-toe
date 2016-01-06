@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <ostream>
+
+#include <sstream>
 #include <string>
 
 #include <cstdio>

@@ -12,6 +12,7 @@ namespace Ui
   class Board;
 }
 
+std::string pieceToString(Piece);
 QPixmap getIcon(Piece);
 void setAllCellsEnabled(bool enabled, Ui::Board * board);
 void clearAllCells(Board *);

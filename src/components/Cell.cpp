@@ -4,6 +4,7 @@
 #include "Board.h"
 #include "Player.h"
 #include "Piece.h"
+#include "Utils.h"
 
 #include "Cell.h"
 
@@ -13,9 +14,7 @@ Cell::Cell(Board * parent, int x, int y)
   _piece = new Piece;
   *_piece = Piece::BLANK;
 
-  std::cerr << "New Cell created: [" << this << "] (" << _x << ", " << _y << ") -> "
-      << (piece() == Piece::CROSS ? "X" : (piece() == Piece::OH ?
-        "O" : "BLANK")) << std::endl;
+  std::cerr << "New Cell created: " << toString() << std::endl;
 }
 
 int
@@ -34,6 +33,17 @@ Piece
 Cell::piece()
 {
   return *_piece;
+}
+
+std::string
+Cell::toString()
+{
+  std::stringstream ss;
+  ss << "[" << this << "] (" 
+      << x() << ", " << y()
+      << ") -> " << pieceToString(piece());
+
+  return ss.str();
 }
 
 void

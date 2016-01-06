@@ -1,7 +1,5 @@
 #include "IBoardIterator.h"
 
-#include "CommonIncludes.h"
-
 #include "Board.h"
 #include "Cell.h"
 #include "BoardRowIterator.h"
@@ -10,9 +8,16 @@
 IBoardIterator::IBoardIterator(Board & board, int r, int c)
     : _board(board), _r(r), _c(c)
 {
-  std::cerr << "New Iterrator created [" << this
-    << "] for: " << &_board 
-    << " at pos: (" << _r << ", " << _c << ")" << std::endl;
+  std::cerr << "New Iterator created " << toString() << std::endl;
+}
+
+std::string
+IBoardIterator::toString()
+{
+  std::stringstream ss;
+  ss << "[" << this << "] holding ref board: " << board().toString()
+      << ", at: (" << r() << ", " << c() << ")";
+  return ss.str();
 }
 
 int
@@ -37,28 +42,28 @@ IBoardIterator::board()
 IBoardIterator
 IBoardIterator::rowMajorBegin(Board & board)
 {
-  BoardRowIterator itr(board, 0, 0);
+  BoardRowIterator itr(board, 1, 1);
   return (IBoardIterator) itr;
 }
 
 IBoardIterator &
-IBoardIterator::columnMajorBegin(Board * board)
+IBoardIterator::columnMajorBegin(Board & board)
 {
-  BoardColumnIterator itr(board, 0, 0);
+  BoardColumnIterator itr(board, 1, 1);
   return (IBoardIterator) itr;
 }
 
 IBoardIterator &
-IBoardIterator::rowMajorEnd(Board * board)
+IBoardIterator::rowMajorEnd(Board & board)
 {
-  BoardRowIterator itr(board, 3, 0);
+  BoardRowIterator itr(board, 4, 0);
   return (IBoardIterator) itr;
 }
 
 IBoardIterator &
-IBoardIterator::columnMajorEnd(Board * board)
+IBoardIterator::columnMajorEnd(Board & board)
 {
-  BoardColumnIterator itr(board, 0, 3);
+  BoardColumnIterator itr(board, 0, 4);
   return (IBoardIterator) itr;
 }
 
@@ -67,7 +72,7 @@ IBoardIterator::operator==(IBoardIterator * other)
 {
   std::cerr << "equality check on itr" << std::endl;
 
-  return this->board() == other->board()
+  return this->board() == &other->board()
       && this->r() == other->r()
       && this->c() == other->c();
 }
@@ -82,7 +87,10 @@ IBoardIterator::operator!=(IBoardIterator * other)
 Cell &
 IBoardIterator::operator*()
 {
-  return this->board().cell(this->r(), this->c());
+  std::cerr << "dereferencing iterator: " << toString() << std::endl;
+  std::cerr << "board: " << board().toString() << std::endl;
+  std::cerr << "cell: " << board().cell(r(), c()).toString() << std::endl;
+  return board().cell(r(), c());
 }
 
 bool operator==(IBoardIterator & lhs, IBoardIterator & rhs)

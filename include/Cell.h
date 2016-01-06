@@ -13,6 +13,7 @@ class Cell
     int y();
     Piece piece();
     void setPiece(Piece);
+    std::string toString();
 
   private:
     Board * _parent;

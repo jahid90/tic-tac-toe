@@ -10,6 +10,15 @@
 
 #include "Utils.h"
 
+std::string pieceToString(Piece p)
+{
+  return (Piece::CROSS == p)
+      ? "X" 
+      : (Piece::OH == p)
+          ? "O"
+          : "-";
+}
+
 void
 setAllCellsEnabled(bool enabled, Ui::Board * board)
 {

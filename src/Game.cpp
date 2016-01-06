@@ -10,6 +10,17 @@ Game::Game()
     , _secondPlayer( new Player(Piece::OH) )
 {
   setCurrentPlayer( firstPlayer() );
+
+  std::cerr << "New Game created: " << toString() << std::endl;
+}
+
+std::string
+Game::toString()
+{
+  std::stringstream ss;
+  ss << "[" << this << "] fP: " << firstPlayer()->toString()
+      << ", sP: " << secondPlayer()->toString();
+  return ss.str();
 }
 
 Board *
