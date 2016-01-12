@@ -3,6 +3,8 @@
 #include "Board.h"
 #include "Player.h"
 #include "Piece.h"
+#include "IStrategy.h"
+#include "NaiveStrategy.h"
 
 Game::Game()
     : _board(new Board)
@@ -51,4 +53,30 @@ void
 Game::setCurrentPlayer(Player * p)
 {
   _currentPlayer = p;
+}
+
+bool
+Game::hasWinner()
+{
+  return board()->hasWinner();
+}
+
+void
+Game::playTurn()
+{
+  currentPlayer()->makeMove();
+  switchPlayers();
+}
+
+void
+Game::switchPlayers()
+{
+  if ( currentPlayer() == firstPlayer() )
+  {
+    setCurrentPlayer( secondPlayer() );
+  }
+  else
+  {
+    setCurrentPlayer( firstPlayer() );
+  }
 }

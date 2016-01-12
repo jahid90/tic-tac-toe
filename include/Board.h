@@ -18,6 +18,7 @@ class Board
     void populateWinningPatterns();
     Cell & cell(int, int);
     void setCell(Cell, int, int);
+    void placePiece(Cell *, Piece);
     bool hasWinner();
     bool isWinner(Player *);
     void onStateChanged(int, int);

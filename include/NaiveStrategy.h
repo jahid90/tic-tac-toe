@@ -6,6 +6,8 @@
 class NaiveStrategy : public IStrategy
 {
   public:
+    Cell * getNextBestMoveFor(Player *, Board *);
+    std::string toString();
 
   private:
 };

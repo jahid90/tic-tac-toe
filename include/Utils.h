@@ -4,7 +4,6 @@
 #include "Piece.h"
 
 class QPixmap;
-class Board;
 class Cell;
 
 namespace Ui

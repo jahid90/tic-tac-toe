@@ -1,13 +1,17 @@
 #ifndef __ISTRATEGY_H__
 #define __ISTRATEGY_H__
 
+#include "CommonIncludes.h"
+
+class Cell;
 class Board;
 class Player;
 
-/* abstract */ class IStrategy
+class IStrategy
 {
   public:
-    Board * getNextBestMoveFor(Player *, Board *);
+    virtual std::string toString() = 0;
+    virtual Cell * getNextBestMoveFor(Player *, Board *) = 0;
 };
 
 #endif // __ISTRATEGY_H__

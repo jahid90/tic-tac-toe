@@ -5,6 +5,7 @@
 
 class Board;
 class Player;
+class IStrategy;
 
 class Game
 {
@@ -24,11 +25,16 @@ class Game
     Player * currentPlayer();
     void setCurrentPlayer(Player *);
 
+    bool hasWinner();
+    void playTurn();
+
   private:
     Board * _board;
     Player * _firstPlayer;
     Player * _secondPlayer;
     Player * _currentPlayer;
+
+    void switchPlayers();
 };
 
 #endif // __GAME_H__

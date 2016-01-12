@@ -2,10 +2,6 @@
 
 #include <QPixmap>
 
-#include "Game.h"
-#include "Board.h"
-#include "IBoardIterator.h"
-#include "Cell.h"
 #include "ui_board.h"
 
 #include "Utils.h"

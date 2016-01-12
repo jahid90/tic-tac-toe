@@ -3,25 +3,52 @@
 #include <QApplication>
 #include <QIcon>
 
+#include "Game.h"
+#include "Board.h"
+#include "Player.h"
+#include "Utils.h"
 #include "QtBoardView.h"
 
 int main(int argc, char **argv)
 {
-  QApplication app(argc, argv);
+  // QApplication app(argc, argv);
 
-  QIcon appIcon(":/images/icon");
-  app.setWindowIcon(appIcon);
+  // QIcon appIcon(":/images/icon");
+  // app.setWindowIcon(appIcon);
 
-  QtBoardView *board = new QtBoardView(NULL);
-  board->show();
+  // QtBoardView *board = new QtBoardView(NULL);
+  // board->show();
 
-  int rc = app.exec();
+  // int rc = app.exec();
 
-  if (0 != rc)
+  Game *game = Game::instance();
+  std::cerr << game->toString() << std::endl;
+
+  while ( true )
   {
-    std::cerr << "Some error occured!" << std::endl;
-    perror("error app.exec(): ");
+    game->playTurn();
+
+    if (game->hasWinner())
+    {
+      std::cout << "We have a winner!" << std::endl;
+      std::cerr << pieceToString(game->board()->winner()->piece())
+          << " is the winner!!" << std::endl;
+
+      // setAllCellsEnabled( false, QtBoardView::board() );
+
+      break;
+    }
+    else
+    {
+      std::cerr << "No winner yet" << std::endl;
+    }
   }
+
+  // if (0 != rc)
+  // {
+    // std::cerr << "Some error occured!" << std::endl;
+    // perror("error app.exec(): ");
+  // }
 
   return EXIT_SUCCESS;
 }

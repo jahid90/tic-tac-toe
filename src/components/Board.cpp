@@ -2,13 +2,13 @@
 
 #include "CommonIncludes.h"
 
-#include "QtBoardView.h"
 #include "Player.h"
 #include "Game.h"
 #include "Piece.h"
 #include "Utils.h"
 #include "BoardRowIterator.h"
 #include "BoardColumnIterator.h"
+#include "QtBoardView.h"
 
 Board::Board()
     : _winner(NULL)
@@ -74,6 +74,12 @@ Board::setCell(Cell cell, int r, int c)
   _cells[r][c].setPiece( cell.piece() );
 }
 
+void
+Board::placePiece(Cell * cell, Piece piece)
+{
+  cell->setPiece( piece );
+}
+
 Player *
 Board::winner()
 {
@@ -137,19 +143,6 @@ Board::onStateChanged(int r, int c)
 
   std::cerr << "content of cell " << cell(1 + r, 1 + c).toString()
       << " changed" << std::endl;
-
-  if (hasWinner())
-  {
-    std::cout << "We have a winner!" << std::endl;
-    std::cerr << pieceToString(winner()->piece())
-        << " is the winner!!" << std::endl;
-
-    setAllCellsEnabled( false, QtBoardView::board() );
-  }
-  else
-  {
-    std::cerr << "No winner yet" << std::endl;
-  }
 }
 
 IBoardIterator &
