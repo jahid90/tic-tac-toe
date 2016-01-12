@@ -26,6 +26,8 @@ BoardActionsHelper::BoardActionsHelper(QObject * parent)
 /* slot */ void
 BoardActionsHelper::clearBoard()
 {
+  Game::instance()->board()->clearAllCells();
+
   QPixmap blankImg(":/images/blank");
 
   emit setContent11(blankImg);
@@ -38,7 +40,6 @@ BoardActionsHelper::clearBoard()
   emit setContent32(blankImg);
   emit setContent33(blankImg);
 
-  clearAllCells( Game::instance()->board() );
   setAllCellsEnabled( true, QtBoardView::board() );
 }
 

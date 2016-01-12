@@ -157,6 +157,9 @@ Board::begin(IBoardIterator::Type type)
 {
   static BoardRowIterator &rItr = IBoardIterator::rowMajorBegin( *this );
   static BoardColumnIterator &cItr = IBoardIterator::columnMajorBegin( *this );
+
+  rItr.reset();
+  cItr.reset();
   
   if (IBoardIterator::Type::ROW == type)
     return rItr;
@@ -190,7 +193,7 @@ bool operator==(Board lhs, Board rhs)
 bool
 Board::hasBlankCell()
 {
-    for ( IBoardIterator &itr = begin( IBoardIterator::Type::ROW )
+  for ( IBoardIterator &itr = begin( IBoardIterator::Type::ROW )
       ; itr != end( IBoardIterator::Type::ROW )
       ; ++itr )
   {
@@ -216,4 +219,17 @@ Board::nextBlankCell()
   }
   
   return NULL; // todo throw exception
+}
+
+void
+Board::clearAllCells()
+{
+  for ( IBoardIterator &itr = begin( IBoardIterator::Type::COL )
+      ; itr != end( IBoardIterator::Type::COL )
+      ; ++itr )
+  {
+    (*itr).setPiece(Piece::BLANK);
+  }
+
+
 }

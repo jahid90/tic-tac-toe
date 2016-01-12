@@ -28,6 +28,8 @@ class IBoardIterator
     static BoardRowIterator & rowMajorEnd(Board &);
     static BoardColumnIterator & columnMajorEnd(Board &);
 
+    void reset();
+
     enum class Type { ROW, COL };
 
   protected:

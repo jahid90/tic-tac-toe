@@ -69,20 +69,26 @@ IBoardIterator::columnMajorEnd(Board & board)
 Cell &
 IBoardIterator::operator*()
 {
-  //std::cerr << "dereferencing iterator: " << toString() << std::endl;
-  //std::cerr << "board: " << board().toString() << std::endl;
-  //std::cerr << "cell: " << board().cell(r(), c()).toString() << std::endl;
   return board().cell(r(), c());
 }
 
-bool operator==(IBoardIterator & lhs, IBoardIterator & rhs)
+bool
+operator==(IBoardIterator & lhs, IBoardIterator & rhs)
 {
   return &lhs.board() == &rhs.board()
       && lhs.r() == rhs.r()
       && lhs.c() == rhs.c();
 }
 
-bool operator!=(IBoardIterator & lhs, IBoardIterator & rhs)
+bool
+operator!=(IBoardIterator & lhs, IBoardIterator & rhs)
 {
   return !( lhs == rhs );
+}
+
+void
+IBoardIterator::reset()
+{
+  this->_r = 1;
+  this->_c = 1;
 }

@@ -24,6 +24,7 @@ class Board
     Player * winner();
     bool hasBlankCell();
     Cell * nextBlankCell();
+    void clearAllCells();
 
     IBoardIterator & begin(IBoardIterator::Type);
     IBoardIterator & end(IBoardIterator::Type);
