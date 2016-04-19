@@ -36,8 +36,10 @@ GameController::toString()
 void
 GameController::playGame()
 {
-  while (!hasWinner() || !isBoardFull())
+  while ( !isBoardFull() )
   {
+    std::cerr << "next blank detected at: " << board()->nextBlankCell() << std::endl;
+
     playTurn();
     switchPlayers();
 
@@ -47,6 +49,11 @@ GameController::playGame()
           << " is the winner! Congrats!" << std::endl;
       break;
     }
+  }
+
+  if ( !hasWinner() )
+  {
+      std::cout << "Game is a draw! Well played both!" << std::endl;
   }
 }
 
@@ -111,5 +118,5 @@ GameController::switchPlayers()
 bool
 GameController::isBoardFull()
 {
-  return board()->hasBlankCell();
+  return !board()->hasBlankCell();
 }
