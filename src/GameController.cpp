@@ -13,7 +13,7 @@
 
 GameController::GameController()
     : _board(new Board)
-    , _firstPlayer( new Player("Naive AI", Piece::CROSS) )
+    , _firstPlayer( new Player("Naive AI", Piece::CROSS, new NaiveStrategy) )
     , _secondPlayer( new Player("Human Player", Piece::OH, new HumanStrategy) )
     , _view(new ConsoleView)
 {

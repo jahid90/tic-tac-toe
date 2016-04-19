@@ -15,12 +15,12 @@ FORMS += \
 SOURCES += \
     main.cpp \
     src/components/Board.cpp \
-    src/components/BoardRowIterator.cpp \
-    src/components/BoardColumnIterator.cpp \
     src/components/Cell.cpp \
-    src/components/IBoardIterator.cpp \
     src/components/Player.cpp \
     src/helpers/BoardActionsHelper.cpp \
+    src/helpers/BoardColumnIterator.cpp \
+    src/helpers/BoardRowIterator.cpp \
+    src/helpers/IBoardIterator.cpp \
     src/helpers/Utils.cpp \
     src/strategies/HumanStrategy.cpp \
     src/strategies/NaiveStrategy.cpp \

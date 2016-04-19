@@ -15,5 +15,6 @@
 #include <tuple>
 
 #include <errno.h>
+#include <cassert>
 
 #endif // __COMMON_INCLUDES_H__

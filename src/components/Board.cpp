@@ -71,12 +71,18 @@ Board::setCell(Cell cell, int r, int c)
 {
   --r; --c;
 
-  _cells[r][c].setPiece( cell.piece() );
+  Cell boardCell = _cells[r][c];
+
+  assert(boardCell.isBlank());
+
+  boardCell.setPiece( cell.piece() );
 }
 
 void
 Board::placePiece(Cell * cell, Piece piece)
 {
+  assert( ("Can't place piece in an already occupied cell!", cell->isBlank()) );
+
   cell->setPiece( piece );
 }
 
