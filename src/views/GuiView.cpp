@@ -1,7 +1,5 @@
 #include "GuiView.h"
 
-#include "GlobalConstants.h"
-
 #include <QApplication>
 #include <QIcon>
 

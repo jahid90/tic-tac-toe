@@ -1,5 +1,4 @@
 #include "CommonIncludes.h"
-#include "GlobalConstants.h"
 #include "GuiView.h"
 
 #include "GameController.h"

@@ -5,6 +5,7 @@
 #include "Piece.h"
 #include "IStrategy.h"
 #include "NaiveStrategy.h"
+#include "HumanStrategy.h"
 #include "IView.h"
 #include "ConsoleView.h"
 #include "GuiView.h"
@@ -12,8 +13,8 @@
 
 GameController::GameController()
     : _board(new Board)
-    , _firstPlayer( new Player(Piece::CROSS) )
-    , _secondPlayer( new Player(Piece::OH) )
+    , _firstPlayer( new Player("Naive AI", Piece::CROSS) )
+    , _secondPlayer( new Player("Human Player", Piece::OH, new HumanStrategy) )
     , _view(new ConsoleView)
 {
   setCurrentPlayer( firstPlayer() );
@@ -42,7 +43,8 @@ GameController::playGame()
 
     if ( hasWinner() )
     {
-      std::cout << board()->winner() << " is the winner! Congrats!" << std::endl;
+      std::cout << board()->winner()->toString() 
+          << " is the winner! Congrats!" << std::endl;
       break;
     }
   }

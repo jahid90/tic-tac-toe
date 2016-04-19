@@ -22,6 +22,7 @@ SOURCES += \
     src/components/Player.cpp \
     src/helpers/BoardActionsHelper.cpp \
     src/helpers/Utils.cpp \
+    src/strategies/HumanStrategy.cpp \
     src/strategies/NaiveStrategy.cpp \
     src/views/ConsoleView.cpp \
     src/views/GuiView.cpp \
@@ -37,11 +38,11 @@ HEADERS += \
     include/BoardColumnIterator.h \
     include/Cell.h \
     include/CommonIncludes.h \
-    include/GlobalConstants.h \
     include/GameController.h \
     include/IBoardIterator.h \
     include/IStrategy.h \
     include/IView.h \
+    include/HumanStrategy.h \
     include/NaiveStrategy.h \
     include/Piece.h \
     include/Player.h \

@@ -7,8 +7,9 @@
 #include "IStrategy.h"
 #include "NaiveStrategy.h"
 
-Player::Player(Piece piece, IStrategy * strat)
-    : _piece(piece)
+Player::Player(std::string name, Piece piece, IStrategy * strat)
+    : _name(name)
+    , _piece(piece)
     , _strategy(strat)
 {
   if (NULL == strategy()) setStrategy( new NaiveStrategy );
@@ -19,7 +20,7 @@ std::string
 Player::toString()
 {
   std::stringstream ss;
-  ss << "[" << this << "] holding piece: " << pieceToString(piece())
+  ss << _name << "[" << this << "] holding piece: " << pieceToString(piece())
       << " and having strategy: " << strategy()->toString();
   return ss.str();
 }

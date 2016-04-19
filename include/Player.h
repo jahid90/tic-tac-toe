@@ -9,7 +9,7 @@ class IStrategy;
 class Player
 {
   public:
-    Player(Piece, IStrategy * strategy = NULL);
+    Player(std::string, Piece, IStrategy * strategy = NULL);
     std::string toString();
     void setStrategy(IStrategy *);
 
@@ -17,6 +17,7 @@ class Player
     void makeMove();
 
   private:
+    std::string _name;
     Piece _piece;
     IStrategy * _strategy;
 
