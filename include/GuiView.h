@@ -9,13 +9,17 @@ class QtBoardView;
 class GuiView : public IView
 {
   public:
-    void init(int, char **);
+    void init();
     void reset();
     void markCell(int, int, Piece);
     void clearCell(int, int);
     void setStatusMessage(std::string);
 
+    static void initParams(int argc, char ** argv);
+
   private:
+    static int _argc;
+    static char ** _argv;
     QApplication * _app;
     QtBoardView * _guiBoard;
 };

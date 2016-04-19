@@ -2,7 +2,6 @@
 #define __COMMON_INCLUDES_H__
 
 #include <iostream>
-#include <ostream>
 
 #include <sstream>
 #include <string>

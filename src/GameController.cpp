@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "GameController.h"
 
 #include "Board.h"
 #include "Player.h"
@@ -6,22 +6,25 @@
 #include "IStrategy.h"
 #include "NaiveStrategy.h"
 #include "IView.h"
+#include "ConsoleView.h"
 #include "GuiView.h"
 #include "QtBoardView.h"
 
-Game::Game()
+GameController::GameController()
     : _board(new Board)
     , _firstPlayer( new Player(Piece::CROSS) )
     , _secondPlayer( new Player(Piece::OH) )
-    , _view(new GuiView)
+    , _view(new ConsoleView)
 {
   setCurrentPlayer( firstPlayer() );
 
-  std::cerr << "New Game created: " << toString() << std::endl;
+  _view->init();
+
+  std::cerr << "New GameController created: " << toString() << std::endl;
 }
 
 std::string
-Game::toString()
+GameController::toString()
 {
   std::stringstream ss;
   ss << "[" << this << "] fP: " << firstPlayer()->toString()
@@ -29,61 +32,82 @@ Game::toString()
   return ss.str();
 }
 
+void
+GameController::playGame()
+{
+  while (!hasWinner() || !isBoardFull())
+  {
+    playTurn();
+    switchPlayers();
+
+    if ( hasWinner() )
+    {
+      std::cout << board()->winner() << " is the winner! Congrats!" << std::endl;
+      break;
+    }
+  }
+}
+
 Board *
-Game::board()
+GameController::board()
 {
   return _board;
 }
 
 Player *
-Game::firstPlayer()
+GameController::firstPlayer()
 {
   return _firstPlayer;
 }
 
 Player *
-Game::secondPlayer()
+GameController::secondPlayer()
 {
   return _secondPlayer;
 }
 
 Player *
-Game::currentPlayer()
+GameController::currentPlayer()
 {
   return _currentPlayer;
 }
 
 void
-Game::setCurrentPlayer(Player * p)
+GameController::setCurrentPlayer(Player * p)
 {
   _currentPlayer = p;
 }
 
 IView *
-Game::view()
+GameController::view()
 {
   return _view;
 }
 
 bool
-Game::hasWinner()
+GameController::hasWinner()
 {
   return board()->hasWinner();
 }
 
 void
-Game::playTurn()
+GameController::playTurn()
 {
   currentPlayer()->makeMove();
-  switchPlayers();
 }
 
 void
-Game::switchPlayers()
+GameController::switchPlayers()
 {
   setCurrentPlayer( 
       currentPlayer() == firstPlayer()
       ? secondPlayer()
       : firstPlayer()
   );
+}
+
+bool
+GameController::isBoardFull()
+{
+  return board()->hasBlankCell();
 }

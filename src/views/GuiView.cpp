@@ -1,14 +1,25 @@
 #include "GuiView.h"
 
+#include "GlobalConstants.h"
+
 #include <QApplication>
 #include <QIcon>
 
 #include "QtBoardView.h"
 
-void
-GuiView::init(int argc, char ** argv)
+int GuiView::_argc;
+char ** GuiView::_argv;
+
+void GuiView::initParams(int argc, char ** argv)
 {
-  _app = new QApplication(argc, argv);
+  _argc = argc;
+  _argv = argv;
+}
+
+void
+GuiView::init()
+{
+  _app = new QApplication(_argc, _argv);
 
   QIcon appIcon(":/images/icon");
   _app->setWindowIcon(appIcon);

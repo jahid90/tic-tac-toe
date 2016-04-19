@@ -23,10 +23,11 @@ SOURCES += \
     src/helpers/BoardActionsHelper.cpp \
     src/helpers/Utils.cpp \
     src/strategies/NaiveStrategy.cpp \
+    src/views/ConsoleView.cpp \
     src/views/GuiView.cpp \
     src/views/QtBoardView.cpp \
     src/views/QtLabelClickable.cpp \
-    src/Game.cpp \
+    src/GameController.cpp \
     $$files(gen/src/*.cpp) \
 
 HEADERS += \
@@ -36,7 +37,8 @@ HEADERS += \
     include/BoardColumnIterator.h \
     include/Cell.h \
     include/CommonIncludes.h \
-    include/Game.h \
+    include/GlobalConstants.h \
+    include/GameController.h \
     include/IBoardIterator.h \
     include/IStrategy.h \
     include/IView.h \

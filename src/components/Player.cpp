@@ -2,7 +2,7 @@
 
 #include "Piece.h"
 #include "Board.h"
-#include "Game.h"
+#include "GameController.h"
 #include "Utils.h"
 #include "IStrategy.h"
 #include "NaiveStrategy.h"
@@ -39,8 +39,10 @@ Player::makeMove()
     return;
   }
 
-  Game::instance()->board()->placePiece(
-      strategy()->getNextBestMoveFor(this, Game::instance()->board()),
+  Board * board = GameController::instance()->board();
+
+  board->placePiece(
+      strategy()->getNextBestMoveFor(this, board),
       this->piece()
   );
 }

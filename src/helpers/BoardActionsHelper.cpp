@@ -2,7 +2,7 @@
 
 #include "Utils.h"
 #include "QtBoardView.h"
-#include "Game.h"
+#include "GameController.h"
 #include "Player.h"
 #include "Board.h"
 #include "Cell.h"
@@ -26,7 +26,7 @@ BoardActionsHelper::BoardActionsHelper(QObject * parent)
 /* slot */ void
 BoardActionsHelper::clearBoard()
 {
-  Game::instance()->board()->clearAllCells();
+  GameController::instance()->board()->clearAllCells();
 
   QPixmap blankImg(":/images/blank");
 
@@ -48,7 +48,7 @@ BoardActionsHelper::markCell()
 {
   QString senderName = sender()->objectName();
 
-  QPixmap icon = getIcon( Game::instance()->currentPlayer()->piece() );
+  QPixmap icon = getIcon( GameController::instance()->currentPlayer()->piece() );
 
   int r = cellMap[senderName].first;
   int c = cellMap[senderName].second;
@@ -68,18 +68,18 @@ BoardActionsHelper::markCell(int r, int c, QPixmap img)
       {
         case 1: 
           emit setContent11(img);
-          Game::instance()->board()->cell(1, 1)
-              .setPiece(Game::instance()->currentPlayer()->piece());
+          GameController::instance()->board()->cell(1, 1)
+              .setPiece(GameController::instance()->currentPlayer()->piece());
           break;
         case 2: 
           emit setContent12(img);
-          Game::instance()->board()->cell(1, 2)
-              .setPiece(Game::instance()->currentPlayer()->piece());
+          GameController::instance()->board()->cell(1, 2)
+              .setPiece(GameController::instance()->currentPlayer()->piece());
           break;
         case 3: 
           emit setContent13(img);
-          Game::instance()->board()->cell(1, 3)
-              .setPiece(Game::instance()->currentPlayer()->piece());
+          GameController::instance()->board()->cell(1, 3)
+              .setPiece(GameController::instance()->currentPlayer()->piece());
           break;
       }
       break;
@@ -89,18 +89,18 @@ BoardActionsHelper::markCell(int r, int c, QPixmap img)
       {
         case 1: 
           emit setContent21(img);
-          Game::instance()->board()->cell(2, 1)
-              .setPiece(Game::instance()->currentPlayer()->piece());
+          GameController::instance()->board()->cell(2, 1)
+              .setPiece(GameController::instance()->currentPlayer()->piece());
           break;
         case 2:
           emit setContent22(img);
-          Game::instance()->board()->cell(2, 2)
-              .setPiece(Game::instance()->currentPlayer()->piece());
+          GameController::instance()->board()->cell(2, 2)
+              .setPiece(GameController::instance()->currentPlayer()->piece());
           break;
         case 3:
           emit setContent23(img);
-          Game::instance()->board()->cell(2, 3)
-              .setPiece(Game::instance()->currentPlayer()->piece());
+          GameController::instance()->board()->cell(2, 3)
+              .setPiece(GameController::instance()->currentPlayer()->piece());
           break;
       }
       break;
@@ -110,22 +110,22 @@ BoardActionsHelper::markCell(int r, int c, QPixmap img)
       {
         case 1:
           emit setContent31(img);
-          Game::instance()->board()->cell(3, 1)
-              .setPiece(Game::instance()->currentPlayer()->piece());
+          GameController::instance()->board()->cell(3, 1)
+              .setPiece(GameController::instance()->currentPlayer()->piece());
           break;
         case 2:
           emit setContent32(img);
-          Game::instance()->board()->cell(3, 2)
-              .setPiece(Game::instance()->currentPlayer()->piece());
+          GameController::instance()->board()->cell(3, 2)
+              .setPiece(GameController::instance()->currentPlayer()->piece());
           break;
         case 3:
           emit setContent33(img);
-          Game::instance()->board()->cell(3, 3)
-              .setPiece(Game::instance()->currentPlayer()->piece());
+          GameController::instance()->board()->cell(3, 3)
+              .setPiece(GameController::instance()->currentPlayer()->piece());
           break;
       }
       break;
   }
 
-  Game::instance()->secondPlayer()->makeMove();
+  GameController::instance()->secondPlayer()->makeMove();
 }

@@ -1,6 +1,6 @@
 #include "CommonIncludes.h"
 
-#include "Game.h"
+#include "GameController.h"
 #include "Board.h"
 #include "Player.h"
 #include "Piece.h"

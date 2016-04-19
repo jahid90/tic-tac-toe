@@ -8,7 +8,7 @@ enum class Piece;
 class IView
 {
   public:
-    virtual void init(int, char **) = 0;
+    virtual void init() = 0;
     virtual void reset() = 0;
     virtual void markCell(int, int, Piece) = 0;
     virtual void clearCell(int, int) = 0;

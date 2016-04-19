@@ -5,7 +5,7 @@
 
 #include "ui_board.h"
 #include "BoardActionsHelper.h"
-#include "Game.h"
+#include "GameController.h"
 #include "Board.h"
 #include "Cell.h"
 

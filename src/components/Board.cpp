@@ -3,7 +3,7 @@
 #include "CommonIncludes.h"
 
 #include "Player.h"
-#include "Game.h"
+#include "GameController.h"
 #include "Piece.h"
 #include "Utils.h"
 #include "BoardRowIterator.h"
@@ -89,8 +89,8 @@ Board::winner()
 bool
 Board::hasWinner()
 {
-  return isWinner( Game::instance()->firstPlayer() ) 
-      || isWinner( Game::instance()->secondPlayer() );
+  return isWinner( GameController::instance()->firstPlayer() ) 
+      || isWinner( GameController::instance()->secondPlayer() );
 }
 
 bool

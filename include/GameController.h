@@ -1,5 +1,5 @@
-#ifndef __GAME_H__
-#define __GAME_H__
+#ifndef __GAME_CONTROLLER_H__
+#define __GAME_CONTROLLER_H__
 
 #include "CommonIncludes.h"
 
@@ -8,18 +8,21 @@ class Player;
 class IStrategy;
 class IView;
 
-class Game
+class GameController
 {
   public:
-    Game();
+    GameController();
     std::string toString();
 
-    static Game * instance()
+    static GameController * instance()
     {
-      static Game _instance;
+      static GameController _instance;
 
       return &_instance;
     }
+
+    void playGame();
+
     Board * board();
     Player * firstPlayer();
     Player * secondPlayer();
@@ -38,6 +41,7 @@ class Game
     IView * _view;
 
     void switchPlayers();
+    bool isBoardFull();
 };
 
-#endif // __GAME_H__
+#endif // __GAME_CONTROLLER_H__
