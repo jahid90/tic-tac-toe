@@ -23,6 +23,7 @@ SOURCES += \
     src/helpers/BoardActionsHelper.cpp \
     src/helpers/Utils.cpp \
     src/strategies/NaiveStrategy.cpp \
+    src/views/GuiView.cpp \
     src/views/QtBoardView.cpp \
     src/views/QtLabelClickable.cpp \
     src/Game.cpp \
@@ -38,6 +39,7 @@ HEADERS += \
     include/Game.h \
     include/IBoardIterator.h \
     include/IStrategy.h \
+    include/IView.h \
     include/NaiveStrategy.h \
     include/Piece.h \
     include/Player.h \

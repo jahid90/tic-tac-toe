@@ -41,7 +41,8 @@ Player::makeMove()
 
   Game::instance()->board()->placePiece(
       strategy()->getNextBestMoveFor(this, Game::instance()->board()),
-      this->piece() );
+      this->piece()
+  );
 }
 
 IStrategy *

@@ -53,6 +53,8 @@ BoardActionsHelper::markCell()
   int r = cellMap[senderName].first;
   int c = cellMap[senderName].second;
 
+  std::cerr << "emitting markCell for [" << r << "][" << c << "]" << std::endl;
+
   markCell(r, c, icon);
 }
 
@@ -124,4 +126,6 @@ BoardActionsHelper::markCell(int r, int c, QPixmap img)
       }
       break;
   }
+
+  Game::instance()->secondPlayer()->makeMove();
 }

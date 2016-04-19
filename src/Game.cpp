@@ -5,11 +5,15 @@
 #include "Piece.h"
 #include "IStrategy.h"
 #include "NaiveStrategy.h"
+#include "IView.h"
+#include "GuiView.h"
+#include "QtBoardView.h"
 
 Game::Game()
     : _board(new Board)
     , _firstPlayer( new Player(Piece::CROSS) )
     , _secondPlayer( new Player(Piece::OH) )
+    , _view(new GuiView)
 {
   setCurrentPlayer( firstPlayer() );
 
@@ -55,6 +59,12 @@ Game::setCurrentPlayer(Player * p)
   _currentPlayer = p;
 }
 
+IView *
+Game::view()
+{
+  return _view;
+}
+
 bool
 Game::hasWinner()
 {
@@ -71,12 +81,9 @@ Game::playTurn()
 void
 Game::switchPlayers()
 {
-  if ( currentPlayer() == firstPlayer() )
-  {
-    setCurrentPlayer( secondPlayer() );
-  }
-  else
-  {
-    setCurrentPlayer( firstPlayer() );
-  }
+  setCurrentPlayer( 
+      currentPlayer() == firstPlayer()
+      ? secondPlayer()
+      : firstPlayer()
+  );
 }

@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "Utils.h"
 #include "QtBoardView.h"
+#include "IView.h"
 
 int main(int argc, char **argv)
 {
@@ -24,6 +25,9 @@ int main(int argc, char **argv)
   Game *game = Game::instance();
   std::cerr << game->toString() << std::endl;
 
+  game->view()->init(argc, argv);
+
+  /*
   while ( true )
   {
     game->playTurn();
@@ -43,6 +47,7 @@ int main(int argc, char **argv)
       std::cerr << "No winner yet" << std::endl;
     }
   }
+  */
 
   // if (0 != rc)
   // {

@@ -200,8 +200,8 @@ Board::hasBlankCell()
 Cell *
 Board::nextBlankCell()
 {
-  for ( IBoardIterator &itr = begin( IBoardIterator::Type::COL )
-      ; itr != end( IBoardIterator::Type::COL )
+  for ( IBoardIterator &itr = begin( IBoardIterator::Type::ROW )
+      ; itr != end( IBoardIterator::Type::ROW )
       ; ++itr )
   {
     if ( (*itr).isBlank() )
@@ -223,6 +223,4 @@ Board::clearAllCells()
   {
     (*itr).setPiece(Piece::BLANK);
   }
-
-
 }
