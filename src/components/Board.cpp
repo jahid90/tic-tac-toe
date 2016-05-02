@@ -25,7 +25,7 @@ Board::Board()
 
   populateWinningPatterns();
 
-  std::cerr << "New Board created: " << toString() << std::endl;
+  if ( DEBUG ) std::cerr << "New Board created: " << toString() << std::endl;
 }
 
 std::string
@@ -102,9 +102,8 @@ Board::hasWinner()
 bool
 Board::isWinner(Player * player)
 {
-  std::cerr << "checking winner for: "
-      << pieceToString(player->piece());
-  std::cerr << std::endl;
+  if ( DEBUG ) std::cerr << "checking winner for: "
+      << pieceToString( player->piece() ) << std::endl;
 
   for (auto itr = winningPatterns.begin(); itr != winningPatterns.end(); ++itr)
   {
@@ -142,12 +141,12 @@ Board::onStateChanged(int r, int c)
   {
     for (int c = 0; c < 3; c++)
     {
-      std::cerr << pieceToString( cell(1 + r, 1 + c).piece() ) << " ";
+      if ( DEBUG ) std::cerr << pieceToString( cell(1 + r, 1 + c).piece() ) << " ";
     }
-    std::cerr << std::endl;
+    if ( DEBUG ) std::cerr << std::endl;
   }
 
-  std::cerr << "content of cell " << cell(1 + r, 1 + c).toString()
+  if ( DEBUG ) std::cerr << "content of cell " << cell(1 + r, 1 + c).toString()
       << " changed" << std::endl;
 }
 
@@ -212,7 +211,7 @@ Board::nextBlankCell()
   {
     if ( (*itr).isBlank() )
     {
-      std::cerr << "found blank cell: " << (*itr).toString() << std::endl;
+      if ( DEBUG ) std::cerr << "found blank cell: " << (*itr).toString() << std::endl;
       return &(*itr);
     }
   }

@@ -6,6 +6,8 @@
 
 #include "Utils.h"
 
+const bool DEBUG = false;
+
 std::string pieceToString(Piece p)
 {
   return (Piece::CROSS == p)

@@ -11,6 +11,8 @@ namespace Ui
   class Board;
 }
 
+extern const bool DEBUG;
+
 std::string pieceToString(Piece);
 QPixmap getIcon(Piece);
 void setAllCellsEnabled(bool enabled, Ui::Board * board);

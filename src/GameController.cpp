@@ -10,6 +10,7 @@
 #include "ConsoleView.h"
 #include "GuiView.h"
 #include "QtBoardView.h"
+#include "Utils.h"
 
 GameController::GameController()
     : _board(new Board)
@@ -21,7 +22,7 @@ GameController::GameController()
 
   _view->init();
 
-  std::cerr << "New GameController created: " << toString() << std::endl;
+  if ( DEBUG ) std::cerr << "New GameController created: " << toString() << std::endl;
 }
 
 std::string
@@ -38,22 +39,23 @@ GameController::playGame()
 {
   while ( !isBoardFull() )
   {
-    std::cerr << "next blank detected at: " << board()->nextBlankCell() << std::endl;
+    if ( DEBUG ) std::cerr << "next blank detected at: " << board()->nextBlankCell() << std::endl;
 
     playTurn();
     switchPlayers();
 
     if ( hasWinner() )
     {
-      std::cout << board()->winner()->toString() 
-          << " is the winner! Congrats!" << std::endl;
+      std::string msg = board()->winner()->toString();
+      msg += " is the winner! Congrats!";
+      view()->setStatusMessage( msg );
       break;
     }
   }
 
   if ( !hasWinner() )
   {
-      std::cout << "Game is a draw! Well played both!" << std::endl;
+      view()->setStatusMessage( "Game is a draw! Well played both!" );
   }
 }
 
@@ -103,6 +105,7 @@ void
 GameController::playTurn()
 {
   currentPlayer()->makeMove();
+  view()->markCell(-1, -1, Piece::BLANK);
 }
 
 void

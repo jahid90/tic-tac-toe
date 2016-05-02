@@ -14,7 +14,7 @@ Cell::Cell(Board * parent, int x, int y)
   _piece = new Piece;
   *_piece = Piece::BLANK;
 
-  std::cerr << "New Cell created: " << toString() << std::endl;
+  if ( DEBUG ) std::cerr << "New Cell created: " << toString() << std::endl;
 }
 
 std::string

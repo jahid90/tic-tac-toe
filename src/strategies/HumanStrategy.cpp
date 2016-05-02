@@ -3,11 +3,13 @@
 #include "Cell.h"
 
 #include "Board.h"
+#include "GameController.h"
+#include "IView.h"
 
 Cell *
 HumanStrategy::getNextBestMoveFor(Player * player, Board * board)
 {
-  std::cout << "Enter your move: ";
+  GameController::instance()->view()->setStatusMessage( "Enter your move: " );
   int r, c; std::cin >> r >> c;
 
   if (r == -1 && c == -1)

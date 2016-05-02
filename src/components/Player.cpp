@@ -13,7 +13,7 @@ Player::Player(std::string name, Piece piece, IStrategy * strat)
     , _strategy(strat)
 {
   if (NULL == strategy()) setStrategy( new NaiveStrategy );
-  std::cerr << "New Player created: " << toString() << std::endl;
+  if ( DEBUG ) std::cerr << "New Player created: " << toString() << std::endl;
 }
 
 std::string
@@ -36,7 +36,7 @@ Player::makeMove()
 {
   if (NULL == strategy())
   {
-    std::cerr << "strategy is NULL!!" << std::endl;
+    if ( DEBUG ) std::cerr << "strategy is NULL!!" << std::endl;
     return;
   }
 

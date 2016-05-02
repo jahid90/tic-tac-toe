@@ -4,11 +4,12 @@
 #include "Cell.h"
 #include "BoardRowIterator.h"
 #include "BoardColumnIterator.h"
+#include "Utils.h"
 
 IBoardIterator::IBoardIterator(Board & board, int r, int c)
     : _board(board), _r(r), _c(c)
 {
-  std::cerr << "New Iterator created " << toString() << std::endl;
+  if ( DEBUG ) std::cerr << "New Iterator created " << toString() << std::endl;
 }
 
 std::string
