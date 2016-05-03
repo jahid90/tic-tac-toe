@@ -206,3 +206,31 @@ Board::reset()
     (*itr).setPiece(Piece::BLANK);
   }
 }
+
+void
+Board::registerStateObserver(Observer * observer)
+{
+  _observers.push_back( observer );
+}
+
+void
+Board::unregisterStateObserver(Observer * observer)
+{
+  for (auto it = _observers.begin(); it != _observers.end(); ++it)
+  {
+    if ( *it == observer )
+    {
+      _observers.erase( it );
+      break;
+    }
+  }
+}
+
+void
+Board::notifyObservers(Cell * cell)
+{
+  for (auto it = _observers.begin(); it != _observers.end(); ++it)
+  {
+    (*it)->cellStateChanged(cell);
+  }
+}

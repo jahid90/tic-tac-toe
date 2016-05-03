@@ -18,6 +18,9 @@ GameController::GameController()
     , _secondPlayer( new Player("Human Player", Piece::OH, new HumanStrategy) )
     , _view(new ConsoleView)
 {
+  _board->registerStateObserver(this);
+  _view->attachListener(this);
+
   setCurrentPlayer( firstPlayer() );
 
   _view->init();
@@ -122,4 +125,16 @@ bool
 GameController::isBoardFull()
 {
   return !board()->hasBlankCell();
+}
+
+void
+GameController::cellStateChanged(Cell * cell)
+{
+
+}
+
+void
+GameController::cellSelected(int r, int c)
+{
+
 }

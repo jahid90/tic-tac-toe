@@ -26,6 +26,7 @@ SOURCES += \
     src/strategies/NaiveStrategy.cpp \
     src/views/ConsoleView.cpp \
     src/views/GuiView.cpp \
+    src/views/IView.cpp \
     src/views/QtBoardView.cpp \
     src/views/QtLabelClickable.cpp \
     src/GameController.cpp \

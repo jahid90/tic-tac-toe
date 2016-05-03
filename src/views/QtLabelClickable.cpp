@@ -5,6 +5,7 @@
 #include <QMouseEvent>
 
 #include "QtLabelClickable.h"
+#include "Utils.h"
 
 QtLabelClickable::QtLabelClickable( const QString & text, QWidget * parent )
     : QLabel(parent)
@@ -24,7 +25,7 @@ QtLabelClickable::~QtLabelClickable()
 void
 QtLabelClickable::mousePressEvent( QMouseEvent * event )
 {
-  std::cout << "received mousePressEvent: " << event->type() << std::endl;
+  if ( DEBUG ) std::cerr << "received mousePressEvent: " << event->type() << std::endl;
 
   emit clicked();
 }

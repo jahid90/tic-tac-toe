@@ -2,13 +2,13 @@
 #define __GAME_CONTROLLER_H__
 
 #include "CommonIncludes.h"
+#include "Board.h"
+#include "IView.h"
 
-class Board;
 class Player;
 class IStrategy;
-class IView;
 
-class GameController
+class GameController : public Board::Observer, public IView::Listener
 {
   public:
     GameController();
@@ -32,6 +32,9 @@ class GameController
 
     bool hasWinner();
     void playTurn();
+
+    void cellStateChanged(Cell *);
+    void cellSelected(int, int);
 
   private:
     Board * _board;

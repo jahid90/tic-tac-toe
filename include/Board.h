@@ -24,6 +24,16 @@ class Board
     Cell * nextBlankCell();
     void reset();
 
+    class Observer
+    {
+      public:
+        virtual void cellStateChanged(Cell *) = 0;
+    };
+
+    void registerStateObserver(Observer *);
+    void unregisterStateObserver(Observer *);
+    void notifyObservers(Cell *);
+
   private:
     void populateWinningPatterns();
     bool isWinner(Player *);
@@ -35,6 +45,8 @@ class Board
     std::map< int, std::tuple< std::pair<int, int>, 
         std::pair<int, int>, std::pair<int, int> > > winningPatterns;
     Player * _winner;
+
+    std::vector<Observer *> _observers;
 };
 
 #endif // __BOARD_H__
