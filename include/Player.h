@@ -11,17 +11,15 @@ class Player
   public:
     Player(std::string, Piece, IStrategy * strategy = NULL);
     std::string toString();
-    void setStrategy(IStrategy *);
 
     Piece piece();
+    void setStrategy(IStrategy *);
     void makeMove();
 
   private:
     std::string _name;
     Piece _piece;
     IStrategy * _strategy;
-
-    IStrategy * strategy();
 };
 
 #endif // __PLAYER_H__

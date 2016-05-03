@@ -12,7 +12,7 @@ Player::Player(std::string name, Piece piece, IStrategy * strat)
     , _piece(piece)
     , _strategy(strat)
 {
-  if (NULL == strategy()) setStrategy( new NaiveStrategy );
+  if ( NULL == _strategy ) setStrategy( new NaiveStrategy );
   if ( DEBUG ) std::cerr << "New Player created: " << toString() << std::endl;
 }
 
@@ -21,7 +21,7 @@ Player::toString()
 {
   std::stringstream ss;
   ss << _name << "[" << this << "] holding piece: " << pieceToString(piece())
-      << " and having strategy: " << strategy()->toString();
+      << " and having strategy: " << _strategy->toString();
   return ss.str();
 }
 
@@ -32,30 +32,22 @@ Player::piece()
 }
 
 void
+Player::setStrategy(IStrategy * s)
+{
+  _strategy = s;
+}
+
+void
 Player::makeMove()
 {
-  if (NULL == strategy())
+  if ( NULL == _strategy )
   {
     if ( DEBUG ) std::cerr << "strategy is NULL!!" << std::endl;
     return;
   }
 
   Board * board = GameController::instance()->board();
+  Cell * bestCell = _strategy->getNextBestMoveFor(this, board);
 
-  board->placePiece(
-      strategy()->getNextBestMoveFor(this, board),
-      this->piece()
-  );
-}
-
-IStrategy *
-Player::strategy()
-{
-  return _strategy;
-}
-
-void
-Player::setStrategy(IStrategy * s)
-{
-  _strategy = s;
+  board->placePiece( bestCell, piece() );
 }
