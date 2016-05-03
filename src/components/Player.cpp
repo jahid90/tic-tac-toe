@@ -25,6 +25,12 @@ Player::toString()
   return ss.str();
 }
 
+std::string
+Player::name()
+{
+  return _name;
+}
+
 Piece
 Player::piece()
 {
@@ -37,17 +43,19 @@ Player::setStrategy(IStrategy * s)
   _strategy = s;
 }
 
-void
+Cell *
 Player::makeMove()
 {
   if ( NULL == _strategy )
   {
     if ( DEBUG ) std::cerr << "strategy is NULL!!" << std::endl;
-    return;
+    return NULL;
   }
 
   Board * board = GameController::instance()->board();
   Cell * bestCell = _strategy->getNextBestMoveFor(this, board);
 
   board->placePiece( bestCell, piece() );
+
+  return bestCell;
 }

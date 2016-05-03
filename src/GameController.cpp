@@ -2,6 +2,7 @@
 
 #include "Board.h"
 #include "Player.h"
+#include "Cell.h"
 #include "Piece.h"
 #include "IStrategy.h"
 #include "NaiveStrategy.h"
@@ -49,7 +50,7 @@ GameController::playGame()
 
     if ( hasWinner() )
     {
-      std::string msg = board()->winner()->toString();
+      std::string msg = board()->winner()->name();
       msg += " is the winner! Congrats!";
       view()->setStatusMessage( msg );
       break;
@@ -107,8 +108,8 @@ GameController::hasWinner()
 void
 GameController::playTurn()
 {
-  currentPlayer()->makeMove();
-  view()->markCell(-1, -1, Piece::BLANK);
+  Cell * modifiedCell = currentPlayer()->makeMove();
+  cellStateChanged( modifiedCell );
 }
 
 void
@@ -130,7 +131,7 @@ GameController::isBoardFull()
 void
 GameController::cellStateChanged(Cell * cell)
 {
-
+  view()->markCell(cell->x(), cell->y(), cell->piece());
 }
 
 void

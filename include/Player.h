@@ -5,16 +5,18 @@
 
 enum class Piece;
 class IStrategy;
+class Cell;
 
 class Player
 {
   public:
     Player(std::string, Piece, IStrategy * strategy = NULL);
     std::string toString();
+    std::string name();
 
     Piece piece();
     void setStrategy(IStrategy *);
-    void makeMove();
+    Cell * makeMove();
 
   private:
     std::string _name;
