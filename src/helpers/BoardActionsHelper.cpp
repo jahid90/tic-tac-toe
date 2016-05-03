@@ -127,5 +127,5 @@ BoardActionsHelper::markCell(int r, int c, QPixmap img)
       break;
   }
 
-  GameController::instance()->secondPlayer()->makeMove();
+  GameController::instance()->secondPlayer()->move();
 }

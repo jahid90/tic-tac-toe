@@ -22,7 +22,7 @@ ConsoleView::reset()
 
 }
 
-void showView(Board * board)
+void renderView(Board * board)
 {
   for (int i = 1; i < 4; ++i)
   {
@@ -37,13 +37,13 @@ void showView(Board * board)
 void
 ConsoleView::markCell(int, int, Piece)
 {
-  showView( GameController::instance()->board() );
+  renderView( GameController::instance()->board() );
 }
 
 void
 ConsoleView::clearCell(int, int)
 {
-  showView( GameController::instance()->board() );
+  renderView( GameController::instance()->board() );
 }
 
 void

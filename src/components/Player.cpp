@@ -7,8 +7,9 @@
 #include "IStrategy.h"
 #include "NaiveStrategy.h"
 
-Player::Player(std::string name, Piece piece, IStrategy * strat)
-    : _name(name)
+Player::Player(GameController * controller, std::string name, Piece piece, IStrategy * strat)
+    : _controller(controller)
+    , _name(name)
     , _piece(piece)
     , _strategy(strat)
 {
@@ -44,7 +45,7 @@ Player::setStrategy(IStrategy * s)
 }
 
 Cell *
-Player::makeMove()
+Player::move()
 {
   if ( NULL == _strategy )
   {
@@ -52,10 +53,9 @@ Player::makeMove()
     return NULL;
   }
 
-  Board * board = GameController::instance()->board();
-  Cell * bestCell = _strategy->getNextBestMoveFor(this, board);
+  Cell * bestCell = _strategy->getNextBestMoveFor(this, _controller->board());
 
-  board->placePiece( bestCell, piece() );
+  _controller->cellSelected( 1 + bestCell->x(), 1 + bestCell->y() );
 
   return bestCell;
 }

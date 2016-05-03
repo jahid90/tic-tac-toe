@@ -15,8 +15,8 @@
 
 GameController::GameController()
     : _board(new Board)
-    , _firstPlayer( new Player("Naive AI", Piece::CROSS, new NaiveStrategy) )
-    , _secondPlayer( new Player("Human Player", Piece::OH, new HumanStrategy) )
+    , _firstPlayer( new Player(this, "Naive AI", Piece::CROSS, new NaiveStrategy) )
+    , _secondPlayer( new Player(this, "Human Player", Piece::OH, new HumanStrategy) )
     , _view(new ConsoleView)
 {
   _board->registerStateObserver(this);
@@ -108,8 +108,8 @@ GameController::hasWinner()
 void
 GameController::playTurn()
 {
-  Cell * modifiedCell = currentPlayer()->makeMove();
-  cellStateChanged( modifiedCell );
+  Cell * modifiedCell = currentPlayer()->move();
+  // cellSelected( 1 + modifiedCell->x(), 1 + modifiedCell->y() );
 }
 
 void
@@ -137,5 +137,6 @@ GameController::cellStateChanged(Cell * cell)
 void
 GameController::cellSelected(int r, int c)
 {
-
+  Cell * cell = &board()->cell(r, c);
+  board()->placePiece( cell, currentPlayer()->piece() );
 }

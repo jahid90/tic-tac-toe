@@ -150,6 +150,8 @@ Board::placePiece(Cell * cell, Piece piece)
   assert( ("Can't place piece in an already occupied cell!", cell->isBlank()) );
 
   cell->setPiece( piece );
+
+  notifyObservers(cell);
 }
 
 Player *
