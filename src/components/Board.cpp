@@ -130,9 +130,10 @@ Board::toString()
   return ss.str();
 }
 
-bool operator==(Board lhs, Board rhs)
+bool
+Board::operator==(const Board & other)
 {
-  return &lhs == &rhs;
+  return this == &other;
 }
 
 Cell &

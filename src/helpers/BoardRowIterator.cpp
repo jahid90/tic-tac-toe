@@ -3,30 +3,24 @@
 BoardRowIterator::BoardRowIterator(Board & board, int r, int c)
     : IBoardIterator(board, r, c)
 {
-  // std::cerr << "row-iter" << std::endl;
 }
 
 BoardRowIterator::BoardRowIterator(BoardRowIterator & other)
-    : IBoardIterator(other.board(), other.r(), other.c())
+    : IBoardIterator(other._board, other._r, other._c)
 {
-  // std::cerr << "row-iter:: copy constructor" << std::endl;
 }
 
 IBoardIterator &
 BoardRowIterator::operator++()
 {
-  // std::cerr << "row-iter::pre-incr" << std::endl;
-  // std::cerr << "before: " << toString() << std::endl;
 
-  this->_c = 1 + this->c();
+  _c = 1 + _c;
 
-  if (this->c() > 3)
+  if (_c > 3)
   {
-    this->_c = 1;
-    this->_r = 1 + this->r();
+    _c = 1;
+    _r = 1 + _r;
   }
-
-  // std::cerr << "after: " << toString() << std::endl;
 
   return *this;
 }
@@ -34,20 +28,15 @@ BoardRowIterator::operator++()
 IBoardIterator &
 BoardRowIterator::operator++(int)
 {
-  // std::cerr << "row-iter::pre-incr" << std::endl;
-  // std::cerr << "before: " << toString() << std::endl;
-  
   BoardRowIterator * clone = new BoardRowIterator(*this);
 
-  this->_c = 1 + this->c();
+  _c = 1 + _c;
 
-  if (this->c() > 3)
+  if (_c > 3)
   {
-    this->_c = 1;
-    this->_r = 1 + this->r();
+    _c = 1;
+    _r = 1 + _r;
   }
-
-  // std::cerr << "after: " << toString() << std::endl;
 
   return *clone;
 }

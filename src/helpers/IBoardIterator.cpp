@@ -16,27 +16,9 @@ std::string
 IBoardIterator::toString()
 {
   std::stringstream ss;
-  ss << "[" << this << "] holding ref board: " << board().toString()
-      << ", at: (" << r() << ", " << c() << ")";
+  ss << "[" << this << "] holding ref board: " << _board.toString()
+      << ", at: (" << _r << ", " << _c << ")";
   return ss.str();
-}
-
-int
-IBoardIterator::r()
-{
-  return _r;
-}
-
-int
-IBoardIterator::c()
-{
-  return _c;
-}
-
-Board &
-IBoardIterator::board()
-{
-  return _board;
 }
 
 BoardRowIterator &
@@ -70,21 +52,21 @@ IBoardIterator::columnMajorEnd(Board & board)
 Cell &
 IBoardIterator::operator*()
 {
-  return board().cell(r(), c());
+  return _board.cell(_r, _c);
 }
 
 bool
-operator==(IBoardIterator & lhs, IBoardIterator & rhs)
+IBoardIterator::operator==(const IBoardIterator & other)
 {
-  return &lhs.board() == &rhs.board()
-      && lhs.r() == rhs.r()
-      && lhs.c() == rhs.c();
+  return _board == other._board
+      && _r == other._r
+      && _c == other._c;
 }
 
 bool
-operator!=(IBoardIterator & lhs, IBoardIterator & rhs)
+IBoardIterator::operator!=(const IBoardIterator & other)
 {
-  return !( lhs == rhs );
+  return !( *this == other );
 }
 
 void

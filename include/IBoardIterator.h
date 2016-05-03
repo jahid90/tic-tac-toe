@@ -14,10 +14,8 @@ class IBoardIterator
     IBoardIterator(Board &, int, int);
     virtual ~IBoardIterator() {};
     std::string toString();
-
-    int r();
-    int c();
-    Board & board();
+    bool operator==(const IBoardIterator &);
+    bool operator!=(const IBoardIterator &);
 
     Cell & operator*();
     virtual IBoardIterator & operator++() = 0;
@@ -37,8 +35,5 @@ class IBoardIterator
     int _r;
     int _c;
 };
-
-bool operator==(IBoardIterator & lhs, IBoardIterator & rhs);
-bool operator!=(IBoardIterator & lhs, IBoardIterator & rhs);
 
 #endif // __BOARD_ITERATOR_H__

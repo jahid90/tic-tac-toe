@@ -14,6 +14,7 @@ class Board
   public:
     Board();
     std::string toString();
+    bool operator==(const Board &);
 
     Cell & cell(int, int);
     void placePiece(Cell *, Piece);
@@ -35,7 +36,5 @@ class Board
         std::pair<int, int>, std::pair<int, int> > > winningPatterns;
     Player * _winner;
 };
-
-bool operator==(Board lhs, Board rhs);
 
 #endif // __BOARD_H__
