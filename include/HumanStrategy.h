@@ -8,8 +8,6 @@ class HumanStrategy : public IStrategy
   public:
     Cell * getNextBestMoveFor(Player *, Board *);
     std::string toString();
-
-  private:
 };
 
 #endif // __HUMAN_STRATEGY_H__

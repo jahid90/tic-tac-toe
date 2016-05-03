@@ -8,8 +8,6 @@ class NaiveStrategy : public IStrategy
   public:
     Cell * getNextBestMoveFor(Player *, Board *);
     std::string toString();
-
-  private:
 };
 
 #endif // __NAIVE_STRATEGY_H__
