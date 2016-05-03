@@ -15,22 +15,21 @@ class Board
     Board();
     std::string toString();
 
-    void populateWinningPatterns();
     Cell & cell(int, int);
-    void setCell(Cell, int, int);
     void placePiece(Cell *, Piece);
     bool hasWinner();
-    bool isWinner(Player *);
-    void onStateChanged(int, int);
     Player * winner();
     bool hasBlankCell();
     Cell * nextBlankCell();
-    void clearAllCells();
+    void reset();
+
+  private:
+    void populateWinningPatterns();
+    bool isWinner(Player *);
 
     IBoardIterator & begin(IBoardIterator::Type);
     IBoardIterator & end(IBoardIterator::Type);
 
-  private:
     std::vector< std::vector<Cell> > _cells;
     std::map< int, std::tuple< std::pair<int, int>, 
         std::pair<int, int>, std::pair<int, int> > > winningPatterns;

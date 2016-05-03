@@ -10,31 +10,7 @@
 #include "BoardColumnIterator.h"
 #include "QtBoardView.h"
 
-Board::Board()
-    : _winner(NULL)
-{
-  for (int i = 0; i < 3; ++i)
-  {
-    std::vector<Cell> c;
-    for (int j = 0; j < 3; ++j)
-    {
-      c.push_back( Cell(this, i, j) );
-    }
-    _cells.push_back(c);
-  }
-
-  populateWinningPatterns();
-
-  if ( DEBUG ) std::cerr << "New Board created: " << toString() << std::endl;
-}
-
-std::string
-Board::toString()
-{
-  std::stringstream ss;
-  ss << "[" << this << "]";
-  return ss.str();
-}
+/* Private Section */
 
 void
 Board::populateWinningPatterns()
@@ -56,47 +32,6 @@ Board::populateWinningPatterns()
       , std::make_pair(1, 1), std::make_pair(2, 2) ) ) );
   winningPatterns.insert( make_pair( 8, std::make_tuple( std::make_pair(0, 2)
       , std::make_pair(1, 1), std::make_pair(2, 0) ) ) );
-}
-
-Cell &
-Board::cell(int r, int c)
-{
-  --r; --c;
-
-  return _cells[r][c];
-}
-
-void
-Board::setCell(Cell cell, int r, int c)
-{
-  --r; --c;
-
-  Cell boardCell = _cells[r][c];
-
-  assert(boardCell.isBlank());
-
-  boardCell.setPiece( cell.piece() );
-}
-
-void
-Board::placePiece(Cell * cell, Piece piece)
-{
-  assert( ("Can't place piece in an already occupied cell!", cell->isBlank()) );
-
-  cell->setPiece( piece );
-}
-
-Player *
-Board::winner()
-{
-  return _winner;
-}
-
-bool
-Board::hasWinner()
-{
-  return isWinner( GameController::instance()->firstPlayer() ) 
-      || isWinner( GameController::instance()->secondPlayer() );
 }
 
 bool
@@ -133,22 +68,6 @@ Board::isWinner(Player * player)
   return false;
 }
 
-void
-Board::onStateChanged(int r, int c)
-{
-  std::cerr << std::endl;
-  for (int r = 0; r < 3; ++r)
-  {
-    for (int c = 0; c < 3; c++)
-    {
-      if ( DEBUG ) std::cerr << pieceToString( cell(1 + r, 1 + c).piece() ) << " ";
-    }
-    if ( DEBUG ) std::cerr << std::endl;
-  }
-
-  if ( DEBUG ) std::cerr << "content of cell " << cell(1 + r, 1 + c).toString()
-      << " changed" << std::endl;
-}
 
 IBoardIterator &
 Board::begin(IBoardIterator::Type type)
@@ -183,9 +102,66 @@ Board::end(IBoardIterator::Type type)
   return rItr;  // row iter by default, todo throw exception
 }
 
+/* Public Section */
+
+Board::Board()
+    : _winner(NULL)
+{
+  for (int i = 0; i < 3; ++i)
+  {
+    std::vector<Cell> c;
+    for (int j = 0; j < 3; ++j)
+    {
+      c.push_back( Cell(i, j) );
+    }
+    _cells.push_back(c);
+  }
+
+  populateWinningPatterns();
+
+  if ( DEBUG ) std::cerr << "New Board created: " << toString() << std::endl;
+}
+
+std::string
+Board::toString()
+{
+  std::stringstream ss;
+  ss << "[" << this << "]";
+  return ss.str();
+}
+
 bool operator==(Board lhs, Board rhs)
 {
   return &lhs == &rhs;
+}
+
+Cell &
+Board::cell(int r, int c)
+{
+  --r; --c;
+
+  return _cells[r][c];
+}
+
+void
+Board::placePiece(Cell * cell, Piece piece)
+{
+  assert( ("Can't place piece in an already occupied cell!", cell->isBlank()) );
+
+  cell->setPiece( piece );
+}
+
+Player *
+Board::winner()
+{
+  return _winner;
+}
+
+bool
+Board::hasWinner()
+{
+  return isWinner( GameController::instance()->firstPlayer() ) 
+      || isWinner( GameController::instance()->secondPlayer() );
 }
 
 bool
@@ -220,7 +196,7 @@ Board::nextBlankCell()
 }
 
 void
-Board::clearAllCells()
+Board::reset()
 {
   for ( IBoardIterator &itr = begin( IBoardIterator::Type::COL )
       ; itr != end( IBoardIterator::Type::COL )

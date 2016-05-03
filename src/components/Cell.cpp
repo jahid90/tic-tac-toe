@@ -8,8 +8,8 @@
 
 #include "Cell.h"
 
-Cell::Cell(Board * parent, int x, int y)
-    : _parent(parent), _x(x), _y(y)
+Cell::Cell(int x, int y)
+    : _x(x), _y(y)
 {
   _piece = new Piece;
   *_piece = Piece::BLANK;
@@ -50,7 +50,6 @@ void
 Cell::setPiece(Piece piece)
 {
   *_piece = piece;
-  _parent->onStateChanged(this->x(), this->y());
 }
 
 bool

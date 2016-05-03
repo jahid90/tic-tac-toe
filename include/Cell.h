@@ -3,12 +3,10 @@
 
 enum class Piece;
 
-class Board;
-
 class Cell
 {
   public:
-    Cell(Board *, int, int);
+    Cell(int, int);
     std::string toString();
 
     int x();
@@ -18,7 +16,6 @@ class Cell
     bool isBlank();
 
   private:
-    Board * _parent;
     int _x;
     int _y;
     Piece * _piece;

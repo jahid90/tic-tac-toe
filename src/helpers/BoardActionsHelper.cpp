@@ -26,7 +26,7 @@ BoardActionsHelper::BoardActionsHelper(QObject * parent)
 /* slot */ void
 BoardActionsHelper::clearBoard()
 {
-  GameController::instance()->board()->clearAllCells();
+  GameController::instance()->board()->reset();
 
   QPixmap blankImg(":/images/blank");
 
