@@ -45,6 +45,7 @@ class GameController : public Board::Observer, public IView::Listener
 
     void switchPlayers();
     bool isBoardFull();
+    void setRandomFirstPlayer();
 };
 
 #endif // __GAME_CONTROLLER_H__

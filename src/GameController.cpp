@@ -22,11 +22,19 @@ GameController::GameController()
   _board->registerStateObserver(this);
   _view->attachListener(this);
 
-  setCurrentPlayer( firstPlayer() );
+  setRandomFirstPlayer();
 
   _view->init();
 
   if ( DEBUG ) std::cerr << "New GameController created: " << toString() << std::endl;
+}
+
+void
+GameController::setRandomFirstPlayer()
+{
+  srand( 2 ); // TODO - randomize
+
+  setCurrentPlayer( rand() % 2 ? firstPlayer() : secondPlayer() );
 }
 
 std::string
