@@ -11,7 +11,7 @@ class IStrategy
 {
   public:
     virtual std::string toString() = 0;
-    virtual Cell * getNextBestMoveFor(Player *, Board *) = 0;
+    virtual void getNextBestMoveFor(Player *, Board *) = 0;
 };
 
 #endif // __ISTRATEGY_H__

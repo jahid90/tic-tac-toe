@@ -6,21 +6,19 @@
 enum class Piece;
 class IStrategy;
 class Cell;
-class GameController;
 
 class Player
 {
   public:
-    Player(GameController * controller, std::string, Piece, IStrategy * strategy = NULL);
+    Player(std::string, Piece, IStrategy * strategy = NULL);
     std::string toString();
     std::string name();
 
     Piece piece();
     void setStrategy(IStrategy *);
-    Cell * move();
+    void move();
 
   private:
-    GameController * _controller;
     std::string _name;
     Piece _piece;
     IStrategy * _strategy;

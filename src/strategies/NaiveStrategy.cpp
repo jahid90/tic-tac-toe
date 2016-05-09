@@ -5,7 +5,7 @@
 #include "IView.h"
 #include "Utils.h"
 
-Cell *
+void
 NaiveStrategy::getNextBestMoveFor(Player * player, Board * board)
 {
   if ( board->hasBlankCell() )
@@ -18,12 +18,14 @@ NaiveStrategy::getNextBestMoveFor(Player * player, Board * board)
     msg += (char)( '0' + bestMove->y() + 1 );
     GameController::instance()->view()->setStatusMessage( msg );
 
-    return bestMove;
+    GameController::instance()->view()->notify( bestMove->x() + 1, bestMove->y() + 1 );
+
+    return;
   }
 
   if ( DEBUG ) std::cerr << "error! requested next move when no blank cell left on board." << std::endl;
 
-  return NULL; // throw exception
+  return; // throw exception
 }
 
 std::string

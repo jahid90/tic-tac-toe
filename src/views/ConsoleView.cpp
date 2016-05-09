@@ -24,6 +24,7 @@ ConsoleView::reset()
 
 void renderView(Board * board)
 {
+  std::cout << std::endl;
   for (int i = 1; i < 4; ++i)
   {
     for (int j = 1; j < 4; ++j)
@@ -32,11 +33,13 @@ void renderView(Board * board)
     }
     std::cout << std::endl;
   }
+  std::cout << std::endl;
 }
 
 void
-ConsoleView::markCell(int, int, Piece)
+ConsoleView::markCell(int row, int col, Piece piece)
 {
+  if ( DEBUG ) std::cerr << "received change event (" << row << ", " << col << ")" << std::endl;
   renderView( GameController::instance()->board() );
 }
 
@@ -49,5 +52,21 @@ ConsoleView::clearCell(int, int)
 void
 ConsoleView::setStatusMessage(std::string msg)
 {
-  std::cout << "  Game:: " << msg << std::endl;
+  std::cout << "##Game:: " << msg << std::endl;
+}
+
+void
+ConsoleView::waitForMove()
+{
+  std::cout << "##Enter your move(r c): ";
+  int r, c; std::cin >> r >> c;
+
+  if ( r < 1 || r > 3 || c < 1 || c > 3 )
+  {
+    std::cerr << "error! requested next move with invalid index(es)." << std::endl;
+
+    return; // throw exception
+  }
+  
+  notify(r, c);
 }

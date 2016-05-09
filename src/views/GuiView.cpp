@@ -51,3 +51,9 @@ GuiView::setStatusMessage(std::string)
 {
 
 }
+
+void
+GuiView::waitForMove()
+{
+  // no-op
+}

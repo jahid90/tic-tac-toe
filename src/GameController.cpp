@@ -15,8 +15,8 @@
 
 GameController::GameController()
     : _board(new Board)
-    , _firstPlayer( new Player(this, "Naive AI", Piece::CROSS, new NaiveStrategy) )
-    , _secondPlayer( new Player(this, "Human Player", Piece::OH, new HumanStrategy) )
+    , _firstPlayer( new Player("Naive AI", Piece::CROSS, new NaiveStrategy) )
+    , _secondPlayer( new Player("Human Player", Piece::OH, new HumanStrategy) )
     , _view(new ConsoleView)
 {
   _board->registerStateObserver(this);
@@ -41,23 +41,19 @@ GameController::toString()
 void
 GameController::playGame()
 {
-  while ( !isBoardFull() )
+  if ( hasWinner() )
+  {
+    std::string msg = board()->winner()->name();
+    msg += " is the winner! Congrats!";
+    view()->setStatusMessage( msg );
+  }
+  else if ( !isBoardFull() )
   {
     if ( DEBUG ) std::cerr << "next blank detected at: " << board()->nextBlankCell() << std::endl;
 
     playTurn();
-    switchPlayers();
-
-    if ( hasWinner() )
-    {
-      std::string msg = board()->winner()->name();
-      msg += " is the winner! Congrats!";
-      view()->setStatusMessage( msg );
-      break;
-    }
   }
-
-  if ( !hasWinner() )
+  else if ( !hasWinner() )
   {
       view()->setStatusMessage( "Game is a draw! Well played both!" );
   }
@@ -108,8 +104,7 @@ GameController::hasWinner()
 void
 GameController::playTurn()
 {
-  Cell * modifiedCell = currentPlayer()->move();
-  // cellSelected( 1 + modifiedCell->x(), 1 + modifiedCell->y() );
+  currentPlayer()->move();
 }
 
 void
@@ -132,6 +127,8 @@ void
 GameController::cellStateChanged(Cell * cell)
 {
   view()->markCell(cell->x(), cell->y(), cell->piece());
+  switchPlayers();
+  playGame();
 }
 
 void

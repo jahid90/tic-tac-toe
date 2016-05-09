@@ -15,6 +15,7 @@ class IView
     virtual void markCell(int, int, Piece) = 0;
     virtual void clearCell(int, int) = 0;
     virtual void setStatusMessage(std::string) = 0;
+    virtual void waitForMove() = 0;
 
     class Listener
     {
