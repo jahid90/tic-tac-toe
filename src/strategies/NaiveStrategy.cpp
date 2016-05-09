@@ -6,7 +6,7 @@
 #include "Utils.h"
 
 void
-NaiveStrategy::getNextBestMoveFor(Player * player, Board * board)
+NaiveStrategy::requestNextBestMoveOn(Board * board)
 {
   if ( board->hasBlankCell() )
   {

@@ -6,7 +6,7 @@
 class NaiveStrategy : public IStrategy
 {
   public:
-    void getNextBestMoveFor(Player *, Board *);
+    void requestNextBestMoveOn(Board *);
     std::string toString();
 };
 

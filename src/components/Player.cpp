@@ -52,5 +52,5 @@ Player::move()
     return;
   }
 
-  _strategy->getNextBestMoveFor(this, GameController::instance()->board());
+  _strategy->requestNextBestMoveOn(GameController::instance()->board());
 }

@@ -6,6 +6,20 @@
 #include "Board.h"
 #include "Utils.h"
 
+void renderView(Board * board)
+{
+  std::cout << std::endl;
+  for (int i = 1; i < 4; ++i)
+  {
+    for (int j = 1; j < 4; ++j)
+    {
+      std::cout << pieceToString( board->cell(i, j).piece() ) << " ";
+    }
+    std::cout << std::endl;
+  }
+  std::cout << std::endl;
+}
+
 ConsoleView::ConsoleView()
 {
 }
@@ -19,21 +33,7 @@ ConsoleView::init()
 void
 ConsoleView::reset()
 {
-
-}
-
-void renderView(Board * board)
-{
-  std::cout << std::endl;
-  for (int i = 1; i < 4; ++i)
-  {
-    for (int j = 1; j < 4; ++j)
-    {
-      std::cout << pieceToString( board->cell(i, j).piece() ) << " ";
-    }
-    std::cout << std::endl;
-  }
-  std::cout << std::endl;
+  renderView( GameController::instance()->board() );
 }
 
 void
