@@ -70,3 +70,9 @@ ConsoleView::waitForMove()
   
   notify(r, c);
 }
+
+void
+ConsoleView::freezeView()
+{
+  // no-op
+}

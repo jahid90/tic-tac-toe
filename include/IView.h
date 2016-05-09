@@ -16,6 +16,7 @@ class IView
     virtual void clearCell(int, int) = 0;
     virtual void setStatusMessage(std::string) = 0;
     virtual void waitForMove() = 0;
+    virtual void freezeView() = 0;
 
     class Listener
     {

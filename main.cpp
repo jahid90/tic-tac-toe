@@ -1,13 +1,15 @@
 #include "CommonIncludes.h"
-#include "GuiView.h"
 
+#include "GuiView.h"
 #include "GameController.h"
+#include "ArgumentsParser.h"
 
 int main(int argc, char **argv)
 {
-  GuiView::initParams(argc, argv);
+  ArgumentsParser::instance()->init(argc, argv);
 
   GameController *game = GameController::instance();
+  game->init();
 
   game->playGame();
 

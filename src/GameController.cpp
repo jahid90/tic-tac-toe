@@ -13,20 +13,27 @@
 #include "QtBoardView.h"
 #include "Utils.h"
 
+GameController * GameController::_instance = new GameController;
+
 GameController::GameController()
     : _board(new Board)
     , _firstPlayer( new Player("Naive AI", Piece::CROSS, new NaiveStrategy) )
     , _secondPlayer( new Player("Human Player", Piece::OH, new HumanStrategy) )
-    , _view(new ConsoleView)
+    , _view(new GuiView)
 {
   _board->registerStateObserver(this);
   _view->attachListener(this);
 
+  if ( DEBUG )
+    std::cerr << "New GameController created: " << toString() << std::endl;
+}
+
+void
+GameController::init()
+{
   setRandomFirstPlayer();
 
   _view->init();
-
-  if ( DEBUG ) std::cerr << "New GameController created: " << toString() << std::endl;
 }
 
 void
@@ -54,6 +61,7 @@ GameController::playGame()
     std::string msg = board()->winner()->name();
     msg += " is the winner! Congrats!";
     view()->setStatusMessage( msg );
+    view()->freezeView();
   }
   else if ( !isBoardFull() )
   {
@@ -64,6 +72,7 @@ GameController::playGame()
   else if ( !hasWinner() )
   {
       view()->setStatusMessage( "Game is a draw! Well played both!" );
+      view()->freezeView();
   }
 }
 

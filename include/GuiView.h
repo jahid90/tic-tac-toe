@@ -15,12 +15,9 @@ class GuiView : public IView
     void clearCell(int, int);
     void setStatusMessage(std::string);
     void waitForMove();
-
-    static void initParams(int argc, char ** argv);
+    void freezeView();
 
   private:
-    static int _argc;
-    static char ** _argv;
     QApplication * _app;
     QtBoardView * _guiBoard;
 };

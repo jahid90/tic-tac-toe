@@ -5,18 +5,25 @@
 
 #include "ui_board.h"
 
+class GuiView;
+
 class QtBoardView : public QMainWindow
 {
   public:
-    QtBoardView(QMainWindow *parent = 0);
-    static Ui::Board * board() 
+    QtBoardView(GuiView * view, QMainWindow *parent = 0);
+
+    static Ui::Board * uiboard() 
     {
       static Ui::Board board;
 
       return &board;
     }
 
+    void setAllCellsEnabled(bool);
+
   private:
+    GuiView * _view;
+
     void initSignalsAndSlots();
     void connectMessageDispatchWithCell();
     void connectCellClickWithHelper();

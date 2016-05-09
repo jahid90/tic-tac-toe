@@ -15,6 +15,7 @@ class ConsoleView : public IView
     void clearCell(int, int);
     void setStatusMessage(std::string);
     void waitForMove();
+    void freezeView();
 
   private:
 };

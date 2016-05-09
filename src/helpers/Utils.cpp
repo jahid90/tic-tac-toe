@@ -17,20 +17,6 @@ std::string pieceToString(Piece p)
           : "-";
 }
 
-void
-setAllCellsEnabled(bool enabled, Ui::Board * board)
-{
-  board->cell_11->setEnabled(enabled);
-  board->cell_12->setEnabled(enabled);
-  board->cell_13->setEnabled(enabled);
-  board->cell_21->setEnabled(enabled);
-  board->cell_22->setEnabled(enabled);
-  board->cell_23->setEnabled(enabled);
-  board->cell_31->setEnabled(enabled);
-  board->cell_32->setEnabled(enabled);
-  board->cell_33->setEnabled(enabled);
-}
-
 QPixmap
 getIcon(Piece p)
 {

@@ -17,6 +17,7 @@ SOURCES += \
     src/components/Board.cpp \
     src/components/Cell.cpp \
     src/components/Player.cpp \
+    src/helpers/ArgumentsParser.cpp \
     src/helpers/BoardActionsHelper.cpp \
     src/helpers/BoardColumnIterator.cpp \
     src/helpers/BoardRowIterator.cpp \
@@ -33,6 +34,7 @@ SOURCES += \
     $$files(gen/src/*.cpp) \
 
 HEADERS += \
+    include/ArgumentsParser.h \
     include/Board.h \
     include/BoardActionsHelper.h \
     include/BoardRowIterator.h \
@@ -62,4 +64,4 @@ RCC_DIR = gen/rcc
 
 ICON = resources/tictactoe.ico
 
-QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CXXFLAGS += -std=c++11 -g

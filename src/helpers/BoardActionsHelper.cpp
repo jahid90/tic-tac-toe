@@ -9,6 +9,8 @@
 
 #include "BoardActionsHelper.h"
 
+BoardActionsHelper * BoardActionsHelper::_instance = new BoardActionsHelper;
+
 BoardActionsHelper::BoardActionsHelper(QObject * parent)
     : QObject(parent)
 {
@@ -24,11 +26,22 @@ BoardActionsHelper::BoardActionsHelper(QObject * parent)
 }
 
 /* slot */ void
+BoardActionsHelper::clear()
+{
+  if ( DEBUG )
+    std::cerr << "received signal to clear board" << std::endl;
+
+  GameController::instance()->board()->reset();
+  GameController::instance()->view()->reset();
+}
+
+void
 BoardActionsHelper::clearBoard()
 {
-  GameController::instance()->board()->reset();
-
   QPixmap blankImg(":/images/blank");
+
+  if ( DEBUG )
+    std::cerr << "resetting ui" << std::endl;
 
   emit setContent11(blankImg);
   emit setContent12(blankImg);
@@ -39,12 +52,10 @@ BoardActionsHelper::clearBoard()
   emit setContent31(blankImg);
   emit setContent32(blankImg);
   emit setContent33(blankImg);
-
-  setAllCellsEnabled( true, QtBoardView::board() );
 }
 
 /* slot */ void
-BoardActionsHelper::markCell()
+BoardActionsHelper::cellClicked()
 {
   QString senderName = sender()->objectName();
 
@@ -53,7 +64,71 @@ BoardActionsHelper::markCell()
   int r = cellMap[senderName].first;
   int c = cellMap[senderName].second;
 
-  std::cerr << "emitting markCell for [" << r << "][" << c << "]" << std::endl;
+  if ( DEBUG )
+    std::cerr << "GUI cell clicked at [" << r << "][" << c << "]" << std::endl;
+
+  cellClicked(r, c, icon);
+}
+
+void
+BoardActionsHelper::cellClicked(int r, int c, QPixmap img)
+{
+  switch(r)
+  {
+    case 1:
+      switch(c)
+      {
+        case 1:
+          GameController::instance()->view()->notify(1, 1);
+          break;
+        case 2:
+          GameController::instance()->view()->notify(1, 2);
+          break;
+        case 3:
+          GameController::instance()->view()->notify(1, 3);
+          break;
+      }
+      break;
+
+    case 2:
+      switch(c)
+      {
+        case 1:
+          GameController::instance()->view()->notify(2, 1);
+          break;
+        case 2:
+          GameController::instance()->view()->notify(2, 2);
+          break;
+        case 3:
+          GameController::instance()->view()->notify(2, 3);
+          break;
+      }
+      break;
+
+    case 3:
+      switch(c)
+      {
+        case 1:
+          GameController::instance()->view()->notify(3, 1);
+          break;
+        case 2:
+          GameController::instance()->view()->notify(3, 2);
+          break;
+        case 3:
+          GameController::instance()->view()->notify(3, 3);
+          break;
+      }
+      break;
+  }
+}
+
+void
+BoardActionsHelper::markCell(int r, int c, Piece p)
+{
+  QPixmap icon = getIcon( p );
+
+  if ( DEBUG )
+    std::cerr << "GUI cell clicked at [" << r << "][" << c << "]" << std::endl;
 
   markCell(r, c, icon);
 }
@@ -68,18 +143,12 @@ BoardActionsHelper::markCell(int r, int c, QPixmap img)
       {
         case 1: 
           emit setContent11(img);
-          GameController::instance()->board()->cell(1, 1)
-              .setPiece(GameController::instance()->currentPlayer()->piece());
           break;
         case 2: 
           emit setContent12(img);
-          GameController::instance()->board()->cell(1, 2)
-              .setPiece(GameController::instance()->currentPlayer()->piece());
           break;
         case 3: 
           emit setContent13(img);
-          GameController::instance()->board()->cell(1, 3)
-              .setPiece(GameController::instance()->currentPlayer()->piece());
           break;
       }
       break;
@@ -89,18 +158,12 @@ BoardActionsHelper::markCell(int r, int c, QPixmap img)
       {
         case 1: 
           emit setContent21(img);
-          GameController::instance()->board()->cell(2, 1)
-              .setPiece(GameController::instance()->currentPlayer()->piece());
           break;
         case 2:
           emit setContent22(img);
-          GameController::instance()->board()->cell(2, 2)
-              .setPiece(GameController::instance()->currentPlayer()->piece());
           break;
         case 3:
           emit setContent23(img);
-          GameController::instance()->board()->cell(2, 3)
-              .setPiece(GameController::instance()->currentPlayer()->piece());
           break;
       }
       break;
@@ -110,22 +173,14 @@ BoardActionsHelper::markCell(int r, int c, QPixmap img)
       {
         case 1:
           emit setContent31(img);
-          GameController::instance()->board()->cell(3, 1)
-              .setPiece(GameController::instance()->currentPlayer()->piece());
           break;
         case 2:
           emit setContent32(img);
-          GameController::instance()->board()->cell(3, 2)
-              .setPiece(GameController::instance()->currentPlayer()->piece());
           break;
         case 3:
           emit setContent33(img);
-          GameController::instance()->board()->cell(3, 3)
-              .setPiece(GameController::instance()->currentPlayer()->piece());
           break;
       }
       break;
   }
-
-  GameController::instance()->secondPlayer()->move();
 }

@@ -11,16 +11,19 @@ class IStrategy;
 class GameController : public Board::Observer, public IView::Listener
 {
   public:
-    GameController();
     std::string toString();
 
     static GameController * instance()
     {
-      static GameController _instance;
+      if ( NULL == _instance )
+      {
+        _instance = new GameController;
+      }
 
-      return &_instance;
+      return _instance;
     }
 
+    void init();
     void playGame();
 
     Board * board();
@@ -37,6 +40,10 @@ class GameController : public Board::Observer, public IView::Listener
     void cellSelected(int, int);
 
   private:
+    GameController();
+
+    static GameController * _instance;
+
     Board * _board;
     Player * _firstPlayer;
     Player * _secondPlayer;
