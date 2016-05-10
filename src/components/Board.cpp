@@ -119,7 +119,29 @@ Board::Board()
 
   populateWinningPatterns();
 
-  if ( DEBUG ) std::cerr << "New Board created: " << toString() << std::endl;
+  if ( DEBUG )
+    std::cerr << "New Board created: " << toString() << std::endl;
+}
+
+Board::Board(Board * other)
+{
+  for (int i = 0; i < 3; ++i)
+  {
+    std::vector<Cell> c;
+    for (int j = 0; j < 3; ++j)
+    {
+      Cell cell(i, j);
+      cell.setPiece( other->cell(1 + i, 1 + j).piece() );
+
+      c.push_back( cell );
+    }
+    _cells.push_back(c);
+  }
+
+  populateWinningPatterns();
+
+  if ( DEBUG )
+    std::cerr << "Copy Board created: " << toString() << std::endl;
 }
 
 std::string
@@ -170,14 +192,36 @@ Board::hasWinner()
 bool
 Board::hasBlankCell()
 {
+  /*
   for ( IBoardIterator &itr = begin( IBoardIterator::Type::ROW )
       ; itr != end( IBoardIterator::Type::ROW )
       ; ++itr )
   {
     if ( (*itr).isBlank() ) return true;
   }
+  */
+
+  for (int i = 0; i < 3; ++i)
+    for (int j = 0; j < 3; ++j)
+  {
+    if ( cell(1 + i, 1 + j).isBlank() ) return true;
+  }
 
   return false;
+}
+
+int
+Board::blankCellCount()
+{
+  int ret = 0;
+
+  for (int i = 0; i < 3; ++i)
+    for (int j = 0; j < 3; ++j)
+  {
+    if ( cell(1 + i, 1 + j).isBlank() ) ++ret;
+  }
+
+  return ret;
 }
 
 /* call hasBlankCell() first */

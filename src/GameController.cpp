@@ -7,6 +7,7 @@
 #include "IStrategy.h"
 #include "NaiveStrategy.h"
 #include "HumanStrategy.h"
+#include "UnbeatableStrategy.h"
 #include "IView.h"
 #include "ConsoleView.h"
 #include "GuiView.h"
@@ -17,9 +18,11 @@ GameController * GameController::_instance = new GameController;
 
 GameController::GameController()
     : _board(new Board)
-    , _firstPlayer( new Player("Naive AI", Piece::CROSS, new NaiveStrategy) )
+    // , _firstPlayer( new Player("Naive AI", Piece::CROSS, new NaiveStrategy) )
+    , _firstPlayer( new Player("Unbeatable AI", Piece::CROSS, new UnbeatableStrategy) )
     , _secondPlayer( new Player("Human Player", Piece::OH, new HumanStrategy) )
     , _view(new GuiView)
+    // , _view(new ConsoleView)
 {
   _board->registerStateObserver(this);
   _view->attachListener(this);

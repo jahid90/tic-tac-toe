@@ -13,6 +13,7 @@ class Board
 {
   public:
     Board();
+    Board(Board *);
     std::string toString();
     bool operator==(const Board &);
 
@@ -23,6 +24,7 @@ class Board
     bool hasBlankCell();
     Cell * nextBlankCell();
     void reset();
+    int blankCellCount();
 
     class Observer
     {
@@ -34,12 +36,12 @@ class Board
     void unregisterStateObserver(Observer *);
     void notifyObservers(Cell *);
 
+    IBoardIterator & begin(IBoardIterator::Type);
+    IBoardIterator & end(IBoardIterator::Type);
+
   private:
     void populateWinningPatterns();
     bool isWinner(Player *);
-
-    IBoardIterator & begin(IBoardIterator::Type);
-    IBoardIterator & end(IBoardIterator::Type);
 
     std::vector< std::vector<Cell> > _cells;
     std::map< int, std::tuple< std::pair<int, int>, 

@@ -25,6 +25,7 @@ SOURCES += \
     src/helpers/Utils.cpp \
     src/strategies/HumanStrategy.cpp \
     src/strategies/NaiveStrategy.cpp \
+    src/strategies/UnbeatableStrategy.cpp \
     src/views/ConsoleView.cpp \
     src/views/GuiView.cpp \
     src/views/IView.cpp \
@@ -42,15 +43,16 @@ HEADERS += \
     include/Cell.h \
     include/CommonIncludes.h \
     include/GameController.h \
+    include/HumanStrategy.h \
     include/IBoardIterator.h \
     include/IStrategy.h \
     include/IView.h \
-    include/HumanStrategy.h \
     include/NaiveStrategy.h \
     include/Piece.h \
     include/Player.h \
     include/QtBoardView.h \
     include/QtLabelClickable.h \
+    include/UnbeatableStrategy.h \
     include/Utils.h \
 
 RESOURCES = \
