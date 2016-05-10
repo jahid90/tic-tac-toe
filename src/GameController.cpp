@@ -42,6 +42,9 @@ GameController::setRandomFirstPlayer()
   srand( 2 ); // TODO - randomize
 
   setCurrentPlayer( rand() % 2 ? firstPlayer() : secondPlayer() );
+
+  if ( DEBUG )
+    std::cerr << "currentPlayer: " << currentPlayer()->toString() << std::endl;
 }
 
 std::string
@@ -143,7 +146,7 @@ GameController::isBoardFull()
 void
 GameController::cellStateChanged(Cell * cell)
 {
-  view()->markCell(cell->x(), cell->y(), cell->piece());
+  view()->markCell(cell->x(), cell->y(), currentPlayer()->piece());
   switchPlayers();
   playGame();
 }

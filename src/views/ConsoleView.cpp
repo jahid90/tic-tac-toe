@@ -37,9 +37,11 @@ ConsoleView::reset()
 }
 
 void
-ConsoleView::markCell(int row, int col, Piece piece)
+ConsoleView::markCell(int row, int col, Piece)
 {
-  if ( DEBUG ) std::cerr << "received change event (" << row << ", " << col << ")" << std::endl;
+  if ( DEBUG )
+    std::cerr << "received change event (" << row << ", " << col << ")" << std::endl;
+  
   renderView( GameController::instance()->board() );
 }
 

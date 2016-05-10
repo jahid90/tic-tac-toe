@@ -8,6 +8,7 @@
 #include "BoardActionsHelper.h"
 #include "ArgumentsParser.h"
 #include "Utils.h"
+#include "GameController.h"
 
 void
 GuiView::init()
@@ -32,7 +33,7 @@ GuiView::init()
   if ( DEBUG ) 
     std::cerr << "init done. launching gui..." << std::endl;
 
-  int rc = _app->exec();
+  _app->exec();
 }
 
 void
@@ -41,6 +42,7 @@ GuiView::reset()
   BoardActionsHelper::instance()->clearBoard();
   _guiBoard->uiboard()->statusbar->showMessage("");
   _guiBoard->setAllCellsEnabled( true );
+  GameController::instance()->setRandomFirstPlayer();
 }
 
 void

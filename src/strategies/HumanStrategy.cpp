@@ -7,7 +7,7 @@
 #include "IView.h"
 
 void
-HumanStrategy::requestNextBestMoveOn(Board * board)
+HumanStrategy::requestNextBestMoveOn(Board *)
 {
   GameController::instance()->view()->waitForMove();
 }

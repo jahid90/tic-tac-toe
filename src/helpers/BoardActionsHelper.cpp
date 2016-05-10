@@ -71,7 +71,7 @@ BoardActionsHelper::cellClicked()
 }
 
 void
-BoardActionsHelper::cellClicked(int r, int c, QPixmap img)
+BoardActionsHelper::cellClicked(int r, int c, QPixmap)
 {
   switch(r)
   {

@@ -35,6 +35,7 @@ class GameController : public Board::Observer, public IView::Listener
 
     bool hasWinner();
     void playTurn();
+    void setRandomFirstPlayer();
 
     void cellStateChanged(Cell *);
     void cellSelected(int, int);
@@ -52,7 +53,6 @@ class GameController : public Board::Observer, public IView::Listener
 
     void switchPlayers();
     bool isBoardFull();
-    void setRandomFirstPlayer();
 };
 
 #endif // __GAME_CONTROLLER_H__
