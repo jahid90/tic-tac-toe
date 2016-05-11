@@ -9,7 +9,7 @@
 
 #include "BoardActionsHelper.h"
 
-BoardActionsHelper * BoardActionsHelper::_instance = new BoardActionsHelper;
+BoardActionsHelper * BoardActionsHelper::_instance = NULL;
 
 BoardActionsHelper::BoardActionsHelper(QObject * parent)
     : QObject(parent)

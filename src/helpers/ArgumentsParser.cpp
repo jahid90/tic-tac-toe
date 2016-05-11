@@ -5,10 +5,12 @@
 void
 ArgumentsParser::showHelpAndExit()
 {
-  std::cout << "usage: " << getArgv()[0] << " [--console] [--beginner]" << std::endl;
+  std::cout << "usage: " << getArgv()[0] << " [--console | --graphical] [--beginner | --expert]" << std::endl;
   std::cout << std::endl;
-  std::cout << "    [--console]    select console based game; default is gui based" << std::endl;
-  std::cout << "    [--beginner]   select beginner level difficulty; default is expert" << std::endl;
+  std::cout << "    [--console]      select console view based game; default is gui based" << std::endl;
+  std::cout << "    [--gui]          select gui view based game; default is gui based" << std::endl;
+  std::cout << "    [--beginner]     select beginner level difficulty; default is expert" << std::endl;
+  std::cout << "    [--expert]       select expert level difficulty; default is expert" << std::endl;
 
   exit(0);
 }
@@ -37,6 +39,20 @@ ArgumentsParser::init(int argc, char **argv)
     }
 
     _opts.insert(stripped);
+  }
+
+  if ( get("console") && get("gui") )
+  {
+    std::cout << "only one of --console and --gui switches allowed!" << std::endl;
+    std::cout << std::endl;
+    showHelpAndExit();
+  }
+
+  if ( get("beginner") && get("expert") )
+  {
+    std::cout << "only one of --beginner and --expert switches allowed!" << std::endl;
+    std::cout << std::endl;
+    showHelpAndExit();
   }
 }
 

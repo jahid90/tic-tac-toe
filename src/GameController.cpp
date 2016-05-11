@@ -31,9 +31,8 @@ GameController::GameController()
 void
 GameController::initComponents()
 {
-  std::string console = "console";
   bool easyMode = ArgumentsParser::instance()->get("beginner") ? true : false;
-  bool graphical = ArgumentsParser::instance()->get(console) ? false : true;
+  bool graphical = ArgumentsParser::instance()->get("console") ? false : true;
 
   _board = new Board;
 
