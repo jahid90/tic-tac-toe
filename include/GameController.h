@@ -51,6 +51,7 @@ class GameController : public Board::Observer, public IView::Listener
     Player * _currentPlayer;
     IView * _view;
 
+    void initComponents();
     void switchPlayers();
     bool isBoardFull();
 };

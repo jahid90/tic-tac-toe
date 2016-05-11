@@ -13,22 +13,38 @@
 #include "GuiView.h"
 #include "QtBoardView.h"
 #include "Utils.h"
+#include "ArgumentsParser.h"
 
-GameController * GameController::_instance = new GameController;
+GameController * GameController::_instance = NULL;
 
 GameController::GameController()
-    : _board(new Board)
-    // , _firstPlayer( new Player("Naive AI", Piece::CROSS, new NaiveStrategy) )
-    , _firstPlayer( new Player("Unbeatable AI", Piece::CROSS, new UnbeatableStrategy) )
-    , _secondPlayer( new Player("Human Player", Piece::OH, new HumanStrategy) )
-    , _view(new GuiView)
-    // , _view(new ConsoleView)
 {
+  initComponents();
+
   _board->registerStateObserver(this);
   _view->attachListener(this);
 
   if ( DEBUG )
     std::cerr << "New GameController created: " << toString() << std::endl;
+}
+
+void
+GameController::initComponents()
+{
+  std::string console = "console";
+  bool easyMode = ArgumentsParser::instance()->get("beginner") ? true : false;
+  bool graphical = ArgumentsParser::instance()->get(console) ? false : true;
+
+  _board = new Board;
+
+  _firstPlayer = easyMode
+      ? new Player("Naive AI", Piece::CROSS, new NaiveStrategy)
+      : new Player("Unbeatable AI", Piece::CROSS, new UnbeatableStrategy);
+
+  _secondPlayer = new Player("Human Player", Piece::OH, new HumanStrategy);
+
+  _view = graphical ? (IView *) new GuiView : (IView *) new ConsoleView;
+  // _view = new GuiView;
 }
 
 void

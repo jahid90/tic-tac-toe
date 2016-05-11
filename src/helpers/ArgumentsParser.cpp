@@ -1,5 +1,18 @@
 #include "ArgumentsParser.h"
 
+#include "Utils.h"
+
+void
+ArgumentsParser::showHelpAndExit()
+{
+  std::cout << "usage: " << getArgv()[0] << " [--console] [--beginner]" << std::endl;
+  std::cout << std::endl;
+  std::cout << "    [--console]    select console based game; default is gui based" << std::endl;
+  std::cout << "    [--beginner]   select beginner level difficulty; default is expert" << std::endl;
+
+  exit(0);
+}
+
 ArgumentsParser::ArgumentsParser()
 {
 }
@@ -9,6 +22,22 @@ ArgumentsParser::init(int argc, char **argv)
 {
   _argc = argc;
   _argv = argv;
+
+  for (int i = 1; i < argc; ++i)
+  {
+    std::string stripped(argv[i]);
+    stripped = stripped.substr(2);
+
+    if ( DEBUG )
+      std::cerr << "opt: " << stripped << std::endl;
+
+    if (stripped == "help")
+    {
+      showHelpAndExit();
+    }
+
+    _opts.insert(stripped);
+  }
 }
 
 int
@@ -23,10 +52,13 @@ ArgumentsParser::getArgv()
   return _argv;
 }
 
-std::string
-ArgumentsParser::get(char)
+bool
+ArgumentsParser::get(std::string opt)
 {
-  // TODO - return value indexed by key from arguments passed to program
+  bool ret = _opts.count(opt) != 0;
 
-  return "";
+  if ( DEBUG )
+    std::cerr << "get: " << opt << " -> " << ret << std::endl;
+
+  return ret;
 }

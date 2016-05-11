@@ -3,8 +3,6 @@
 
 #include "IView.h"
 
-#include "CommonIncludes.h"
-
 class ConsoleView : public IView
 {
   public:

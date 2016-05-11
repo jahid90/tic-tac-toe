@@ -7,9 +7,12 @@ class ArgumentsParser
 {
   private:
     ArgumentsParser();
+    void showHelpAndExit();
     
     int _argc;
     char ** _argv;
+
+    std::set<std::string> _opts;
 
   public:
     static ArgumentsParser * instance()
@@ -23,7 +26,7 @@ class ArgumentsParser
 
     int getArgc();
     char ** getArgv();
-    std::string get(char);
+    bool get(std::string);
 };
 
 #endif  // __ARGUMENTSPARSER_H__
