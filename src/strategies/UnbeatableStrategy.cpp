@@ -134,6 +134,9 @@ UnbeatableStrategy::minimax(Board * board, bool maximize)
 void
 UnbeatableStrategy::requestNextBestMoveOn(Board * board)
 {
+  if ( DEBUG )
+    std::cerr << "Thinking..." << std::endl;
+
   Cell * bestMove = minimax(board, true);
 
   std::string msg = "AI's move is: ";

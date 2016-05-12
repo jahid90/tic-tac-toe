@@ -42,27 +42,31 @@ GameController::initComponents()
 
   _secondPlayer = new Player("Human Player", Piece::OH, new HumanStrategy);
 
-  _view = graphical ? (IView *) new GuiView : (IView *) new ConsoleView;
-  // _view = new GuiView;
+  _view = graphical
+      ? (IView *) new GuiView
+      : (IView *) new ConsoleView;
 }
 
 void
 GameController::init()
 {
-  setRandomFirstPlayer();
+  setRandomCurrentPlayer();
 
   _view->init();
+
+  playGame();
 }
 
 void
-GameController::setRandomFirstPlayer()
+GameController::setRandomCurrentPlayer()
 {
-  srand( 2 ); // TODO - randomize
+  srand( 0 ); // TODO - randomize
 
-  setCurrentPlayer( rand() % 2 ? firstPlayer() : secondPlayer() );
+  // setCurrentPlayer( rand() % 2 ? firstPlayer() : secondPlayer() );
+  setCurrentPlayer( secondPlayer() );
 
   if ( DEBUG )
-    std::cerr << "currentPlayer: " << currentPlayer()->toString() << std::endl;
+    std::cerr << "currentPlayer at randomize: " << currentPlayer()->toString() << std::endl;
 }
 
 std::string
@@ -86,7 +90,8 @@ GameController::playGame()
   }
   else if ( !isBoardFull() )
   {
-    if ( DEBUG ) std::cerr << "next blank detected at: " << board()->nextBlankCell() << std::endl;
+    if ( DEBUG )
+      std::cerr << "next blank detected at: " << board()->nextBlankCell() << std::endl;
 
     playTurn();
   }
@@ -142,6 +147,9 @@ GameController::hasWinner()
 void
 GameController::playTurn()
 {
+  if ( DEBUG )
+    std::cerr << "playing " << currentPlayer()->toString() << "'s turn..." << std::endl;
+
   currentPlayer()->move();
 }
 

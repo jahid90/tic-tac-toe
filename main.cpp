@@ -11,7 +11,5 @@ int main(int argc, char **argv)
   GameController *game = GameController::instance();
   game->init();
 
-  game->playGame();
-
   return EXIT_SUCCESS;
 }

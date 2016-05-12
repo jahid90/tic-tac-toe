@@ -31,11 +31,11 @@ class GameController : public Board::Observer, public IView::Listener
     Player * secondPlayer();
     Player * currentPlayer();
     void setCurrentPlayer(Player *);
+    void setRandomCurrentPlayer();
     IView * view();
 
     bool hasWinner();
     void playTurn();
-    void setRandomFirstPlayer();
 
     void cellStateChanged(Cell *);
     void cellSelected(int, int);

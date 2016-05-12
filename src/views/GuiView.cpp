@@ -42,7 +42,8 @@ GuiView::reset()
   BoardActionsHelper::instance()->clearBoard();
   _guiBoard->uiboard()->statusbar->showMessage("");
   _guiBoard->setAllCellsEnabled( true );
-  GameController::instance()->setRandomFirstPlayer();
+  GameController::instance()->setRandomCurrentPlayer();
+  GameController::instance()->playGame();
 }
 
 void
