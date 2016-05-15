@@ -1,20 +1,15 @@
-#include "CommonIncludes.h"
-
-#include "GameController.h"
-#include "Board.h"
-#include "Player.h"
-#include "Piece.h"
-#include "Utils.h"
-
 #include "Cell.h"
 
-Cell::Cell(int x, int y)
-    : _x(x), _y(y)
-{
-  _piece = new Piece;
-  *_piece = Piece::BLANK;
+#include "Board.h"
+#include "GameController.h"
+#include "Player.h"
+#include "Utils.h"
 
-  if ( DEBUG ) std::cerr << "New Cell created: " << toString() << std::endl;
+Cell::Cell(int x, int y, Piece piece)
+    : _x(x), _y(y), _piece(piece)
+{
+  if ( DEBUG )
+    std::cerr << "New Cell created: " << toString() << std::endl;
 }
 
 std::string
@@ -43,17 +38,17 @@ Cell::y()
 Piece
 Cell::piece()
 {
-  return *_piece;
+  return _piece;
 }
 
 void
 Cell::setPiece(Piece piece)
 {
-  *_piece = piece;
+  _piece = piece;
 }
 
 bool
 Cell::isBlank()
 {
-  return Piece::BLANK == piece();
+  return Piece::BLANK == _piece;
 }

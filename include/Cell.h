@@ -2,13 +2,12 @@
 #define __CELL_H__
 
 #include "CommonIncludes.h"
-
-enum class Piece;
+#include "Piece.h"
 
 class Cell
 {
   public:
-    Cell(int, int);
+    Cell(int, int, Piece piece = Piece::BLANK);
     std::string toString();
 
     int x();
@@ -20,7 +19,7 @@ class Cell
   private:
     int _x;
     int _y;
-    Piece * _piece;
+    Piece _piece;
 };
 
 #endif // __CELL_H__
