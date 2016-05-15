@@ -6,7 +6,7 @@
 class BoardRowIterator : public IBoardIterator
 {
   public:
-    BoardRowIterator(Board &, int, int);
+    BoardRowIterator(Board *, int, int);
 
     IBoardIterator & operator++();
     IBoardIterator & operator++(int);

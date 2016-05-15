@@ -19,7 +19,6 @@ SOURCES += \
     src/components/Player.cpp \
     src/helpers/ArgumentsParser.cpp \
     src/helpers/BoardActionsHelper.cpp \
-    src/helpers/BoardColumnIterator.cpp \
     src/helpers/BoardRowIterator.cpp \
     src/helpers/IBoardIterator.cpp \
     src/helpers/Utils.cpp \
@@ -39,7 +38,6 @@ HEADERS += \
     include/Board.h \
     include/BoardActionsHelper.h \
     include/BoardRowIterator.h \
-    include/BoardColumnIterator.h \
     include/Cell.h \
     include/CommonIncludes.h \
     include/GameController.h \

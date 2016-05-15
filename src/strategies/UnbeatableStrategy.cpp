@@ -15,7 +15,7 @@ void debugView(Board * board)
   {
     for (int j = 1; j < 4; ++j)
     {
-      std::cerr << pieceToString( board->cell(i, j).piece() ) << " ";
+      std::cerr << pieceToString( board->cell(i, j)->piece() ) << " ";
     }
     std::cerr << std::endl;
   }
@@ -29,16 +29,16 @@ Config::buildTree()
   {
     for (int j = 0; j < 3; ++j)
     {
-      Cell cell = _board->cell(1 + i, 1 + j);
+      Cell * cell = _board->cell(1 + i, 1 + j);
 
-      if ( !cell.isBlank() )
+      if ( !cell->isBlank() )
       {
         _child[ i * 3 + j ] = NULL;
       }
       else
       {
         Board * copy = new Board(_board);
-        copy->cell(1 + i, 1 + j).setPiece( _maximize 
+        copy->cell(1 + i, 1 + j)->setPiece( _maximize 
             ? GameController::instance()->firstPlayer()->piece()
             : GameController::instance()->secondPlayer()->piece() );
 
@@ -109,7 +109,7 @@ Config::score()
 
       int r = i / 3;
       int c = i % 3;
-      if ( val == childScore ) _cell = &_board->cell(1 + r, 1 + c);
+      if ( val == childScore ) _cell = _board->cell(1 + r, 1 + c);
     }
   }
 

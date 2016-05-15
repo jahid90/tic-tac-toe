@@ -1,6 +1,6 @@
 #include "BoardRowIterator.h"
 
-BoardRowIterator::BoardRowIterator(Board & board, int r, int c)
+BoardRowIterator::BoardRowIterator(Board * board, int r, int c)
     : IBoardIterator(board, r, c)
 {
 }
@@ -13,7 +13,6 @@ BoardRowIterator::BoardRowIterator(BoardRowIterator & other)
 IBoardIterator &
 BoardRowIterator::operator++()
 {
-
   _c = 1 + _c;
 
   if (_c > 3)

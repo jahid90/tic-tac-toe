@@ -13,7 +13,7 @@ void renderView(Board * board)
   {
     for (int j = 1; j < 4; ++j)
     {
-      std::cout << pieceToString( board->cell(i, j).piece() ) << " ";
+      std::cout << pieceToString( board->cell(i, j)->piece() ) << " ";
     }
     std::cout << std::endl;
   }

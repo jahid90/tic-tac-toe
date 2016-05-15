@@ -196,6 +196,5 @@ GameController::cellStateChanged(Cell * cell)
 void
 GameController::cellSelected(int r, int c)
 {
-  Cell * cell = &board()->cell(r, c);
-  board()->placePiece( cell, currentPlayer()->piece() );
+  board()->placePiece( board()->cell(r, c), currentPlayer()->piece() );
 }

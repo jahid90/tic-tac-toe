@@ -1,37 +1,34 @@
 #include "Board.h"
 
+#include "BoardRowIterator.h"
 #include "CommonIncludes.h"
-
-#include "Player.h"
 #include "GameController.h"
 #include "Piece.h"
-#include "Utils.h"
-#include "BoardRowIterator.h"
-#include "BoardColumnIterator.h"
+#include "Player.h"
 #include "QtBoardView.h"
+#include "Utils.h"
 
 /* Private Section */
 
 void
 Board::populateWinningPatterns()
 {
-  // 0-based indexing! - 1-based everywhere else, careful!!
-  winningPatterns.insert( make_pair( 1, std::make_tuple( std::make_pair(0, 0)
-      , std::make_pair(0, 1), std::make_pair(0, 2) ) ) );
-  winningPatterns.insert( make_pair( 2, std::make_tuple( std::make_pair(1, 0)
-      , std::make_pair(1, 1), std::make_pair(1, 2) ) ) );
-  winningPatterns.insert( make_pair( 3, std::make_tuple( std::make_pair(2, 0)
-      , std::make_pair(2, 1), std::make_pair(2, 2) ) ) );
-  winningPatterns.insert( make_pair( 4, std::make_tuple( std::make_pair(0, 0)
-      , std::make_pair(1, 0), std::make_pair(2, 0) ) ) );
-  winningPatterns.insert( make_pair( 5, std::make_tuple( std::make_pair(0, 1)
-      , std::make_pair(1, 1), std::make_pair(2, 1) ) ) );
-  winningPatterns.insert( make_pair( 6, std::make_tuple( std::make_pair(0, 2)
-      , std::make_pair(1, 2), std::make_pair(2, 2) ) ) );
-  winningPatterns.insert( make_pair( 7, std::make_tuple( std::make_pair(0, 0)
-      , std::make_pair(1, 1), std::make_pair(2, 2) ) ) );
-  winningPatterns.insert( make_pair( 8, std::make_tuple( std::make_pair(0, 2)
-      , std::make_pair(1, 1), std::make_pair(2, 0) ) ) );
+  winningPatterns.insert( std::make_tuple( std::make_pair(1, 1)
+      , std::make_pair(1, 2), std::make_pair(1, 3) ) );
+  winningPatterns.insert( std::make_tuple( std::make_pair(2, 1)
+      , std::make_pair(2, 2), std::make_pair(2, 3) ) );
+  winningPatterns.insert( std::make_tuple( std::make_pair(3, 1)
+      , std::make_pair(3, 2), std::make_pair(3, 3) ) );
+  winningPatterns.insert( std::make_tuple( std::make_pair(1, 1)
+      , std::make_pair(2, 1), std::make_pair(3, 1) ) );
+  winningPatterns.insert( std::make_tuple( std::make_pair(1, 2)
+      , std::make_pair(2, 2), std::make_pair(3, 2) ) );
+  winningPatterns.insert( std::make_tuple( std::make_pair(1, 3)
+      , std::make_pair(2, 3), std::make_pair(3, 3) ) );
+  winningPatterns.insert( std::make_tuple( std::make_pair(1, 1)
+      , std::make_pair(2, 2), std::make_pair(3, 3) ) );
+  winningPatterns.insert( std::make_tuple( std::make_pair(1, 3)
+      , std::make_pair(2, 2), std::make_pair(3, 1) ) );
 }
 
 bool
@@ -42,22 +39,22 @@ Board::isWinner(Player * player)
 
   for (auto itr = winningPatterns.begin(); itr != winningPatterns.end(); ++itr)
   {
-    bool winner = true;
+    bool cellsHaveSamePiece = true;
     int r, c;
 
-    r = 1 + std::get<0>(itr->second).first;
-    c = 1 + std::get<0>(itr->second).second;
-    winner &= (player->piece() == cell(r, c).piece());
+    r = std::get<0>(*itr).first;
+    c = std::get<0>(*itr).second;
+    cellsHaveSamePiece &= (player->piece() == cell(r, c)->piece());
 
-    r = 1 + std::get<1>(itr->second).first;
-    c = 1 + std::get<1>(itr->second).second;
-    winner &= (player->piece() == cell(r, c).piece());
+    r = std::get<1>(*itr).first;
+    c = std::get<1>(*itr).second;
+    cellsHaveSamePiece &= (player->piece() == cell(r, c)->piece());
 
-    r = 1 + std::get<2>(itr->second).first;
-    c = 1 + std::get<2>(itr->second).second;
-    winner &= (player->piece() == cell(r, c).piece());
+    r = std::get<2>(*itr).first;
+    c = std::get<2>(*itr).second;
+    cellsHaveSamePiece &= (player->piece() == cell(r, c)->piece());
 
-    if (winner)
+    if (cellsHaveSamePiece)
     {
       _winner = player;
 
@@ -68,38 +65,18 @@ Board::isWinner(Player * player)
   return false;
 }
 
-
 IBoardIterator &
-Board::begin(IBoardIterator::Type type)
+Board::begin()
 {
-  static BoardRowIterator &rItr = IBoardIterator::rowMajorBegin( *this );
-  static BoardColumnIterator &cItr = IBoardIterator::columnMajorBegin( *this );
-
-  rItr.reset();
-  cItr.reset();
-  
-  if (IBoardIterator::Type::ROW == type)
-    return rItr;
-
-  if (IBoardIterator::Type::COL == type)
-    return cItr;
-
-  return rItr;  // row iter by default, todo throw exception
+  IBoardIterator * iter = new BoardRowIterator(this, 1, 1);
+  return *iter;
 }
 
 IBoardIterator &
-Board::end(IBoardIterator::Type type)
+Board::end()
 {
-  static BoardRowIterator &rItr = IBoardIterator::rowMajorEnd( *this );
-  static BoardColumnIterator &cItr = IBoardIterator::columnMajorEnd( *this );
-  
-  if (IBoardIterator::Type::ROW == type)
-    return rItr;
-
-  if (IBoardIterator::Type::COL == type)
-    return cItr;
-
-  return rItr;  // row iter by default, todo throw exception
+  IBoardIterator * iter = new BoardRowIterator(this, 4, 1);
+  return *iter;
 }
 
 /* Public Section */
@@ -131,7 +108,7 @@ Board::Board(Board * other)
     for (int j = 0; j < 3; ++j)
     {
       Cell cell(i, j);
-      cell.setPiece( other->cell(1 + i, 1 + j).piece() );
+      cell.setPiece( other->cell(1 + i, 1 + j)->piece() );
 
       c.push_back( cell );
     }
@@ -158,12 +135,10 @@ Board::operator==(const Board & other)
   return this == &other;
 }
 
-Cell &
+Cell *
 Board::cell(int r, int c)
 {
-  --r; --c;
-
-  return _cells[r][c];
+  return &_cells[r - 1][c - 1];
 }
 
 void
@@ -197,19 +172,11 @@ Board::hasWinner()
 bool
 Board::hasBlankCell()
 {
-  /*
-  for ( IBoardIterator &itr = begin( IBoardIterator::Type::ROW )
-      ; itr != end( IBoardIterator::Type::ROW )
+  for ( IBoardIterator &itr = begin()
+      ; itr != end()
       ; ++itr )
   {
     if ( (*itr).isBlank() ) return true;
-  }
-  */
-
-  for (int i = 0; i < 3; ++i)
-    for (int j = 0; j < 3; ++j)
-  {
-    if ( cell(1 + i, 1 + j).isBlank() ) return true;
   }
 
   return false;
@@ -220,10 +187,11 @@ Board::blankCellCount()
 {
   int ret = 0;
 
-  for (int i = 0; i < 3; ++i)
-    for (int j = 0; j < 3; ++j)
+  for ( IBoardIterator &itr = begin()
+      ; itr != end()
+      ; ++itr )
   {
-    if ( cell(1 + i, 1 + j).isBlank() ) ++ret;
+    if ( (*itr).isBlank() ) ++ret;
   }
 
   return ret;
@@ -233,8 +201,8 @@ Board::blankCellCount()
 Cell *
 Board::nextBlankCell()
 {
-  for ( IBoardIterator &itr = begin( IBoardIterator::Type::ROW )
-      ; itr != end( IBoardIterator::Type::ROW )
+  for ( IBoardIterator &itr = begin()
+      ; itr != end()
       ; ++itr )
   {
     if ( (*itr).isBlank() )
@@ -250,8 +218,8 @@ Board::nextBlankCell()
 void
 Board::reset()
 {
-  for ( IBoardIterator &itr = begin( IBoardIterator::Type::COL )
-      ; itr != end( IBoardIterator::Type::COL )
+  for ( IBoardIterator &itr = begin()
+      ; itr != end()
       ; ++itr )
   {
     (*itr).setPiece(Piece::BLANK);
