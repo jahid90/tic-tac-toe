@@ -12,8 +12,8 @@ class Player
   public:
     Player(std::string, Piece, IStrategy * strategy = NULL);
     std::string toString();
-    std::string name();
 
+    std::string name();
     Piece piece();
     void setStrategy(IStrategy *);
     void move();

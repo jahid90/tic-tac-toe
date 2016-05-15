@@ -1,11 +1,11 @@
 #include "Player.h"
 
-#include "Piece.h"
 #include "Board.h"
 #include "GameController.h"
-#include "Utils.h"
 #include "IStrategy.h"
 #include "NaiveStrategy.h"
+#include "Piece.h"
+#include "Utils.h"
 
 Player::Player(std::string name, Piece piece, IStrategy * strat)
     : _name(name)
