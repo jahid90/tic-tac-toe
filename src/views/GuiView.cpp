@@ -40,10 +40,9 @@ void
 GuiView::reset()
 {
   BoardActionsHelper::instance()->clearBoard();
+  GameController::instance()->reset();
   _guiBoard->uiboard()->statusbar->showMessage("");
   _guiBoard->setAllCellsEnabled( true );
-  GameController::instance()->setRandomCurrentPlayer();
-  GameController::instance()->playGame();
 }
 
 void

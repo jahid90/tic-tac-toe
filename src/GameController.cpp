@@ -1,21 +1,30 @@
 #include "GameController.h"
 
-#include "Board.h"
-#include "Player.h"
+#include "ArgumentsParser.h"
 #include "Cell.h"
-#include "Piece.h"
-#include "IStrategy.h"
-#include "NaiveStrategy.h"
-#include "HumanStrategy.h"
-#include "UnbeatableStrategy.h"
-#include "IView.h"
 #include "ConsoleView.h"
 #include "GuiView.h"
+#include "HumanStrategy.h"
+#include "IStrategy.h"
+#include "NaiveStrategy.h"
+#include "Piece.h"
+#include "Player.h"
 #include "QtBoardView.h"
+#include "UnbeatableStrategy.h"
 #include "Utils.h"
-#include "ArgumentsParser.h"
 
 GameController * GameController::_instance = NULL;
+
+GameController * 
+GameController::instance()
+{
+  if ( NULL == _instance )
+  {
+    _instance = new GameController;
+  }
+
+  return _instance;
+}
 
 GameController::GameController()
 {
@@ -50,15 +59,15 @@ GameController::initComponents()
 void
 GameController::init()
 {
-  setRandomCurrentPlayer();
+  randomizeCurrentPlayer();
 
   _view->init();
 
-  playGame();
+  playTurn();
 }
 
 void
-GameController::setRandomCurrentPlayer()
+GameController::randomizeCurrentPlayer()
 {
   srand( 0 ); // TODO - randomize
 
@@ -79,7 +88,7 @@ GameController::toString()
 }
 
 void
-GameController::playGame()
+GameController::playTurn()
 {
   if ( hasWinner() )
   {
@@ -93,13 +102,32 @@ GameController::playGame()
     if ( DEBUG )
       std::cerr << "next blank detected at: " << board()->nextBlankCell() << std::endl;
 
-    playTurn();
+    makeMove();
   }
   else if ( !hasWinner() )
   {
-      view()->setStatusMessage( "Game is a draw! Well played both!" );
-      view()->freezeView();
+    view()->setStatusMessage( "Game is a draw! Well played both!" );
+    view()->freezeView();
   }
+}
+
+void
+GameController::makeMove()
+{
+  if ( DEBUG )
+    std::cerr << "playing " << currentPlayer()->toString() << "'s turn..." << std::endl;
+
+  currentPlayer()->move();
+}
+
+void
+GameController::switchPlayers()
+{
+  setCurrentPlayer( 
+      currentPlayer() == firstPlayer()
+      ? secondPlayer()
+      : firstPlayer()
+  );
 }
 
 Board *
@@ -144,25 +172,6 @@ GameController::hasWinner()
   return board()->hasWinner();
 }
 
-void
-GameController::playTurn()
-{
-  if ( DEBUG )
-    std::cerr << "playing " << currentPlayer()->toString() << "'s turn..." << std::endl;
-
-  currentPlayer()->move();
-}
-
-void
-GameController::switchPlayers()
-{
-  setCurrentPlayer( 
-      currentPlayer() == firstPlayer()
-      ? secondPlayer()
-      : firstPlayer()
-  );
-}
-
 bool
 GameController::isBoardFull()
 {
@@ -170,11 +179,18 @@ GameController::isBoardFull()
 }
 
 void
+GameController::reset()
+{
+  GameController::instance()->randomizeCurrentPlayer();
+  GameController::instance()->playTurn();
+}
+
+void
 GameController::cellStateChanged(Cell * cell)
 {
   view()->markCell(cell->x(), cell->y(), currentPlayer()->piece());
   switchPlayers();
-  playGame();
+  playTurn();
 }
 
 void

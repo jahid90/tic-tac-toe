@@ -1,8 +1,8 @@
 #ifndef __GAME_CONTROLLER_H__
 #define __GAME_CONTROLLER_H__
 
-#include "CommonIncludes.h"
 #include "Board.h"
+#include "CommonIncludes.h"
 #include "IView.h"
 
 class Player;
@@ -13,30 +13,18 @@ class GameController : public Board::Observer, public IView::Listener
   public:
     std::string toString();
 
-    static GameController * instance()
-    {
-      if ( NULL == _instance )
-      {
-        _instance = new GameController;
-      }
-
-      return _instance;
-    }
-
-    void init();
-    void playGame();
+    static GameController * instance();
 
     Board * board();
     Player * firstPlayer();
     Player * secondPlayer();
     Player * currentPlayer();
-    void setCurrentPlayer(Player *);
-    void setRandomCurrentPlayer();
     IView * view();
 
+    void init();
+    void reset();
     bool hasWinner();
-    void playTurn();
-
+    
     void cellStateChanged(Cell *);
     void cellSelected(int, int);
 
@@ -52,8 +40,12 @@ class GameController : public Board::Observer, public IView::Listener
     IView * _view;
 
     void initComponents();
-    void switchPlayers();
     bool isBoardFull();
+    void playTurn();
+    void makeMove();
+    void switchPlayers();
+    void setCurrentPlayer(Player *);
+    void randomizeCurrentPlayer();
 };
 
 #endif // __GAME_CONTROLLER_H__
