@@ -2,6 +2,18 @@
 
 #include "Utils.h"
 
+ArgumentsParser * ArgumentsParser::_instance = NULL;
+
+ArgumentsParser * ArgumentsParser::instance()
+{
+  if ( NULL == _instance )
+  {
+    _instance = new ArgumentsParser;
+  }
+
+  return _instance;
+}
+
 void
 ArgumentsParser::showHelpAndExit()
 {

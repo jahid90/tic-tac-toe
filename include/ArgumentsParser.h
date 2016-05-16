@@ -7,20 +7,17 @@ class ArgumentsParser
 {
   private:
     ArgumentsParser();
+
     void showHelpAndExit();
     
     int _argc;
     char ** _argv;
-
     std::set<std::string> _opts;
 
-  public:
-    static ArgumentsParser * instance()
-    {
-      static ArgumentsParser instance;
+    static ArgumentsParser * _instance;
 
-      return &instance;
-    }
+  public:
+    static ArgumentsParser * instance();
 
     void init(int, char **);
 
