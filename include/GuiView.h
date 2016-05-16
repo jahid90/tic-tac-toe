@@ -5,6 +5,7 @@
 
 class QApplication;
 class QtBoardView;
+class BoardActionsHelper;
 
 class GuiView : public IView
 {
@@ -20,6 +21,7 @@ class GuiView : public IView
   private:
     QApplication * _app;
     QtBoardView * _guiBoard;
+    BoardActionsHelper * _helper;
 };
 
 #endif // __GUI_VIEW_H__

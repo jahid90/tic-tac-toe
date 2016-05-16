@@ -4,11 +4,12 @@
 #include <QIcon>
 #include <QString>
 
-#include "QtBoardView.h"
-#include "BoardActionsHelper.h"
 #include "ArgumentsParser.h"
-#include "Utils.h"
+#include "BoardActionsHelper.h"
 #include "GameController.h"
+#include "QtBoardView.h"
+#include "Utils.h"
+#include "ui_board.h"
 
 void
 GuiView::init()
@@ -16,7 +17,8 @@ GuiView::init()
   int argc = ArgumentsParser::instance()->getArgc();
   char ** argv = ArgumentsParser::instance()->getArgv();
 
-  BoardActionsHelper::instance()->init( this );
+  _helper = BoardActionsHelper::instance();
+  _helper->init( this );
 
   if ( DEBUG )
     std::cerr << "received arguments" << std::endl;
@@ -41,7 +43,7 @@ GuiView::init()
 void
 GuiView::reset()
 {
-  BoardActionsHelper::instance()->clearBoard();
+  _helper->clearBoard();
 
   _guiBoard->uiboard()->statusbar->showMessage("");
   _guiBoard->setAllCellsEnabled( true );
@@ -50,13 +52,13 @@ GuiView::reset()
 void
 GuiView::markCell(int r, int c, Piece p)
 {
-  BoardActionsHelper::instance()->markCell(1 + r, 1 + c, p);
+  _helper->markCell(1 + r, 1 + c, p);
 }
 
 void
 GuiView::clearCell(int r, int c)
 {
-  BoardActionsHelper::instance()->markCell(1 + r, 1 + c, Piece::BLANK);
+  _helper->markCell(1 + r, 1 + c, Piece::BLANK);
 }
 
 void

@@ -1,28 +1,42 @@
-#include "CommonIncludes.h"
+#include "QtBoardView.h"
 
 #include <QPixmap>
 #include <QPushButton>
 
-#include "ui_board.h"
-#include "BoardActionsHelper.h"
-#include "GameController.h"
 #include "Board.h"
+#include "BoardActionsHelper.h"
 #include "Cell.h"
+#include "CommonIncludes.h"
+#include "GameController.h"
 #include "GuiView.h"
+#include "ui_board.h"
 
-#include "QtBoardView.h"
+Ui::Board * QtBoardView::_board = NULL;
+
+Ui::Board *
+QtBoardView::uiboard()
+{
+  if (NULL == _board)
+  {
+    _board = new Ui::Board;
+  }
+
+  return _board;
+}
 
 QtBoardView::QtBoardView(GuiView * view, QMainWindow * parent)
     : QMainWindow(parent)
     , _view(view)
 {
+  _helper = BoardActionsHelper::instance();
+
   uiboard()->setupUi(this);
 
   initSignalsAndSlots();
 
   setupCellsToUseScaledContents();
 
-  BoardActionsHelper::instance()->clearBoard();
+  _helper->clearBoard();
 }
 
 void 
@@ -32,7 +46,7 @@ QtBoardView::initSignalsAndSlots()
       QApplication::instance(), SLOT (quit()) );
 
   connect( uiboard()->btnClear, SIGNAL (clicked()), 
-      BoardActionsHelper::instance(), SLOT (clear()) );
+      _helper, SLOT (clear()) );
 
   connectMessageDispatchWithCell();
 
@@ -42,23 +56,23 @@ QtBoardView::initSignalsAndSlots()
 void
 QtBoardView::connectMessageDispatchWithCell()
 {
-  connect( BoardActionsHelper::instance(), SIGNAL (setContent11(QPixmap)),
+  connect( _helper, SIGNAL (setContent11(QPixmap)),
       uiboard()->cell_11, SLOT (setPixmap(QPixmap)) );
-  connect( BoardActionsHelper::instance(), SIGNAL (setContent12(QPixmap)),
+  connect( _helper, SIGNAL (setContent12(QPixmap)),
       uiboard()->cell_12, SLOT (setPixmap(QPixmap)) );
-  connect( BoardActionsHelper::instance(), SIGNAL (setContent13(QPixmap)),
+  connect( _helper, SIGNAL (setContent13(QPixmap)),
       uiboard()->cell_13, SLOT (setPixmap(QPixmap)) );
-  connect( BoardActionsHelper::instance(), SIGNAL (setContent21(QPixmap)),
+  connect( _helper, SIGNAL (setContent21(QPixmap)),
       uiboard()->cell_21, SLOT (setPixmap(QPixmap)) );
-  connect( BoardActionsHelper::instance(), SIGNAL (setContent22(QPixmap)),
+  connect( _helper, SIGNAL (setContent22(QPixmap)),
       uiboard()->cell_22, SLOT (setPixmap(QPixmap)) );
-  connect( BoardActionsHelper::instance(), SIGNAL (setContent23(QPixmap)),
+  connect( _helper, SIGNAL (setContent23(QPixmap)),
       uiboard()->cell_23, SLOT (setPixmap(QPixmap)) );
-  connect( BoardActionsHelper::instance(), SIGNAL (setContent31(QPixmap)),
+  connect( _helper, SIGNAL (setContent31(QPixmap)),
       uiboard()->cell_31, SLOT (setPixmap(QPixmap)) );
-  connect( BoardActionsHelper::instance(), SIGNAL (setContent32(QPixmap)),
+  connect( _helper, SIGNAL (setContent32(QPixmap)),
       uiboard()->cell_32, SLOT (setPixmap(QPixmap)) );
-  connect( BoardActionsHelper::instance(), SIGNAL (setContent33(QPixmap)),
+  connect( _helper, SIGNAL (setContent33(QPixmap)),
       uiboard()->cell_33, SLOT (setPixmap(QPixmap)) );
 }
 
@@ -66,23 +80,23 @@ void
 QtBoardView::connectCellClickWithHelper()
 {
   connect( uiboard()->cell_11, SIGNAL (clicked()),
-      BoardActionsHelper::instance(), SLOT (cellClicked()) );
+      _helper, SLOT (cellClicked()) );
   connect( uiboard()->cell_12, SIGNAL (clicked()),
-      BoardActionsHelper::instance(), SLOT (cellClicked()) );
+      _helper, SLOT (cellClicked()) );
   connect( uiboard()->cell_13, SIGNAL (clicked()),
-      BoardActionsHelper::instance(), SLOT (cellClicked()) );
+      _helper, SLOT (cellClicked()) );
   connect( uiboard()->cell_21, SIGNAL (clicked()),
-      BoardActionsHelper::instance(), SLOT (cellClicked()) );
+      _helper, SLOT (cellClicked()) );
   connect( uiboard()->cell_22, SIGNAL (clicked()),
-      BoardActionsHelper::instance(), SLOT (cellClicked()) );
+      _helper, SLOT (cellClicked()) );
   connect( uiboard()->cell_23, SIGNAL (clicked()),
-      BoardActionsHelper::instance(), SLOT (cellClicked()) );
+      _helper, SLOT (cellClicked()) );
   connect( uiboard()->cell_31, SIGNAL (clicked()),
-      BoardActionsHelper::instance(), SLOT (cellClicked()) );
+      _helper, SLOT (cellClicked()) );
   connect( uiboard()->cell_32, SIGNAL (clicked()),
-      BoardActionsHelper::instance(), SLOT (cellClicked()) );
+      _helper, SLOT (cellClicked()) );
   connect( uiboard()->cell_33, SIGNAL (clicked()),
-      BoardActionsHelper::instance(), SLOT (cellClicked()) );
+      _helper, SLOT (cellClicked()) );
 }
 
 void

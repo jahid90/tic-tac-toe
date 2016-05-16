@@ -3,26 +3,28 @@
 
 #include <QMainWindow>
 
-#include "ui_board.h"
+namespace Ui
+{
+  class Board;
+}
 
 class GuiView;
+class BoardActionsHelper;
 
 class QtBoardView : public QMainWindow
 {
   public:
     QtBoardView(GuiView * view, QMainWindow *parent = 0);
 
-    static Ui::Board * uiboard() 
-    {
-      static Ui::Board board;
-
-      return &board;
-    }
+    static Ui::Board * uiboard();
 
     void setAllCellsEnabled(bool);
 
   private:
+    static Ui::Board * _board;
+
     GuiView * _view;
+    BoardActionsHelper * _helper;
 
     void initSignalsAndSlots();
     void connectMessageDispatchWithCell();

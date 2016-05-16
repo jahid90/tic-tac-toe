@@ -1,9 +1,8 @@
 #include "ConsoleView.h"
 
-#include "CommonIncludes.h"
-
-#include "GameController.h"
 #include "Board.h"
+#include "CommonIncludes.h"
+#include "GameController.h"
 #include "Utils.h"
 
 void renderView(Board * board)
