@@ -1,14 +1,15 @@
 #ifndef __BOARD_ACTIONS_HELPER_H__
 #define __BOARD_ACTIONS_HELPER_H__
 
-#include <QObject>
 #include <QMap>
+#include <QObject>
 #include <QPair>
 #include <QPixmap>
 
 #include "Piece.h"
 
 class QString;
+class IView;
 
 class BoardActionsHelper : public QObject
 {
@@ -16,23 +17,18 @@ class BoardActionsHelper : public QObject
   public:
     BoardActionsHelper(QObject *parent = NULL);
 
-    static BoardActionsHelper * instance()
-    {
-      if ( NULL == _instance )
-      {
-        _instance = new BoardActionsHelper;
-      }
-
-      return _instance; 
-    }
+    static BoardActionsHelper * instance();
 
     void markCell(int, int, Piece);
     void clearBoard();
+    void init(IView *);
 
   private:
     QMap<QString, QPair<int, int> > cellMap;
     void cellClicked(int, int, QPixmap);
     void markCell(int, int, QPixmap);
+
+    IView * _backingView;
 
     static BoardActionsHelper * _instance;
 

@@ -16,6 +16,8 @@ GuiView::init()
   int argc = ArgumentsParser::instance()->getArgc();
   char ** argv = ArgumentsParser::instance()->getArgv();
 
+  BoardActionsHelper::instance()->init( this );
+
   if ( DEBUG )
     std::cerr << "received arguments" << std::endl;
   
@@ -40,7 +42,7 @@ void
 GuiView::reset()
 {
   BoardActionsHelper::instance()->clearBoard();
-  GameController::instance()->reset();
+
   _guiBoard->uiboard()->statusbar->showMessage("");
   _guiBoard->setAllCellsEnabled( true );
 }

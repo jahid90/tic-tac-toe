@@ -181,6 +181,9 @@ GameController::isBoardFull()
 void
 GameController::reset()
 {
+  GameController::instance()->board()->reset();
+  GameController::instance()->view()->reset();
+
   GameController::instance()->randomizeCurrentPlayer();
   GameController::instance()->playTurn();
 }
