@@ -26,7 +26,8 @@ NaiveStrategy::requestNextBestMoveOn(Board * board)
     return;
   }
 
-  if ( DEBUG ) std::cerr << "error! requested next move when no blank cell left on board." << std::endl;
+  if ( DEBUG )
+    std::cerr << "error! requested next move when no blank cell left on board." << std::endl;
 
   return; // throw exception
 }

@@ -1,8 +1,7 @@
 #include "HumanStrategy.h"
 
-#include "Cell.h"
-
 #include "Board.h"
+#include "Cell.h"
 #include "GameController.h"
 #include "IView.h"
 

@@ -1,10 +1,10 @@
 #include "UnbeatableStrategy.h"
 
 #include "Board.h"
-#include "Player.h"
-#include "GameController.h"
-#include "Utils.h"
 #include "CommonIncludes.h"
+#include "GameController.h"
+#include "Player.h"
+#include "Utils.h"
 
 void debugView(Board * board)
 {
@@ -84,17 +84,20 @@ Config::score()
     if ( firstPlayer == winner ) 
     {
       _score = val;
-      return val;
+    }
+    else
+    {
+      _score = -1 * val;
     }
 
-    _score = -1 * val;
-    return -1 * val;
+    return _score;
   }
 
   if ( !_board->hasBlankCell() )
   {
     _score = 0;
-    return 0;
+
+    return _score;
   }
 
   int val = _maximize ? INT_MIN : INT_MAX;
@@ -114,7 +117,8 @@ Config::score()
   }
 
   _score = val;
-  return val;
+
+  return _score;
 }
 
 Cell *
