@@ -1,10 +1,8 @@
-#include "CommonIncludes.h"
+#include "Utils.h"
+
+#include "Piece.h"
 
 #include <QPixmap>
-
-#include "ui_board.h"
-
-#include "Utils.h"
 
 const bool DEBUG = false;
 

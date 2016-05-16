@@ -1,15 +1,10 @@
 #ifndef __UTILS_H__
 #define __UTILS_H__
 
-#include "Piece.h"
+#include "CommonIncludes.h"
 
+enum class Piece;
 class QPixmap;
-class Cell;
-
-namespace Ui
-{
-  class Board;
-}
 
 extern const bool DEBUG;
 
