@@ -18,6 +18,9 @@ class GuiView : public IView
     void waitForMove();
     void freezeView();
 
+    ~GuiView();
+    GuiView();
+
   private:
     QApplication * _app;
     QtBoardView * _guiBoard;

@@ -12,10 +12,13 @@ Player::Player(std::string name, Piece piece, IStrategy * strat)
     , _piece(piece)
     , _strategy(strat)
 {
-  if ( NULL == _strategy ) setStrategy( new NaiveStrategy );
-  
   if ( DEBUG )
     std::cerr << "New Player created: " << toString() << std::endl;
+}
+
+Player::~Player()
+{
+  _strategy = NULL;
 }
 
 std::string

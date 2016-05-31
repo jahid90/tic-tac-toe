@@ -24,9 +24,8 @@ QtBoardView::uiboard()
   return _board;
 }
 
-QtBoardView::QtBoardView(GuiView * view, QMainWindow * parent)
+QtBoardView::QtBoardView(QMainWindow * parent)
     : QMainWindow(parent)
-    , _view(view)
 {
   _helper = BoardActionsHelper::instance();
 
@@ -37,6 +36,11 @@ QtBoardView::QtBoardView(GuiView * view, QMainWindow * parent)
   setupCellsToUseScaledContents();
 
   _helper->clearBoard();
+}
+
+QtBoardView::~QtBoardView()
+{
+  _helper = NULL;
 }
 
 void 

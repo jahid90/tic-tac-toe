@@ -23,6 +23,13 @@ BoardActionsHelper::instance()
 }
 
 void
+BoardActionsHelper::nullify()
+{
+  delete _instance;
+  _instance = NULL;
+}
+
+void
 BoardActionsHelper::init(IView * view)
 {
   _backingView = view;
@@ -40,6 +47,12 @@ BoardActionsHelper::BoardActionsHelper(QObject * parent)
   cellMap.insert("cell_31", qMakePair(3, 1));
   cellMap.insert("cell_32", qMakePair(3, 2));
   cellMap.insert("cell_33", qMakePair(3, 3));
+}
+
+BoardActionsHelper::~BoardActionsHelper()
+{
+  cellMap.clear();
+  _backingView = NULL;
 }
 
 /* slot */ void

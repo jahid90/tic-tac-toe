@@ -5,6 +5,11 @@ IView::IView()
   _listener = NULL;
 }
 
+IView::~IView()
+{
+  _listener = NULL;
+}
+
 void
 IView::attachListener(Listener * listener)
 {

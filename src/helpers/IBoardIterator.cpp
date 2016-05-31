@@ -12,6 +12,11 @@ IBoardIterator::IBoardIterator(Board * board, int r, int c)
     std::cerr << "New Iterator created " << toString() << std::endl;
 }
 
+IBoardIterator::~IBoardIterator()
+{
+  _board = NULL;
+}
+
 std::string
 IBoardIterator::toString()
 {

@@ -15,6 +15,13 @@ ArgumentsParser * ArgumentsParser::instance()
 }
 
 void
+ArgumentsParser::nullify()
+{
+  delete _instance;
+  _instance = NULL;
+}
+
+void
 ArgumentsParser::showHelpAndExit()
 {
   std::cout << "usage: " << getArgv()[0] << " [--console | --graphical] [--beginner | --expert]" << std::endl;
@@ -29,6 +36,15 @@ ArgumentsParser::showHelpAndExit()
 
 ArgumentsParser::ArgumentsParser()
 {
+  _argc = 0;
+  _argv = NULL;
+}
+
+ArgumentsParser::~ArgumentsParser()
+{
+  std::set<std::string>().swap(_opts);
+
+  _argv = NULL;
 }
 
 void

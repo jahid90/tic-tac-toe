@@ -11,6 +11,7 @@ class Player
 {
   public:
     Player(std::string, Piece, IStrategy * strategy = NULL);
+    ~Player();
     std::string toString();
 
     std::string name();

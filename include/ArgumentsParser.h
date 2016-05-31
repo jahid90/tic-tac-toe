@@ -7,6 +7,7 @@ class ArgumentsParser
 {
   private:
     ArgumentsParser();
+    ~ArgumentsParser();
 
     void showHelpAndExit();
     
@@ -18,6 +19,7 @@ class ArgumentsParser
 
   public:
     static ArgumentsParser * instance();
+    static void nullify();
 
     void init(int, char **);
 

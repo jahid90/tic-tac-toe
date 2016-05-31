@@ -11,7 +11,7 @@ class IBoardIterator
 {
   public:
     IBoardIterator(Board *, int, int);
-    virtual ~IBoardIterator() {};
+    virtual ~IBoardIterator();
     std::string toString();
 
     bool operator==(const IBoardIterator &);

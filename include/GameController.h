@@ -14,6 +14,7 @@ class GameController : public Board::Observer, public IView::Listener
     std::string toString();
 
     static GameController * instance();
+    static void nullify();
 
     Board * board();
     Player * firstPlayer();
@@ -30,6 +31,7 @@ class GameController : public Board::Observer, public IView::Listener
 
   private:
     GameController();
+    ~GameController();
 
     static GameController * _instance;
 

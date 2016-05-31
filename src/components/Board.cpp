@@ -121,6 +121,18 @@ Board::Board(Board * other)
     std::cerr << "Copy Board created: " << toString() << std::endl;
 }
 
+Board::~Board()
+{
+  std::set< std::tuple< std::pair<int, int>,
+        std::pair<int, int>, std::pair<int, int> > >().swap(winningPatterns);
+
+  std::vector< std::vector<Cell> >().swap(_cells);
+
+  _winner = NULL;
+
+  std::vector<Observer *>().swap(_observers);
+}
+
 std::string
 Board::toString()
 {

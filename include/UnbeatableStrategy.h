@@ -10,6 +10,7 @@ class Config
 {
   public:
     Config(Board *, bool);
+    ~Config();
     int score();
     Cell * bestCell();
     void buildTree();

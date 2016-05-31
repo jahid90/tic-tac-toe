@@ -16,18 +16,20 @@ class BoardActionsHelper : public QObject
   Q_OBJECT
   public:
     BoardActionsHelper(QObject *parent = NULL);
+    ~BoardActionsHelper();
 
     static BoardActionsHelper * instance();
+    static void nullify();
 
     void markCell(int, int, Piece);
     void clearBoard();
     void init(IView *);
 
   private:
-    QMap<QString, QPair<int, int> > cellMap;
     void cellClicked(int, int, QPixmap);
     void markCell(int, int, QPixmap);
 
+    QMap<QString, QPair<int, int> > cellMap;
     IView * _backingView;
 
     static BoardActionsHelper * _instance;

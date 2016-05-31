@@ -14,7 +14,8 @@ class BoardActionsHelper;
 class QtBoardView : public QMainWindow
 {
   public:
-    QtBoardView(GuiView * view, QMainWindow *parent = 0);
+    QtBoardView(QMainWindow *parent = 0);
+    ~QtBoardView();
 
     static Ui::Board * uiboard();
 
@@ -23,7 +24,6 @@ class QtBoardView : public QMainWindow
   private:
     static Ui::Board * _board;
 
-    GuiView * _view;
     BoardActionsHelper * _helper;
 
     void initSignalsAndSlots();

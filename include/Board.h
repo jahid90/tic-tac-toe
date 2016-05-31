@@ -12,6 +12,7 @@ class Board
   public:
     Board();
     Board(Board *);
+    ~Board();
 
     std::string toString();
     bool operator==(const Board &);
@@ -43,7 +44,7 @@ class Board
     bool isWinner(Player *);
 
     std::vector< std::vector<Cell> > _cells;
-    std::set< std::tuple< std::pair<int, int>, 
+    std::set< std::tuple< std::pair<int, int>,
         std::pair<int, int>, std::pair<int, int> > > winningPatterns;
     Player * _winner;
     std::vector<Observer *> _observers;

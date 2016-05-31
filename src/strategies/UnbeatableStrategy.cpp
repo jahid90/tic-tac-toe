@@ -59,8 +59,26 @@ Config::Config(Board * board, bool maximize)
     , _maximize(maximize)
 {
   _child = new Config*[9];
+  for (int i = 0; i < 9; ++i)
+  {
+    _child[i] = NULL;
+  }
+
   _score = INT_MIN;
+
   _cell = NULL;
+}
+
+Config::~Config()
+{
+  for (int i = 0; i < 9; ++i)
+  {
+    if (_child) delete _child[i];
+    _child[i] = NULL;
+  }
+
+  delete[]_child;
+  _child = NULL;
 }
 
 Cell *
@@ -89,35 +107,32 @@ Config::score()
     {
       _score = -1 * val;
     }
-
-    return _score;
   }
-
-  if ( !_board->hasBlankCell() )
+  else if ( !_board->hasBlankCell() )
   {
     _score = 0;
-
-    return _score;
   }
-
-  int val = _maximize ? INT_MIN : INT_MAX;
-
-  for (int i = 0; i < 9; ++i)
+  else
   {
-    if ( NULL != _child[i] )
+    int val = _maximize ? INT_MIN : INT_MAX;
+
+    for (int i = 0; i < 9; ++i)
     {
-      int childScore = _child[i]->score();
+      if ( NULL != _child[i] )
+      {
+        int childScore = _child[i]->score();
 
-      val = _maximize ? std::max(val, childScore) : std::min(val, childScore);
+        val = _maximize ? std::max(val, childScore) : std::min(val, childScore);
 
-      int r = i / 3;
-      int c = i % 3;
-      if ( val == childScore ) _cell = _board->cell(1 + r, 1 + c);
+        int r = i / 3;
+        int c = i % 3;
+        if ( val == childScore ) _cell = _board->cell(1 + r, 1 + c);
+      }
     }
+
+    _score = val;
   }
-
-  _score = val;
-
+ 
   return _score;
 }
 
@@ -132,7 +147,11 @@ UnbeatableStrategy::minimax(Board * board, bool maximize)
   if ( DEBUG )
     std::cerr << "best score achievable: " << score << std::endl;
 
-  return root->bestCell();
+  Cell * res = root->bestCell();
+
+  delete root;
+
+  return res;
 }
 
 void

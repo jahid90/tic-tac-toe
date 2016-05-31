@@ -40,6 +40,27 @@ GuiView::init()
   _app->exec();
 }
 
+GuiView::GuiView()
+{
+  BoardActionsHelper::nullify();
+  _helper = NULL;
+
+  _app = NULL;
+  
+  _guiBoard = NULL;
+}
+
+GuiView::~GuiView()
+{
+  delete _guiBoard;
+  _guiBoard = NULL;
+
+  delete _app;
+  _app = NULL;
+
+  _helper = NULL;
+}
+
 void
 GuiView::reset()
 {

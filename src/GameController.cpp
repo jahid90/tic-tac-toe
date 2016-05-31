@@ -26,6 +26,13 @@ GameController::instance()
   return _instance;
 }
 
+void
+GameController::nullify()
+{
+  delete _instance;
+  _instance = NULL;
+}
+
 GameController::GameController()
 {
   initComponents();
@@ -54,6 +61,28 @@ GameController::initComponents()
   _view = graphical
       ? (IView *) new GuiView
       : (IView *) new ConsoleView;
+
+  _currentPlayer = NULL;
+}
+
+GameController::~GameController()
+{
+  _view->detachlistener();
+  _board->unregisterStateObserver(this);
+
+  _currentPlayer = NULL;
+
+  delete _view;
+  _view = NULL;
+
+  delete _secondPlayer;
+  _secondPlayer = NULL;
+
+  delete _firstPlayer;
+  _firstPlayer = NULL;
+
+  delete _board;
+  _board = NULL;
 }
 
 void
@@ -69,12 +98,12 @@ GameController::init()
 void
 GameController::randomizeCurrentPlayer()
 {
-  srand( 0 ); // TODO - randomize
+  srand( time(NULL) ); // TODO - randomize
 
-  // setCurrentPlayer( rand() % 2 ? firstPlayer() : secondPlayer() );
-  setCurrentPlayer( secondPlayer() );
+  setCurrentPlayer( rand() % 2 ? firstPlayer() : secondPlayer() );
+  // setCurrentPlayer( secondPlayer() );
 
-  if ( DEBUG )
+  // if ( DEBUG )
     std::cerr << "currentPlayer at randomize: " << currentPlayer()->toString() << std::endl;
 }
 

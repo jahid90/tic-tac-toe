@@ -7,6 +7,7 @@ class ConsoleView : public IView
 {
   public:
     ConsoleView();
+
     void init();
     void reset();
     void markCell(int, int, Piece);
