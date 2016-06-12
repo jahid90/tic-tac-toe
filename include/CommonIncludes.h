@@ -20,4 +20,7 @@
 #include <errno.h>
 #include <cassert>
 
+#include <thread>
+#include <chrono>
+
 #endif // __COMMON_INCLUDES_H__

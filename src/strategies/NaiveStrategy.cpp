@@ -8,8 +8,7 @@
 void
 NaiveStrategy::requestNextBestMoveOn(Board * board)
 {
-  // add delay; TODO - replace by sleep
-  for (int i = 0; i < (int)(1e+7); ++i);
+  std::this_thread::sleep_for( std::chrono::seconds(1) );
 
   if ( board->hasBlankCell() )
   {
