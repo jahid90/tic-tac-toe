@@ -1,7 +1,7 @@
-#!/usr/bin/sh
+#!/bin/sh
 
 echo "building..."
 
 make clean
-qmake-qt5 TicTacToe.pro
+qmake TicTacToe.pro
 ./mk.sh
