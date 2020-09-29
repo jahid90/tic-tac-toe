@@ -3,3 +3,4 @@ Makefile
 tictactoe
 *.o
 gen/*
+.qmake.stash
