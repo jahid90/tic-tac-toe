@@ -1,10 +1,21 @@
-A C++ implementation of the popular board game TicTacToe
+# TicTacToe
 
-Prerequisites:
-  gcc
-  qt5
+A C++ implementation of the popular board game - TicTacToe.
+The GUI is developed using qt5.
 
-To build the project, run
+## Development
+
+### Prerequisites to be installed:
+```
+$ apt get install gcc qt5-default qt5-qmake make
+```
+
+### To build the project, run
+```
 $ ./build.sh
+```
 
-GUI is developed using Qt5
+### To run the game, run
+```
+$ ./run.sh
+```
